@@ -38,6 +38,8 @@ function run() {
   ln -sf /var/lib/aviary/av /usr/bin/av
   mkdir -p ${INSTALL_PATH}/aviary/inventory
 
+  mv ${INSTALL_PATH}/aviary/inventory/config ${INSTALL_PATH}/aviary/
+
   if [[ ! -z "$INVENTORY_GIT_URL" ]]; then
     echo "inventory_git_url=$INVENTORY_GIT_URL" >> $CONFIG_FILE
   fi
