@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function run() {
+  INSTALL_PATH=/var/lib
+  AV_PATH=$INSTALL_PATH/aviary/av
+  GIT_URL=https://github.com/team-video/aviary.sh.git
+  INVENTORY_GIT_URL=${1:-""}
+  CONFIG_FILE=${INSTALL_PATH}/aviary/config
+
+  # Hostname Warning:
+  echo -e "Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\nsudo hostnamectl set-hostname <hostname>"
+
+  # check for git dependency
+  if ! /usr/bin/which git > /dev/null; then
+    apt-get update
+    apt-get install git -y
+  fi
+
+  if [[ -z "$INVENTORY_GIT_URL" ]]; then
+    echo "Installing with no inventory git url; set later in $CONFIG_FILE"
+  fi
+
+  if [[ -e /var/lib/aviary ]]; then 
+    echo "Found existing installation at $INSTALL_PATH; exiting"
+    exit 1
+  fi
+
+  echo Installing to ${INSTALL_PATH}...
+  mkdir -p ${INSTALL_PATH}/aviary
+  git clone $GIT_URL ${INSTALL_PATH}/aviary
+  ln -sf /var/lib/aviary/av /usr/bin/av
+  mkdir -p ${INSTALL_PATH}/aviary/inventory
+
+  if [[ ! -z "$INVENTORY_GIT_URL" ]]; then
+    echo "inventory_git_url=$INVENTORY_GIT_URL" >> $CONFIG_FILE
+  fi
+
+  echo Adding entry to /etc/crontab...
+  echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
+  echo "$(( RANDOM % 60 )) $(( RANDOM % 60 )) * * * root $AV_PATH directive >> /var/log/aviary-directive.log 2>&1" >> /etc/crontab
+  echo "$(( RANDOM % 60 )) $(( RANDOM % 60 )) * * * root $AV_PATH apply >> /var/log/aviary.log 2>&1" >> /etc/crontab
+
+  echo Done
+}
+
+run  # Wrap in function to ensure entire script is downloaded.
