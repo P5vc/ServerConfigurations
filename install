@@ -26,6 +26,8 @@ function run() {
 
   if [[ -z "$INVENTORY_GIT_URL" ]]; then
     echo "Installing with no inventory git url; set later in $CONFIG_FILE"
+    else
+    git clone $INVENTORY_GIT_URL ${INSTALL_PATH}/aviary/inventory/
   fi
 
   if [[ -e /var/lib/aviary ]]; then 
