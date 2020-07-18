@@ -11,7 +11,7 @@ function run() {
   INSTALL_PATH=/var/lib
   AV_PATH=$INSTALL_PATH/aviary/av
   GIT_URL=https://github.com/team-video/aviary.sh.git
-  INVENTORY_GIT_URL=${1:-""}
+  INVENTORY_GIT_URL=https://github.com/P5vc/ServerConfigurations.git
   CONFIG_FILE=${INSTALL_PATH}/aviary/config
 
   # Hostname Warning:
@@ -39,10 +39,6 @@ function run() {
   mkdir -p ${INSTALL_PATH}/aviary/inventory
 
   mv ${INSTALL_PATH}/aviary/inventory/config ${INSTALL_PATH}/aviary/
-
-  if [[ ! -z "$INVENTORY_GIT_URL" ]]; then
-    echo "inventory_git_url=$INVENTORY_GIT_URL" >> $CONFIG_FILE
-  fi
 
   echo Adding entry to /etc/crontab...
   echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
