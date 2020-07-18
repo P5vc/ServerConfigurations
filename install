@@ -24,15 +24,16 @@ function run() {
     apt-get install git -y
   fi
 
-  if [[ -z "$INVENTORY_GIT_URL" ]]; then
-    echo "Installing with no inventory git url; set later in $CONFIG_FILE"
-    else
-    git clone $INVENTORY_GIT_URL ${INSTALL_PATH}/aviary/inventory/
-  fi
-
   if [[ -e /var/lib/aviary ]]; then 
     echo "Found existing installation at $INSTALL_PATH; exiting"
     exit 1
+  fi
+
+  if [[ -z "$INVENTORY_GIT_URL" ]]
+    then
+      echo "Installing with no inventory git url; set later in $CONFIG_FILE"
+    else
+      git clone $INVENTORY_GIT_URL ${INSTALL_PATH}/aviary/inventory/
   fi
 
   echo Installing to ${INSTALL_PATH}...
