@@ -10,7 +10,7 @@ function run() {
   CONFIG_FILE=${INSTALL_PATH}/aviary/config
 
   # Hostname Warning:
-  echo -e "Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\nsudo hostnamectl set-hostname <hostname>"
+  echo -e "Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\nsudo hostnamectl set-hostname <hostname>\n\nThe current hostname is: $(hostname)"
 
   # check for git dependency
   if ! /usr/bin/which git > /dev/null; then
