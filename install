@@ -42,7 +42,7 @@ function run() {
       git clone $INVENTORY_GIT_URL ${INSTALL_PATH}/aviary/inventory/
   fi
 
-  curl $CONFIG_FILE_URL -o ${INSTALL_PATH}/aviary/config
+  mv ${INSTALL_PATH}/aviary/inventory/config ${INSTALL_PATH}/aviary/
 
   echo Adding entry to /etc/crontab...
   echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
