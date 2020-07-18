@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+BLUE="\033[0;34m"
+CYAN="\033[0;36m"
+PURPLE="\033[0;35m"
+NO_COLOR="\033[0m"
+
 set -euo pipefail
 
 function run() {
@@ -10,7 +15,7 @@ function run() {
   CONFIG_FILE=${INSTALL_PATH}/aviary/config
 
   # Hostname Warning:
-  echo -e "Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\nsudo hostnamectl set-hostname <hostname>\n\nThe current hostname is: $(hostname)"
+  echo -e "\n\n${BLUE}Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\n${CYAN}sudo hostnamectl set-hostname <hostname>\n\n${PURPLE}The current hostname is: $(hostname)${NO_COLOR}\n\n"
 
   # check for git dependency
   if ! /usr/bin/which git > /dev/null; then
