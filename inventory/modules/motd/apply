@@ -1,0 +1,6 @@
+source template
+source variables
+
+if [ "$templateToUse" == "Webserver" ]
+	then template $(dirname $0)/webserver.template > /etc/motd
+fi
