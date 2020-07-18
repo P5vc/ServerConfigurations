@@ -1,0 +1,16 @@
+source variables
+
+if [ "$serverType" == "Webserver" ]
+then
+
+
+apt-get update
+apt-get upgrade -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools libpq-dev python-dev postgresql build-essential postgresql-contrib vnstat unzip -y
+
+pip3 install --upgrade pip
+pip3 install virtualenv
+
+hostnamectl set-hostname $serverHostname
+
+fi
