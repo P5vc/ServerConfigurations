@@ -11,8 +11,9 @@ function run() {
   INSTALL_PATH=/var/lib
   AV_PATH=$INSTALL_PATH/aviary/av
   GIT_URL=https://github.com/team-video/aviary.sh.git
-  INVENTORY_GIT_URL=https://github.com/P5vc/ServerConfigurations.git
+  INVENTORY_GIT_URL="https://github.com/P5vc/ServerConfigurations.git"
   CONFIG_FILE=${INSTALL_PATH}/aviary/config
+  CONFIG_FILE_URL="https://raw.githubusercontent.com/P5vc/ServerConfigurations/master/config"
 
   # Hostname Warning:
   echo -e "\n\n${BLUE}Make sure to set the server hostname so that it matches\none of the valid options under the hosts directory.\nThis hostname must be unique (not used by any other server).\nYou may set the hostname by running:\n${CYAN}sudo hostnamectl set-hostname <hostname>\n\n${PURPLE}The current hostname is: $(hostname)${NO_COLOR}\n\n"
@@ -38,7 +39,7 @@ function run() {
   ln -sf /var/lib/aviary/av /usr/bin/av
   mkdir -p ${INSTALL_PATH}/aviary/inventory
 
-  mv ${INSTALL_PATH}/aviary/inventory/config ${INSTALL_PATH}/aviary/
+  curl $CONFIG_FILE_URL -o ${INSTALL_PATH}/aviary/config
 
   echo Adding entry to /etc/crontab...
   echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
