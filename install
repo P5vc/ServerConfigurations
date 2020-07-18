@@ -29,18 +29,18 @@ function run() {
     exit 1
   fi
 
+  echo Installing to ${INSTALL_PATH}...
+  mkdir -p ${INSTALL_PATH}/aviary
+  git clone $GIT_URL ${INSTALL_PATH}/aviary
+  ln -sf /var/lib/aviary/av /usr/bin/av
+  mkdir -p ${INSTALL_PATH}/aviary/inventory
+
   if [[ -z "$INVENTORY_GIT_URL" ]]
     then
       echo "Installing with no inventory git url; set later in $CONFIG_FILE"
     else
       git clone $INVENTORY_GIT_URL ${INSTALL_PATH}/aviary/inventory/
   fi
-
-  echo Installing to ${INSTALL_PATH}...
-  mkdir -p ${INSTALL_PATH}/aviary
-  git clone $GIT_URL ${INSTALL_PATH}/aviary
-  ln -sf /var/lib/aviary/av /usr/bin/av
-  mkdir -p ${INSTALL_PATH}/aviary/inventory
 
   curl $CONFIG_FILE_URL -o ${INSTALL_PATH}/aviary/config
 
