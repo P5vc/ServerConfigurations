@@ -1,5 +1,5 @@
 # Server Configurations
-A system to set up, configure, and maintain all Priveasy servers (running Ubuntu Server 20.04 LTS) from scratch.
+A system to set up, configure, and maintain all Priveasy servers (running Ubuntu Server 20.04 LTS) from scratch
 
 ------------
 

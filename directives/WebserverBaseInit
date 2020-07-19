@@ -1,0 +1,73 @@
+source variables
+
+if [ "$serverType" == "Webserver" ]
+then
+if [ "$serverGeneration" == "Base" ]
+then
+
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools libpq-dev python-dev postgresql build-essential postgresql-contrib vnstat unzip -y
+
+# pip3
+pip3 install --upgrade pip
+pip3 install virtualenv
+
+# hostnamectl
+hostnamectl set-hostname $serverHostname
+
+# postfix
+debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${serverFQDN}"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+
+apt-get install postfix -y
+
+# opendkim
+adduser postfix opendkim
+
+mkdir -p /etc/opendkim/keys
+mkdir /etc/opendkim/keys/noreply.${serverFQDN}
+mkdir /etc/opendkim/keys/fwd.${serverFQDN}
+mkdir /etc/opendkim/keys/burn.${serverFQDN}
+mkdir /var/spool/postfix/opendkim
+
+opendkim-genkey -b 2048 -d noreply.${serverFQDN} -D /etc/opendkim/keys/noreply.${serverFQDN} -s noreply -v
+opendkim-genkey -b 2048 -d fwd.${serverFQDN} -D /etc/opendkim/keys/fwd.${serverFQDN} -s fwd -v
+opendkim-genkey -b 2048 -d burn.${serverFQDN} -D /etc/opendkim/keys/burn.${serverFQDN} -s burn -v
+
+chown -R opendkim:opendkim /etc/opendkim
+chmod go-rw /etc/opendkim/keys
+chown opendkim:opendkim /etc/opendkim/keys/noreply.${serverFQDN}/noreply.private
+chown opendkim:opendkim /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private
+chown opendkim:opendkim /etc/opendkim/keys/burn.${serverFQDN}/burn.private
+chown opendkim:postfix /var/spool/postfix/opendkim
+
+echo -e " -  Create DNS TXT records for the following keys:\n\n" >> /root/TODO
+cat /etc/opendkim/keys/noreply.${serverFQDN}/noreply.txt >> /root/TODO
+cat /etc/opendkim/keys/fwd.${serverFQDN}/fwd.txt >> /root/TODO
+cat /etc/opendkim/keys/burn.${serverFQDN}/burn.txt >> /root/TODO
+
+# postfix
+touch /etc/postfix/virtual
+postmap /etc/postfix/virtual
+
+# systemctl
+systemctl restart opendkim postfix
+
+# system
+su - ubuntu
+cd /home/ubuntu
+
+# python
+virtualenv priveasyEnv
+source priveasyEnv/bin/activate
+pip install django uwsgi celery psycopg2 psycopg2-binary twilio django-kronos stripe
+
+# TODO
+echo -e "\n\n -  Reboot the server" >> /root/TODO
+
+
+fi
+fi
