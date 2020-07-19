@@ -6,6 +6,11 @@ if [ "$serverGeneration" == "Base" ]
 then
 
 
+# system
+touch /root/TODO
+mkdir /root/secrets
+touch /root/secrets/secrets.txt
+
 # apt
 apt-get update
 apt-get upgrade -y
@@ -43,6 +48,10 @@ chown opendkim:opendkim /etc/opendkim/keys/noreply.${serverFQDN}/noreply.private
 chown opendkim:opendkim /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private
 chown opendkim:opendkim /etc/opendkim/keys/burn.${serverFQDN}/burn.private
 chown opendkim:postfix /var/spool/postfix/opendkim
+
+cp /etc/opendkim/keys/noreply.${serverFQDN}/noreply.private /root/secrets/
+cp /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private /root/secrets/
+cp /etc/opendkim/keys/burn.${serverFQDN}/burn.private /root/secrets/
 
 echo -e " -  Create DNS TXT records for the following keys:\n\n" >> /root/TODO
 cat /etc/opendkim/keys/noreply.${serverFQDN}/noreply.txt >> /root/TODO
