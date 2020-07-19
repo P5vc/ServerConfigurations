@@ -1,0 +1,3 @@
+noreply._domainkey.{{ serverFQDN }}    noreply.{{ serverFQDN }}:noreply:/etc/opendkim/keys/noreply.{{ serverFQDN }}/noreply.private
+fwd._domainkey.{{ serverFQDN }}        fwd.{{ serverFQDN }}:fwd:/etc/opendkim/keys/fwd.{{ serverFQDN }}/fwd.private
+burn._domainkey.{{ serverFQDN }}       burn._domainkey.{{ serverFQDN }}:burn:/etc/opendkim/keys/burn.{{ serverFQDN }}/burn.private
