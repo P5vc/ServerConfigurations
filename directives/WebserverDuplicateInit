@@ -2,7 +2,7 @@ source variables
 
 if [ "$serverType" == "Webserver" ]
 then
-if [ "$serverGeneration == "Duplicate" ]
+if [ "$serverGeneration" == "Duplicate" ]
 then
 
 # apt
