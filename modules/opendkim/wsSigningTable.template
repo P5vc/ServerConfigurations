@@ -1,0 +1,3 @@
+*@noreply.{{ serverFQDN }} noreply._domainkey.{{ serverFQDN }}
+*@fwd.{{ serverFQDN }}     fwd._domainkey.{{ serverFQDN }}
+*@burn.{{ serverFQDN }}    burn._domainkey.{{ serverFQDN }}

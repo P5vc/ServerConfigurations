@@ -1,0 +1,2 @@
+admin@fwd.{{ serverFQDN }} Admin@{{ serverFQDN }}
+support@fwd.{{ serverFQDN }} Support@{{ serverFQDN }}
