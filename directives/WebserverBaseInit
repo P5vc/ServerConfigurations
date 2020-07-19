@@ -60,10 +60,13 @@ systemctl restart opendkim postfix
 su - ubuntu
 cd /home/ubuntu
 
-# python
 virtualenv priveasyEnv
 source priveasyEnv/bin/activate
+sudo chown -R ubuntu:ubuntu priveasyEnv
+
 pip install django uwsgi celery psycopg2 psycopg2-binary twilio django-kronos stripe
+
+exit
 
 # TODO
 echo -e "\n\n -  Reboot the server" >> /root/TODO
