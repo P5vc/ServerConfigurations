@@ -18,6 +18,7 @@ function run() {
   # Set hostname variable:
   echo -e "\n\n${BLUE}A hostname matching one of the valid options under the hosts\ndirectory must be set for this server. This hostname must\nbe unique.\n\n${CYAN}Desired Hostname: ${NO_COLOR}"
   read serverHostname
+  hostnamectl set-hostname $serverHostname
   echo -e "\n\n${PURPLE}The server's new hostname will be: ${serverHostname}${NO_COLOR}"
 
   # Set public IP variable:
