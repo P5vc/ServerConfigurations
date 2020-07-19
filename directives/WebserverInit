@@ -13,4 +13,12 @@ pip3 install virtualenv
 
 hostnamectl set-hostname $serverHostname
 
+debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${serverFQDN}"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+
+apt-get install postfix -y
+
+adduser postfix opendkim
+
+
 fi

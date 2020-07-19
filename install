@@ -18,12 +18,12 @@ function run() {
   # Set hostname variable:
   echo -e "\n\n${BLUE}A hostname matching one of the valid options under the hosts\ndirectory must be set for this server. This hostname must\nbe unique.\n\n${CYAN}Desired Hostname: ${NO_COLOR}"
   read serverHostname
-  echo -e "\n\n${PURPLE}The server's new hostname will be: ${serverHostname}${NO_COLOR}\n\n"
+  echo -e "\n\n${PURPLE}The server's new hostname will be: ${serverHostname}${NO_COLOR}"
 
   # Set public IP variable:
   echo -e "\n\n${BLUE}In order to properly configure this server, it's public IPv4\naddress is required.\n\n${CYAN}Public IPv4 Address: ${NO_COLOR}"
   read serverPubIPv4
-  echo -e "\n\n${PURPLE}The server's public IPv4 address has been set to: ${serverPubIPv4}${NO_COLOR}\n\n"
+  echo -e "\n\n${PURPLE}The server's public IPv4 address has been set to: ${serverPubIPv4}${NO_COLOR}"
 
   # Set FQDN variable:
   echo -e "\n\n${BLUE}In order to properly configure this server, it's associated\nfully-qualified domain name is required. This is most likely 'Priveasy.org' or 'P5.vc'.\n\n${CYAN}FQDN: ${NO_COLOR}"
