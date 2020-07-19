@@ -41,16 +41,20 @@ chown opendkim:opendkim /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private
 chown opendkim:opendkim /etc/opendkim/keys/burn.${serverFQDN}/burn.private
 chown opendkim:postfix /var/spool/postfix/opendkim
 
-echo -e "Create DNS TXT records for the following keys:\n\n" >> /root/TODO
+echo -e " -  Create DNS TXT records for the following keys:\n\n" >> /root/TODO
 cat /etc/opendkim/keys/noreply.${serverFQDN}/noreply.txt >> /root/TODO
 cat /etc/opendkim/keys/fwd.${serverFQDN}/fwd.txt >> /root/TODO
 cat /etc/opendkim/keys/burn.${serverFQDN}/burn.txt >> /root/TODO
 
 # postfix
+touch /etc/postfix/virtual
 postmap /etc/postfix/virtual
 
 # systemctl
 systemctl restart opendkim postfix
+
+# TODO
+echo -e "\n\n -  Reboot the server" >> /root/TODO
 
 
 fi
