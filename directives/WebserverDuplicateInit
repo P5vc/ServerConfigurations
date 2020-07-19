@@ -5,6 +5,14 @@ then
 if [ "$serverGeneration" == "Duplicate" ]
 then
 
+
+# system
+if [ ! -d "/root/secrets" ]
+  then
+  echo -e "\n\nThe /root/secrets directory does not exist.\nAs this is a duplicate server, these secrets are necessary\nin order to set up this server: new secrets cannot be\n generated from scratch for a duplicate server.\nThe correct secrets folder can be found at /root/secrets\non the base webserver.\n\n"
+  exit 1
+fi
+
 # apt
 apt-get update
 apt-get upgrade -y
@@ -32,7 +40,9 @@ mkdir /etc/opendkim/keys/fwd.${serverFQDN}
 mkdir /etc/opendkim/keys/burn.${serverFQDN}
 mkdir /var/spool/postfix/opendkim
 
-# Add code here to copy-over keys to the correct directory
+cp /root/secrets/noreply.private /etc/opendkim/keys/noreply.${serverFQDN}/
+cp /root/secrets/fwd.private /etc/opendkim/keys/fwd.${serverFQDN}/
+cp /root/secrets/burn.private /etc/opendkim/keys/burn.${serverFQDN}/
 
 chown -R opendkim:opendkim /etc/opendkim
 chmod go-rw /etc/opendkim/keys
