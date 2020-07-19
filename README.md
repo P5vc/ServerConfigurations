@@ -7,6 +7,6 @@ Priveasy currently uses [aviary.sh](https://github.com/team-video/aviary.sh "avi
 
 To set up a new Priveasy server, run the following command:
 
-`curl https://raw.githubusercontent.com/P5vc/ServerConfigurations/master/install -o /tmp/install && sudo bash /tmp/install && av apply && av directive`
+`curl https://raw.githubusercontent.com/P5vc/ServerConfigurations/master/install -o /tmp/install && sudo bash /tmp/install && av directive && av apply`
 
 Answer any prompts that may appear as the command is run, and follow any final instructions left in the `/root/TODO` file, after the command has finished running.
