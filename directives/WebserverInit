@@ -53,6 +53,15 @@ postmap /etc/postfix/virtual
 # systemctl
 systemctl restart opendkim postfix
 
+# system
+su - ubuntu
+cd /home/ubuntu
+
+# python
+virtualenv priveasyEnv
+source priveasyEnv/bin/activate
+pip install django uwsgi celery psycopg2 psycopg2-binary twilio django-kronos stripe
+
 # TODO
 echo -e "\n\n -  Reboot the server" >> /root/TODO
 
