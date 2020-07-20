@@ -1,6 +1,4 @@
 source template
 source variables
 
-if [ "$serverType" == "Webserver" ]
-	then template $(dirname $0)/webserver.template > /etc/ssh/sshd_config
-fi
+template $(dirname $0)/sshd_config.template > /etc/ssh/sshd_config

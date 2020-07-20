@@ -82,7 +82,7 @@ virtualenv priveasyEnv
 chown -R ubuntu:ubuntu priveasyEnv
 source priveasyEnv/bin/activate
 
-pip install django uwsgi psycopg2 celery django-environ django-kronos stripe twilio
+pip install django uwsgi psycopg2-binary celery django-environ django-kronos stripe twilio
 
 deactivate
 
@@ -101,7 +101,7 @@ echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
 dbPass=$(sed -n "1p" "/root/secrets/dbSecrets.txt")
 dbHostname=$(sed -n "2p" "/root/secrets/dbSecrets.txt")
 echo "DATABASE_PASSWORD=${dbPass}" >> ./Priveasy/Priveasy/settings/.env
-echo "DATABASE_HOST=${dbHostname}" >> ./Priveasy/Priveasy/settings/.env
+echo "DATABASE_HOST=${dbHostname}.${serverFQDN}" >> ./Priveasy/Priveasy/settings/.env
 echo "DATABASE_PORT=58762" >> ./Priveasy/Priveasy/settings/.env
 
 chown -R ubuntu:ubuntu Priveasy
