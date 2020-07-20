@@ -23,12 +23,12 @@ cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
 rm /root/secrets/${serverHostname}.pub
 
 # TODO
-echo -e "-  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
+echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server." >> /root/TODO
 
 # postgres
 priveasyuserPass=$(gpg --armor --gen-random 2 64)
 priveasyuserPass=${priveasyuserPass:0:64}
-echo "$priveasyuserPass" >> /root/secrets/wsSecrets.txt
+echo "$priveasyuserPass" >> /root/secrets/dbSecrets.txt
 
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
 sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
