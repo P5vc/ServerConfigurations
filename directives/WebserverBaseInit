@@ -14,7 +14,7 @@ touch /root/secrets/secrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools libpq-dev python-dev postgresql build-essential postgresql-contrib vnstat unzip fail2ban -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat unzip fail2ban -y
 
 # pip3
 pip3 install --upgrade pip
@@ -90,7 +90,15 @@ virtualenv priveasyEnv
 source priveasyEnv/bin/activate
 sudo chown -R ubuntu:ubuntu priveasyEnv
 
-pip install django uwsgi celery psycopg2 psycopg2-binary twilio django-kronos stripe
+pip install django uwsgi celery twilio django-kronos django-environ stripe
+
+# django
+git clone https://github.com/P5vc/WebserverBackend.git
+
+djangoSecretKey=$(gpg --armor --gen-random 2 64)
+djangoSecretKey=${djangoSecretKey:0:64}
+echo "$djangoSecretKey" >> /root/secrets/secrets.txt
+echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 
 # change user
 exit
