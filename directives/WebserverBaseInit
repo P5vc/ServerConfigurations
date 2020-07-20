@@ -82,7 +82,7 @@ virtualenv priveasyEnv
 chown -R ubuntu:ubuntu priveasyEnv
 source priveasyEnv/bin/activate
 
-pip install django uwsgi celery twilio django-kronos django-environ stripe
+pip install django uwsgi psycopg2 celery django-environ django-kronos stripe twilio
 
 deactivate
 
