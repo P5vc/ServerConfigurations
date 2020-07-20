@@ -25,7 +25,7 @@ hostnamectl set-hostname $serverHostname
 
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
-cat /root/secrets/${serverHostname}.pub >> ~/.ssh/authorized_keys
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
 rm /root/secrets/${serverHostname}.pub
 
 # TODO
@@ -74,6 +74,9 @@ postmap /etc/postfix/virtual
 # systemctl
 systemctl restart opendkim postfix
 
+# system
+cd /home/ubuntu
+
 # virtualenv
 virtualenv priveasyEnv
 chown -R ubuntu:ubuntu priveasyEnv
@@ -83,6 +86,8 @@ pip install django uwsgi celery twilio django-kronos django-environ stripe
 
 # django
 git clone https://github.com/P5vc/WebserverBackend.git
+cp -R WebserverBackend/* ./
+rm -rf WebserverBackend
 
 djangoSecretKey=$(gpg --armor --gen-random 2 64)
 djangoSecretKey=${djangoSecretKey:0:64}
