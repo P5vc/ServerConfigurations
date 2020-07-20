@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+RED="\033[0;31m"
 BLUE="\033[0;34m"
 CYAN="\033[0;36m"
 PURPLE="\033[0;35m"
@@ -20,6 +21,17 @@ function run() {
   read serverHostname
   hostnamectl set-hostname $serverHostname
   echo -e "\n\n${PURPLE}The server's new hostname will be: ${serverHostname}${NO_COLOR}"
+
+  # If this is a webserver, make sure the database server has already been set up first:
+  hostnameBeginning=${serverHostname:0:9}
+  if [ "$hostnameBeginning" == "webserver" ]
+  then
+    if [ ! -f "/root/secrets/dbSecrets.txt" ]
+    then
+      echo -e "\n\n${RED}The '/root/secrets/dbSecrets.txt' file could not be found.\nPlease set up a database server before this webserver,\nthen copy-over the database server's secrets folder\nto this webserver, before continuing with the install."
+      exit 1
+    fi
+  fi
 
   # Set public IP variable:
   echo -e "\n\n${BLUE}In order to properly configure this server, it's public IPv4\naddress is required.\n\n${CYAN}Public IPv4 Address: ${NO_COLOR}"
