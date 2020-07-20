@@ -1,0 +1,6 @@
+source template
+source variables
+
+if [ "$serverType" == "Webserver" ]
+	then template $(dirname $0)/webserver.template > /etc/fail2ban/jail.conf
+fi
