@@ -74,14 +74,10 @@ postmap /etc/postfix/virtual
 # systemctl
 systemctl restart opendkim postfix
 
-# change user
-su - ubuntu
-cd /home/ubuntu
-
 # virtualenv
 virtualenv priveasyEnv
+chown -R ubuntu:ubuntu priveasyEnv
 source priveasyEnv/bin/activate
-sudo chown -R ubuntu:ubuntu priveasyEnv
 
 pip install django uwsgi celery twilio django-kronos django-environ stripe
 
@@ -93,11 +89,9 @@ djangoSecretKey=${djangoSecretKey:0:64}
 echo "$djangoSecretKey" >> /root/secrets/secrets.txt
 echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 
-# change user
-exit
-
-# django
 echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
+
+chown -R ubuntu:ubuntu Priveasy
 
 # ufw
 ufw allow 22
