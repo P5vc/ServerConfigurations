@@ -23,10 +23,6 @@ pip3 install virtualenv
 # hostnamectl
 hostnamectl set-hostname $serverHostname
 
-# change user
-su - ubuntu
-cd /home/ubuntu
-
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
 cat /root/secrets/${serverHostname}.pub >> ~/.ssh/authorized_keys
@@ -34,9 +30,6 @@ rm /root/secrets/${serverHostname}.pub
 
 # TODO
 echo -e "-  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
-
-# change user
-exit
 
 # postfix
 debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${serverFQDN}"
