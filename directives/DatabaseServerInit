@@ -1,0 +1,49 @@
+source variables
+
+if [ "$serverType" == "Database" ]
+then
+
+
+# system
+touch /root/TODO
+mkdir /root/secrets
+touch /root/secrets/dbSecrets.txt
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install postgresql postgresql-contrib -y
+
+# hostnamectl
+hostnamectl set-hostname $serverHostname
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
+
+# TODO
+echo -e "-  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
+
+# postgres
+priveasyuserPass=$(gpg --armor --gen-random 2 64)
+priveasyuserPass=${priveasyuserPass:0:64}
+echo "$priveasyuserPass" >> /root/secrets/wsSecrets.txt
+
+sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
+sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
+sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
+
+# ufw
+ufw allow 22
+ufw allow 58762
+ufw allow 58763
+yes | ufw enable
+
+# TODO
+echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
+
+
+fi
