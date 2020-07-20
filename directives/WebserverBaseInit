@@ -9,7 +9,7 @@ then
 # system
 touch /root/TODO
 mkdir /root/secrets
-touch /root/secrets/secrets.txt
+touch /root/secrets/wsSecrets.txt
 
 # apt
 apt-get update
@@ -84,6 +84,8 @@ source priveasyEnv/bin/activate
 
 pip install django uwsgi celery twilio django-kronos django-environ stripe
 
+deactivate
+
 # django
 git clone https://github.com/P5vc/WebserverBackend.git
 cp -R WebserverBackend/* ./
@@ -91,7 +93,7 @@ rm -rf WebserverBackend
 
 djangoSecretKey=$(gpg --armor --gen-random 2 64)
 djangoSecretKey=${djangoSecretKey:0:64}
-echo "$djangoSecretKey" >> /root/secrets/secrets.txt
+echo "$djangoSecretKey" >> /root/secrets/wsSecrets.txt
 echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 
 echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
@@ -108,7 +110,7 @@ ufw allow 587
 yes | ufw enable
 
 # TODO
-echo -e "\n\n -  After you save the secret key to a separate drive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 

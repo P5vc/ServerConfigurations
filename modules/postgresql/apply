@@ -1,0 +1,8 @@
+source template
+source variables
+
+if [ "$serverType" == "Webserver" ]
+	then
+	template $(dirname $0)/psqlConf.template > /etc/postgresql/12/main/postgresql.conf
+	template $(dirname $0)/hba.template > /etc/postgresql/12/main/pg_hba.conf
+fi
