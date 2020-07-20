@@ -12,7 +12,7 @@ touch /root/secrets/dbSecrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install postgresql postgresql-contrib -y
+apt-get install postgresql postgresql-contrib fail2ban -y
 
 # hostnamectl
 hostnamectl set-hostname $serverHostname
@@ -26,6 +26,9 @@ rm /root/secrets/${serverHostname}.pub
 echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server." >> /root/TODO
 
 # postgres
+echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
+systemctl restart postgresql
+
 priveasyuserPass=$(gpg --armor --gen-random 2 64)
 priveasyuserPass=${priveasyuserPass:0:64}
 echo "$priveasyuserPass" >> /root/secrets/dbSecrets.txt
