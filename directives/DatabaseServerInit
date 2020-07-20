@@ -29,6 +29,7 @@ echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${
 priveasyuserPass=$(gpg --armor --gen-random 2 64)
 priveasyuserPass=${priveasyuserPass:0:64}
 echo "$priveasyuserPass" >> /root/secrets/dbSecrets.txt
+echo "$serverHostname" >> /root/secrets/dbSecrets.txt
 
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
 sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
