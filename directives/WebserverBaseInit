@@ -14,7 +14,7 @@ touch /root/secrets/secrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools libpq-dev python-dev postgresql build-essential postgresql-contrib vnstat unzip -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools libpq-dev python-dev postgresql build-essential postgresql-contrib vnstat unzip fail2ban -y
 
 # pip3
 pip3 install --upgrade pip
@@ -22,6 +22,21 @@ pip3 install virtualenv
 
 # hostnamectl
 hostnamectl set-hostname $serverHostname
+
+# change user
+su - ubuntu
+cd /home/ubuntu
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> ~/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
+
+# TODO
+echo -e "-  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
+
+# change user
+exit
 
 # postfix
 debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${serverFQDN}"
@@ -53,6 +68,7 @@ cp /etc/opendkim/keys/noreply.${serverFQDN}/noreply.private /root/secrets/
 cp /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private /root/secrets/
 cp /etc/opendkim/keys/burn.${serverFQDN}/burn.private /root/secrets/
 
+# TODO
 echo -e " -  Create DNS TXT records for the following keys:\n\n" >> /root/TODO
 cat /etc/opendkim/keys/noreply.${serverFQDN}/noreply.txt >> /root/TODO
 cat /etc/opendkim/keys/fwd.${serverFQDN}/fwd.txt >> /root/TODO
@@ -65,20 +81,22 @@ postmap /etc/postfix/virtual
 # systemctl
 systemctl restart opendkim postfix
 
-# system
+# change user
 su - ubuntu
 cd /home/ubuntu
 
+# virtualenv
 virtualenv priveasyEnv
 source priveasyEnv/bin/activate
 sudo chown -R ubuntu:ubuntu priveasyEnv
 
 pip install django uwsgi celery psycopg2 psycopg2-binary twilio django-kronos stripe
 
+# change user
 exit
 
 # TODO
-echo -e "\n\n -  Reboot the server" >> /root/TODO
+echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
 fi

@@ -1,5 +1,7 @@
 hosts
+sshd
 motd
+fail2ban
 apt
 opendkim
 postfix
