@@ -2,3 +2,4 @@ sshd
 motd
 fail2ban
 apt
+postgresql
