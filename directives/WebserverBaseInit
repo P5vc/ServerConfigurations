@@ -97,6 +97,7 @@ echo "$djangoSecretKey" >> /root/secrets/wsSecrets.txt
 echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 
 echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
+export DJANGO_SETTINGS_MODULE=Priveasy.settings.pro
 
 dbPass=$(sed -n "1p" "/root/secrets/dbSecrets.txt")
 dbHostname=$(sed -n "2p" "/root/secrets/dbSecrets.txt")
@@ -112,8 +113,10 @@ source priveasyEnv/bin/activate
 
 cd /home/ubuntu/Priveasy
 
-python manage.py collectstatic
+yes 'yes' | python manage.py collectstatic
 python manage.py installtasks
+python manage.py makemigrations
+python manage.py migrate
 
 deactivate
 
