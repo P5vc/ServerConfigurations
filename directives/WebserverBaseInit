@@ -106,6 +106,17 @@ echo "DATABASE_PORT=58762" >> ./Priveasy/Priveasy/settings/.env
 
 chown -R ubuntu:ubuntu Priveasy
 
+ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
+
+source priveasyEnv/bin/activate
+
+cd /home/ubuntu/Priveasy
+
+python manage.py collectstatic
+python manage.py installtasks
+
+deactivate
+
 # ufw
 ufw allow 22
 ufw allow 80
