@@ -5,3 +5,4 @@ fail2ban
 apt
 opendkim
 postfix
+nginx
