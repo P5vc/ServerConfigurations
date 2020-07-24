@@ -14,7 +14,7 @@ touch /root/secrets/wsSecrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat unzip fail2ban -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban -y
 
 # pip3
 pip3 install --upgrade pip

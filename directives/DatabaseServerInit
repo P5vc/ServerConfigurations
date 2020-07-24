@@ -12,7 +12,7 @@ touch /root/secrets/dbSecrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install postgresql postgresql-contrib fail2ban -y
+apt-get install postgresql postgresql-contrib fail2ban vnstat -y
 
 # hostnamectl
 hostnamectl set-hostname $serverHostname
@@ -41,9 +41,15 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveas
 
 # ufw
 ufw allow 22
+# Add stricter rules here, only allowing access from the IP's of our webservers:
 ufw allow 58762
 ufw allow 58763
 yes | ufw enable
+
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl stop systemd-resolved
+systemctl disable systemd-resolved
 
 # TODO
 echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
