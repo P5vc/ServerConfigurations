@@ -111,6 +111,8 @@ ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.
 
 source priveasyEnv/bin/activate
 
+python -m pip install django[argon2]
+
 cd /home/ubuntu/Priveasy
 
 yes 'yes' | python manage.py collectstatic
