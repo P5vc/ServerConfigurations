@@ -1,0 +1,4 @@
+source template
+source variables
+
+template $(dirname $0)/resolvConf.template > /etc/resolv.conf
