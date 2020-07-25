@@ -1,0 +1,18 @@
+[program:uwsgiSupervised]
+command=/home/ubuntu/priveasyEnv/bin/uwsgi --ini /home/ubuntu/Priveasy/config/uwsgi.ini
+directory=/home/ubuntu/Priveasy/
+
+user=root
+numprocs=1
+stdout_logfile=/var/log/uwsgi/uwsgi.log
+stderr_logfile=/var/log/uwsgi/uwsgi.err
+autostart=true
+autorestart=true
+startsecs=30
+
+; Causes supervisor to send the termination signal (SIGTERM) to the whole process group.
+stopasgroup=true
+
+; if rabbitmq is supervised, set its priority higher
+; so it starts first
+priority=998

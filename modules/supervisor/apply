@@ -3,6 +3,9 @@ source variables
 
 if [ "$serverType" == "Webserver" ]
 	then
-		#template $(dirname $0)/supervisordConf.template > /etc/supervisord.conf
-		#template $(dirname $0)/uwsgiSupervisedConf.template > /etc/supervisor/conf.d/uwsgiSupervised.conf
+		template $(dirname $0)/supervisordConf.template > /etc/supervisord.conf
+		template $(dirname $0)/uwsgiSupervisedConf.template > /etc/supervisor/conf.d/uwsgiSupervised.conf
+		template $(dirname $0)/celeryConf.template > /etc/supervisor/conf.d/celery.conf
+		template $(dirname $0)/celeryBeatConf.template > /etc/supervisor/conf.d/celeryBeat.conf
+		template $(dirname $0)/torConf.template > /etc/supervisor/conf.d/tor.conf
 fi
