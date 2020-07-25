@@ -1,0 +1,8 @@
+source template
+source variables
+
+if [ "$serverType" == "Webserver" ]
+	then
+		#template $(dirname $0)/supervisordConf.template > /etc/supervisord.conf
+		#template $(dirname $0)/uwsgiSupervisedConf.template > /etc/supervisor/conf.d/uwsgiSupervised.conf
+fi
