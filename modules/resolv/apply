@@ -1,4 +1,5 @@
 source template
 source variables
 
-template $(dirname $0)/resolvConf.template > /etc/resolv.conf
+template $(dirname $0)/resolvConf.template > /tmp/resolv.conf
+mv /tmp/resolv.conf /etc/resolv.conf
