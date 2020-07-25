@@ -14,7 +14,7 @@ touch /root/secrets/wsSecrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban rabbitmq-server -y
 
 # pip3
 pip3 install --upgrade pip
@@ -149,6 +149,26 @@ ufw allow 58763
 ufw allow 25
 ufw allow 587
 yes | ufw enable
+
+# uwsgi
+mkdir -p /var/log/uwsgi/
+touch /var/log/uwsgi/uwsgi.log
+
+# supervisor
+mkdir -p /var/log/celery/
+touch /var/log/celery/worker.log
+
+# rabbitmq
+systemctl enable rabbitmq-server
+
+# tor
+cd /var
+mkdir tor
+chown ubuntu:ubuntu tor
+chmod 660 tor
+cd /home/ubuntu
+mkdir hiddenService
+chmod 700 hiddenService
 
 # TODO
 echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
