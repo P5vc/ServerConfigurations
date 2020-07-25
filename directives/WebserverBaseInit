@@ -109,7 +109,9 @@ chown -R ubuntu:ubuntu Priveasy
 
 ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
 
-sed 's/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return "https"\n        ### END OF MODIFIED LINES ###/1' /home/ubuntu/priveasyEnv/lib/python*/site-packages/django/http/request.py > /home/ubuntu/priveasyEnv/lib/python*/site-packages/django/http/request.py
+pythonVersion=$(ls /home/ubuntu/priveasyEnv/lib/)
+sed "s/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return 'https'\n        ### END OF MODIFIED LINES ###/1" /home/ubuntu/priveasyEnv/lib/${pythonVersion}/site-packages/django/http/request.py > /tmp/request.py
+mv /tmp/request.py /home/ubuntu/priveasyEnv/lib/${pythonVersion}/site-packages/django/http/request.py
 
 source priveasyEnv/bin/activate
 
