@@ -138,7 +138,7 @@ echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Prive
 apt-get install software-properties-common
 add-apt-repository universe
 apt-get update
-apt-get install certbot python3-certbot-nginx
+apt-get install certbot python3-certbot-nginx -y
 echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
 
 # ufw
