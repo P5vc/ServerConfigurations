@@ -48,7 +48,6 @@ yes | ufw enable
 
 # dnscrypt
 apt-get install dnscrypt-proxy -y
-systemctl stop systemd-resolved
 systemctl disable systemd-resolved
 
 # TODO
