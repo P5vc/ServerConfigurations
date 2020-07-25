@@ -134,6 +134,13 @@ zcashEncKey=${zcashEncKey:0:64}
 echo "$zcashEncKey" >> /root/secrets/wsSecrets.txt
 echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Priveasy/settings/.env
 
+# certbot
+apt-get install software-properties-common
+add-apt-repository universe
+apt-get update
+apt-get install certbot python3-certbot-nginx
+echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
+
 # ufw
 ufw allow 22
 ufw allow 80
