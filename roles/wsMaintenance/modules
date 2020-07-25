@@ -6,4 +6,3 @@ apt
 opendkim
 postfix
 nginx
-customDjango
