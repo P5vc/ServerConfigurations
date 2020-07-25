@@ -128,7 +128,7 @@ deactivate
 zcashEncKey=$(gpg --armor --gen-random 2 64)
 zcashEncKey=${zcashEncKey:0:64}
 echo "$zcashEncKey" >> /root/secrets/wsSecrets.txt
-echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> ./Priveasy/Priveasy/settings/.env
+echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Priveasy/settings/.env
 
 # ufw
 ufw allow 22
