@@ -7,3 +7,4 @@ opendkim
 postfix
 nginx
 supervisor
+tor
