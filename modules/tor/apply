@@ -9,6 +9,5 @@ if [ "$serverType" == "Webserver" ]
 		apt-get update
 		apt-get install tor deb.torproject.org-keyring -y
 		mkdir -p /home/ubuntu/hiddenService/authorized_clients
-		chmod 700 /home/ubuntu/hiddenService/authorized_clients
-		chmod 600 /home/ubuntu/hiddenService/h*
+		chmod -R 600 /home/ubuntu/hiddenService
 fi
