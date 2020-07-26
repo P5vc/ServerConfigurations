@@ -1,0 +1,16 @@
+source template
+source variables
+
+if [ "$serverType" == "Database" ]
+	then
+	webserver0IP=$(host -4 webserver0.p5.vc)
+	webserver0IP=${webserver0IP:29}
+	webserver1IP=$(host -4 webserver1.p5.vc)
+	webserver1IP=${webserver1IP:29}
+
+	yes | ufw delete 1
+	yes | ufw delete 1
+
+	ufw insert 1 allow from $webserver0IP port 58762
+	ufw insert 1 allow from $webserver1IP port 58762
+fi
