@@ -41,9 +41,12 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveas
 
 # ufw
 ufw allow 22
-# Add stricter rules here, only allowing access from the IP's of our webservers:
-ufw allow 58762
 ufw allow 58763
+
+# Dummy rules that will get replaced:
+ufw insert 1 allow from 127.0.0.1 port 58762
+ufw insert 1 allow from 127.0.0.2 port 58762
+
 yes | ufw enable
 
 # dnscrypt

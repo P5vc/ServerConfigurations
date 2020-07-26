@@ -4,3 +4,4 @@ fail2ban
 apt
 postgresql
 resolv
+ufw
