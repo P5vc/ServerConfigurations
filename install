@@ -41,8 +41,12 @@ function run() {
   # Set FQDN variable:
   echo -e "\n\n${BLUE}In order to properly configure this server, it's associated\nfully-qualified domain name is required. This is most likely 'Priveasy.org' or 'P5.vc'.\n\n${CYAN}FQDN: ${NO_COLOR}"
   read serverFQDN
-  echo -e "\n\n${PURPLE}The server's FQDn has been set to: ${serverFQDN}${NO_COLOR}\n\n"
+  echo -e "\n\n${PURPLE}The server's FQDn has been set to: ${serverFQDN}${NO_COLOR}"
 
+  # Set latest Zcash client wallet version variable:
+  echo -e "\n\n${BLUE}In order to properly configure this server, the latest version\nof zecwallet-light-cli must be known (https://github.com/adityapk00/zecwallet-light-cli/releases).\nPlease enter the current version number (i.e. 1.4.0).\n\n%{CYAN}Version Number: ${NO_COLOR}"
+  read zcashCliVersion
+  echo -e "\n\n${PURPLE}The current zecwallet-light-cli version has been set to: ${zcashCliVersion}${NO_COLOR}\n\n"
 
   # check for git dependency
   if ! /usr/bin/which git > /dev/null; then
@@ -74,6 +78,7 @@ function run() {
   echo "serverHostname=${serverHostname}" >> ${INSTALL_PATH}/aviary/variables
   echo "serverPubIPv4=${serverPubIPv4}" >> ${INSTALL_PATH}/aviary/variables
   echo "serverFQDN=${serverFQDN}" >> ${INSTALL_PATH}/aviary/variables
+  echo "zcashCliVersion=${zcashCliVersion}" >> ${INSTALL_PATH}/aviary/variables
 
   echo Adding entry to /etc/crontab...
   echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
