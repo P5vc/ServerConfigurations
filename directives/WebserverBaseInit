@@ -14,7 +14,7 @@ touch /root/secrets/wsSecrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban rabbitmq-server apt-transport-https -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban rabbitmq-server apt-transport-https unzip -y
 
 # pip3
 pip3 install --upgrade pip
@@ -133,6 +133,15 @@ zcashEncKey=$(gpg --armor --gen-random 2 64)
 zcashEncKey=${zcashEncKey:0:64}
 echo "$zcashEncKey" >> /root/secrets/wsSecrets.txt
 echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Priveasy/settings/.env
+
+cd /home/ubuntu
+wget https://github.com/adityapk00/zecwallet-light-cli/releases/download/v${zcashCliVersion}/linux-zecwallet-cli-v${zcashCliVersion}.zip
+unzip linux-zecwallet-cli-v${zcashCliVersion}.zip
+rm linux-zecwallet-cli-v${zcashCliVersion}.zip
+mv linux-zecwallet-cli-v${zcashCliVersion} Zcash
+cd /home/ubuntu/Zcash
+./zecwallet-cli encrypt $zcashEncKey
+./zecwallet-cli save
 
 # certbot
 apt-get install software-properties-common
