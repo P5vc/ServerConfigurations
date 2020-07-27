@@ -71,6 +71,10 @@ cat /etc/opendkim/keys/burn.${serverFQDN}/burn.txt >> /root/TODO
 touch /etc/postfix/virtual
 postmap /etc/postfix/virtual
 
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl disable systemd-resolved
+
 # systemctl
 systemctl restart opendkim postfix
 
