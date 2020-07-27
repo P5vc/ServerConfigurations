@@ -8,3 +8,4 @@ postfix
 nginx
 supervisor
 tor
+resolv
