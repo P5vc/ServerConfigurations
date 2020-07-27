@@ -1,2 +1,4 @@
 serverType="Webserver"
 serverGeneration="Base"
+jailDir="/home/jail"
+programsToCopy="/bin/bash"

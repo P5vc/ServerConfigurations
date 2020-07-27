@@ -9,3 +9,4 @@ nginx
 supervisor
 tor
 resolv
+jail
