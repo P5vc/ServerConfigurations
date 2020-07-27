@@ -2,3 +2,8 @@ source template
 source variables
 
 template $(dirname $0)/sshd_config.template > /etc/ssh/sshd_config
+
+if [ "$serverType" == "Webserver" ]
+	then
+	echo -e "Match group jailed\n\tChrootDirectory /home/vpnservers/" >> /etc/ssh/sshd_config
+fi
