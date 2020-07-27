@@ -7,7 +7,7 @@ if [ "$serverType" == "Webserver" ]
 		mkdir -p /etc/tor
 		template $(dirname $0)/torrc.template > /etc/tor/torrc
 		apt-get update
-		apt-get install tor deb.torproject.org-keyring -y
+		yes 'Y' | apt-get install tor deb.torproject.org-keyring -y >> /dev/null
 		mkdir -p /home/ubuntu/hiddenService/authorized_clients
 		chmod -R 600 /home/ubuntu/hiddenService
 fi
