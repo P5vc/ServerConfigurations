@@ -8,9 +8,9 @@ if [ "$serverType" == "Database" ]
 	webserver1IP=$(host -4 webserver1.${serverFQDN})
 	webserver1IP=${webserver1IP:29}
 
-	yes | ufw delete 1
-	yes | ufw delete 1
+	yes | ufw delete 1 >> /dev/null
+	yes | ufw delete 1 >> /dev/null
 
-	ufw insert 1 allow from $webserver0IP to any port 58762
-	ufw insert 1 allow from $webserver1IP to any port 58762
+	ufw insert 1 allow from $webserver0IP to any port 58762 >> /dev/null
+	ufw insert 1 allow from $webserver1IP to any port 58762 >> /dev/null
 fi
