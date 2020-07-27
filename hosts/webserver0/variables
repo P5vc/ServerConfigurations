@@ -1,4 +1,4 @@
 serverType="Webserver"
 serverGeneration="Base"
 jailDir="/home/jail"
-programsToCopy="/bin/bash"
+programsToCopy="/bin/bash /bin/ls /bin/cat /bin/echo /bin/rm /usr/bin/pwd /usr/bin/chmod /usr/bin/touch"

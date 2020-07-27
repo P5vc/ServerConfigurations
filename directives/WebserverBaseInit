@@ -23,10 +23,34 @@ pip3 install virtualenv
 # hostnamectl
 hostnamectl set-hostname $serverHostname
 
+# jail
+mkdir -p $jailDir
+mkdir -p $jailDir/VPN
+
+for program in $programsToCopy
+do
+  cp --parents $program $jailDir
+  cp --parents $(ldd $program | grep -v dynamic | cut -d " " -f 3 | sed "s/://" | sort | uniq) $jailDir
+done
+
+cp --parents /lib64/ld-linux-x86-64.so.2 $jailDir
+
+yes "" | adduser vpnservers --disabled-password
+
+mkdir -p /home/vpnservers/.ssh
+touch /home/vpnservers/.ssh/authorized_keys
+
+groupadd jailed
+adduser vpnservers jailed
+
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
 cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
 rm /root/secrets/${serverHostname}.pub
+
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/vpnservers -N ""
+cat /root/secrets/vpnservers.pub >> /home/vpnservers/.ssh/authorized_keys
+rm /root/secrets/vpnservers.pub
 
 # TODO
 echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
@@ -186,18 +210,6 @@ chmod 700 hiddenService
 curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
 echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenService" >> /root/TODO
-
-# jail
-mkdir -p $jailDir
-mkdir -p $jailDir/VPN
-
-for program in $programsToCopy
-do
-  cp --parents $program $jailDir
-  cp --parents $(ldd $program | grep -v dynamic | cut -d " " -f 3 | sed "s/://" | sort | uniq) $jailDir
-done
-
-cp --parents /lib64/ld-linux-x86-64.so.2 $jailDir
 
 # TODO
 echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
