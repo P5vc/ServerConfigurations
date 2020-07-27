@@ -3,9 +3,9 @@ source variables
 
 if [ "$serverType" == "Database" ]
 	then
-	webserver0IP=$(host -4 webserver0.p5.vc)
+	webserver0IP=$(host -4 webserver0.${serverFQDN})
 	webserver0IP=${webserver0IP:29}
-	webserver1IP=$(host -4 webserver1.p5.vc)
+	webserver1IP=$(host -4 webserver1.${serverFQDN})
 	webserver1IP=${webserver1IP:29}
 
 	yes | ufw delete 1
