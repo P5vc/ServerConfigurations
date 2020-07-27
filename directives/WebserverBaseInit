@@ -211,6 +211,9 @@ curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E8
 
 echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenService" >> /root/TODO
 
+# openssl
+openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /tmp/tempKey.key -out /tmp/tempCert.crt
+
 # TODO
 echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
