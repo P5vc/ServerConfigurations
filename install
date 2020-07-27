@@ -81,7 +81,10 @@ function run() {
   echo "serverHostname=${serverHostname}" >> ${INSTALL_PATH}/aviary/variables
   echo "serverPubIPv4=${serverPubIPv4}" >> ${INSTALL_PATH}/aviary/variables
   echo "serverFQDN=${serverFQDN}" >> ${INSTALL_PATH}/aviary/variables
-  echo "zcashCliVersion=${zcashCliVersion}" >> ${INSTALL_PATH}/aviary/variables
+  if [ "$hostnameBeginning" == "webserver" ]
+  then
+    echo "zcashCliVersion=${zcashCliVersion}" >> ${INSTALL_PATH}/aviary/variables
+  fi
 
   echo Adding entry to /etc/crontab...
   echo "$(cat /etc/crontab | grep -v $AV_PATH)" > /etc/crontab
