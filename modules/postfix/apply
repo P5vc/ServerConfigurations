@@ -5,5 +5,4 @@ if [ "$serverType" == "Webserver" ]
 	then
 	template $(dirname $0)/wsMainConf.template > /etc/postfix/main.cf
 	template $(dirname $0)/wsMailname.template > /etc/mailname
-	template $(dirname $0)/wsVirtual.template > /etc/postfix/virtual
 fi
