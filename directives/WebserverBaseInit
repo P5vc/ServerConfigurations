@@ -155,6 +155,7 @@ python manage.py migrate
 deactivate
 
 echo -e "\n\n -  Run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/wsSecrets.txt file." >> /root/TODO
+echo -e "\n\n" -  Add the appropriate Twilio credentials to the /home/ubuntu/Priveasy/mainSite/.env file." >> /root/TODO
 
 # Zcash
 zcashEncKey=$(gpg --armor --gen-random 2 64)
