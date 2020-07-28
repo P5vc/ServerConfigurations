@@ -133,6 +133,12 @@ echo "DATABASE_PASSWORD=${dbPass}" >> ./Priveasy/Priveasy/settings/.env
 echo "DATABASE_HOST=${dbHostname}.${serverFQDN}" >> ./Priveasy/Priveasy/settings/.env
 echo "DATABASE_PORT=58762" >> ./Priveasy/Priveasy/settings/.env
 
+echo "TWILIO_ACCOUNT_SID=" >> ./Priveasy/Priveasy/settings/.env
+echo "TWILIO_AUTH_TOKEN=" >> ./Priveasy/Priveasy/settings/.env
+echo "STRIPE_API_KEY=" >> ./Priveasy/Priveasy/settings/.env
+
+echo -e "\n\n -  Insert the correct Twilio and Stripe keys in /home/ubuntu/Priveasy/Priveasy/settings/.env" >> /root/TODO
+
 chown -R ubuntu:ubuntu Priveasy
 
 ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
