@@ -1,6 +1,7 @@
 127.0.0.1		localhost
-{{ serverPubIPv4 }}		{{ serverHostname }}.{{ serverFQDN }}		{{ serverHostname }}
-{{ serverPubIPv4 }}		noreply.{{ serverFQDN }}		{{ serverHostname }}
-{{ serverPubIPv4 }}		fwd.{{ serverFQDN }}		{{ serverHostname }}
-{{ serverPubIPv4 }}		burn.{{ serverFQDN }}		{{ serverHostname }}
-{{ serverPubIPv4 }}		{{ serverFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}		{{ serverHostname }}.{{ internalFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}		noreply.{{ publicFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}		fwd.{{ publicFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}		burn.{{ publicFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}             {{ internalFQDN }}                {{ serverHostname }}
+{{ serverPubIPv4 }}		{{ publicFQDN }}		{{ serverHostname }}

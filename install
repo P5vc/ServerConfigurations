@@ -47,10 +47,14 @@ function run() {
   read serverPubIPv4
   echo -e "\n\n${PURPLE}The server's public IPv4 address has been set to: ${serverPubIPv4}${NO_COLOR}"
 
-  # Set FQDN variable:
-  echo -e "\n\n${BLUE}In order to properly configure this server, it's associated\nfully-qualified domain name is required. This is most likely 'Priveasy.org' or 'P5.vc'.\n\n${CYAN}FQDN: ${NO_COLOR}"
-  read serverFQDN
-  echo -e "\n\n${PURPLE}The server's FQDn has been set to: ${serverFQDN}${NO_COLOR}"
+  # Set FQDN variables:
+  echo -e "\n\n${BLUE}In order to properly configure this server, it's associated,\npublic fully-qualified domain name is required. This is most likely 'Priveasy.org'.\n\n${CYAN}Public FQDN: ${NO_COLOR}"
+  read publicFQDN
+  echo -e "\n\n${PURPLE}The server's public FQDN has been set to: ${publicFQDN}${NO_COLOR}"
+
+  echo -e "\n\n${BLUE}In order to properly configure this server, it's associated,\ninternal/configuration fully-qualified domain name is required. This is most likely 'P5.vc'.\n\n${CYAN}Internal FQDN: ${NO_COLOR}"
+  read internalFQDN
+  echo -e "\n\n${PURPLE}The server's internal FQDN has been set to: ${internalFQDN}${NO_COLOR}"
 
   # Set latest Zcash client wallet version variable:
   if [ "$hostnameBeginning" == "webserver" ]
@@ -89,7 +93,8 @@ function run() {
   # Save set variables:
   echo "serverHostname=${serverHostname}" >> ${INSTALL_PATH}/aviary/variables
   echo "serverPubIPv4=${serverPubIPv4}" >> ${INSTALL_PATH}/aviary/variables
-  echo "serverFQDN=${serverFQDN}" >> ${INSTALL_PATH}/aviary/variables
+  echo "publicFQDN=${publicFQDN}" >> ${INSTALL_PATH}/aviary/variables
+  echo "internalFQDN=${internalFQDN}" >> ${INSTALL_PATH}/aviary/variables
   if [ "$hostnameBeginning" == "webserver" ]
   then
     echo "zcashCliVersion=${zcashCliVersion}" >> ${INSTALL_PATH}/aviary/variables
