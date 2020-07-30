@@ -26,11 +26,21 @@ function run() {
   hostnameBeginning=${serverHostname:0:9}
   if [ "$hostnameBeginning" == "webserver" ]
   then
-    if [ ! -f "/root/secrets/dbSecrets.txt" ]
+    if [ "$serverHostname" == "webserver0" ]
     then
-      echo -e "\n\n${RED}The '/root/secrets/dbSecrets.txt' file could not be found.\nPlease set up a database server before this webserver,\nthen copy-over the database server's secrets folder\nto this webserver, before continuing with the install.${NO_COLOR}"
-      exit 1
+      if [ ! -f "/root/secrets/dbSecrets.txt" ]
+      then
+        echo -e "\n\n${RED}The '/root/secrets/dbSecrets.txt' file could not be found.\nPlease set up a database server before this webserver,\nthen copy-over the database server's secrets folder\nto this webserver, before continuing with the install.${NO_COLOR}"
+        exit 1
+      fi
+    else
+      if [ ! -f "/root/secrets/ws0Secrets.txt" ]
+      then
+        echo -e "\n\n${RED}The '/root/secrets/ws0Secrets.txt' file could not be found.\nPlease set up a primary webserver before this webserver,\nthen copy-over the primary webserver's secrets folder\nto this webserver, before continuing with the install.${NO_COLOR}"
+        exit 1
+      fi
     fi
+      
   fi
 
   # Set public IP variable:
