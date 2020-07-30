@@ -1,0 +1,15 @@
+source template
+source variables
+
+if [ "$serverType" == "Webserver" ]
+then
+if [ "$serverGeneration" == "Duplicate" ]
+then
+
+	scp -P 58763 -i /root/secrets/webserver0 /etc/letsencrypt/live/p5.vc/fullchain.pem /etc/ssl/private/tempCert.crt
+	scp -P 58763 -i /root/secrets/webserver0 /etc/letsencrypt/live/p5.vc/privkey.pem /etc/ssl/private/tempKey.key
+
+	scp -P 58763 -i /root/secrets/webserver0 -r /home/ubuntu/priveasyVPN /home/ubuntu/
+
+fi
+fi
