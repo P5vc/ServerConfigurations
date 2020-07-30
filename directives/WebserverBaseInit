@@ -9,7 +9,7 @@ then
 # system
 touch /root/TODO
 mkdir /root/secrets
-touch /root/secrets/wsSecrets.txt
+touch /root/secrets/ws0Secrets.txt
 
 # apt
 apt-get update
@@ -81,9 +81,7 @@ chown opendkim:opendkim /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private
 chown opendkim:opendkim /etc/opendkim/keys/burn.${serverFQDN}/burn.private
 chown opendkim:postfix /var/spool/postfix/opendkim
 
-cp /etc/opendkim/keys/noreply.${serverFQDN}/noreply.private /root/secrets/
-cp /etc/opendkim/keys/fwd.${serverFQDN}/fwd.private /root/secrets/
-cp /etc/opendkim/keys/burn.${serverFQDN}/burn.private /root/secrets/
+cp -R /etc/opendkim/keys /root/secrets/
 
 # TODO
 echo -e " -  Create DNS TXT records for the following keys:\n\n" >> /root/TODO
@@ -121,7 +119,7 @@ rm -rf WebserverBackend
 
 djangoSecretKey=$(gpg --armor --gen-random 2 64)
 djangoSecretKey=${djangoSecretKey:0:64}
-echo "$djangoSecretKey" >> /root/secrets/wsSecrets.txt
+echo "$djangoSecretKey" >> /root/secrets/ws0Secrets.txt
 echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 
 echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
@@ -160,13 +158,13 @@ python manage.py migrate
 
 deactivate
 
-echo -e "\n\n -  Run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/wsSecrets.txt file." >> /root/TODO
+echo -e "\n\n -  Run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/ws0Secrets.txt file." >> /root/TODO
 echo -e "\n\n -  Add the appropriate Twilio credentials to the /home/ubuntu/Priveasy/mainSite/.env file." >> /root/TODO
 
 # Zcash
 zcashEncKey=$(gpg --armor --gen-random 2 64)
 zcashEncKey=${zcashEncKey:0:64}
-echo "$zcashEncKey" >> /root/secrets/wsSecrets.txt
+echo "$zcashEncKey" >> /root/secrets/ws0Secrets.txt
 echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Priveasy/settings/.env
 
 cd /home/ubuntu
@@ -219,10 +217,10 @@ curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E8
 echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenService" >> /root/TODO
 
 # openssl
-yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /tmp/tempKey.key -out /tmp/tempCert.crt
+yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt
 
 # TODO
-echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  After you save the secrets directory to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
