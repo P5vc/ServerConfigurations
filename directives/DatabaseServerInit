@@ -53,13 +53,13 @@ fi
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
 sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON TABLES IN SCHEMA TO priveasyuser;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
 if [ "$serverGeneration" == "Duplicate" ]
 then
   sudo -u postgres psql -c "CREATE SUBSCRIPTION priveasydbPublication CONNECTION 'host=database0.${internalFQDN} port=58762 password=${priveasyuserPass} user=priveasyuser dbname=priveasydb' PUBLICATION priveasydbPublication;"
 else
-  sudo -u postgres psql -c "CREATE PUBLICATION FOR ALL TABLES priveasydbPublication;"
+  sudo -u postgres psql -c "CREATE PUBLICATION priveasydbPublication FOR ALL TABLES;"
 fi
 
 # ufw
