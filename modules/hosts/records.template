@@ -1,3 +1,3 @@
-127.0.0.1		mail.{{ publicFQDN }} localhost
-{{ serverPubIPv4 }}		mail.{{ publicFQDN }}
-{{ serverPubIPv4 }}		records0.{{ internalFQDN }}
+127.0.0.1		mail.{{ publicFQDN }}		mail
+{{ serverPubIPv4 }}		mail.{{ publicFQDN }}		mail
+{{ serverPubIPv4 }}		records0.{{ internalFQDN }}		records0
