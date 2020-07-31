@@ -10,7 +10,21 @@ if [ "$serverType" == "Database" ]
 
 	yes | ufw delete 1 >> /dev/null
 	yes | ufw delete 1 >> /dev/null
+	yes | ufw delete 1 >> /dev/null
 
 	ufw insert 1 allow from $webserver0IP to any port 58762 >> /dev/null
 	ufw insert 1 allow from $webserver1IP to any port 58762 >> /dev/null
+
+	if [ "$serverGeneration" == "Duplicate" ]
+	then
+		database0IP=$(host -4 database0.${internalFQDN})
+		database0IP=${database0IP:28}
+
+		ufw insert 1 allow from $database0IP to any port 58762 >> /dev/null
+	else
+		database1IP=$(host -4 database1.${internalFQDN})
+		database1IP=${database1IP:28}
+
+		ufw insert 1 allow from $database1IP to any port 58762 >> /dev/null
+	fi
 fi

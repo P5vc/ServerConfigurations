@@ -20,9 +20,6 @@ apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail
 pip3 install --upgrade pip
 pip3 install virtualenv
 
-# hostnamectl
-hostnamectl set-hostname $serverHostname
-
 # jail
 mkdir -p $jailDir
 mkdir -p $jailDir/VPN
@@ -125,8 +122,8 @@ echo "SECRET_KEY=${djangoSecretKey}" >> ./Priveasy/Priveasy/settings/.env
 echo "DJANGO_SETTINGS_MODULE=Priveasy.settings.pro" >> /etc/environment
 export DJANGO_SETTINGS_MODULE=Priveasy.settings.pro
 
-dbPass=$(sed -n "1p" "/root/secrets/dbSecrets.txt")
-dbHostname=$(sed -n "2p" "/root/secrets/dbSecrets.txt")
+dbPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+dbHostname=$(sed -n "2p" "/root/secrets/db0Secrets.txt")
 echo "DATABASE_PASSWORD=${dbPass}" >> ./Priveasy/Priveasy/settings/.env
 echo "DATABASE_HOST=${dbHostname}.${internalFQDN}" >> ./Priveasy/Priveasy/settings/.env
 echo "DATABASE_PORT=58762" >> ./Priveasy/Priveasy/settings/.env

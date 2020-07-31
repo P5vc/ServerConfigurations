@@ -4,18 +4,27 @@ if [ "$serverType" == "Database" ]
 then
 
 
+if [ "$serverGeneration" == "Duplicate" ]
+then
+  if [ ! -f "/root/secrets/db0Secrets.txt" ]
+  then
+    echo -e "\n\nThe '/root/secrets/db0Secrets.txt' file could not be found.\nPlease set up a primary database before this database,\nthen copy-over the secrets folder generated."
+    exit 1
+  fi
+fi
+
+databaseNum=$(hostname)
+databaseNum=${databaseNum:8}
+
 # system
 touch /root/TODO
 mkdir /root/secrets
-touch /root/secrets/dbSecrets.txt
+touch /root/secrets/db${databaseNum}Secrets.txt
 
 # apt
 apt-get update
 apt-get upgrade -y
 apt-get install postgresql postgresql-contrib fail2ban vnstat -y
-
-# hostnamectl
-hostnamectl set-hostname $serverHostname
 
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
@@ -27,17 +36,31 @@ echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${
 
 # postgres
 echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
+echo "wal_level = logical" >> /etc/postgresql/12/main/postgresql.conf
 systemctl restart postgresql
 
-priveasyuserPass=$(gpg --armor --gen-random 2 64)
-priveasyuserPass=${priveasyuserPass:0:64}
-echo "$priveasyuserPass" >> /root/secrets/dbSecrets.txt
-echo "$serverHostname" >> /root/secrets/dbSecrets.txt
+if [ "$serverGeneration" == "Duplicate" ]
+then
+  priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+else
+  priveasyuserPass=$(gpg --armor --gen-random 2 64)
+  priveasyuserPass=${priveasyuserPass:0:64}
+  echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
+  echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
+  sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
+fi
 
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
-sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
 sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON TABLES IN SCHEMA TO priveasyuser;"
+
+if [ "$serverGeneration" == "Duplicate" ]
+then
+  sudo -u postgres psql -c "CREATE SUBSCRIPTION priveasydbPublication CONNECTION 'host=database0.${internalFQDN} port=58762 password=${priveasyuserPass} user=priveasyuser dbname=priveasydb' PUBLICATION priveasydbPublication;"
+else
+  sudo -u postgres psql -c "CREATE PUBLICATION FOR ALL TABLES priveasydbPublication;"
+fi
 
 # ufw
 ufw allow 22
@@ -46,6 +69,7 @@ ufw allow 58763
 # Dummy rules that will get replaced:
 ufw insert 1 allow from 127.0.0.1 port 58762
 ufw insert 1 allow from 127.0.0.2 port 58762
+ufw insert 1 allow from 127.0.0.3 port 58762
 
 yes | ufw enable
 
