@@ -1,3 +1,2 @@
-127.0.0.1               localhost
-{{ serverPubIPv4 }}             {{ serverHostname }}.{{ internalFQDN }}         {{ serverHostname }}
-{{ serverPubIPv4 }}             {{ serverHostname }}.{{ publicFQDN }}           {{ serverHostname }}
+127.0.0.1		{{ serverHostname }}.{{ internalFQDN }}		{{ serverHostname }}
+{{ serverPubIPv4 }}		{{ serverHostname }}.{{ internalFQDN }}		{{ serverHostname }}

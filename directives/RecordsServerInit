@@ -10,9 +10,10 @@ touch /root/TODO
 mkdir -p /root/secrets
 touch /root/secrets/recordsSecrets.txt
 
-hostnamectl set-hostname "mail.${publicFQDN}"
+hostnamectl set-hostname "mail"
 
-echo "127.0.0.1               mail.{{ publicFQDN }} localhost" > /etc/hosts
+echo "127.0.0.1          mail.${publicFQDN}          mail" > /etc/hosts
+echo "${serverPubIPv4}          mail.${publicFQDN}          mail" >> /etc/hosts
 
 # apt
 apt-get update
@@ -42,6 +43,18 @@ rm iRedMail-${iRedMailVersion}.tar.gz
 cd iRedMail-${iRedMailVersion}
 bash iRedMail.sh
 
+mv config /root/secrets/recordsServerConfig
+
+# certbot
+apt-get install software-properties-common
+add-apt-repository universe
+apt-get update
+apt-get install certbot python3-certbot-nginx -y
+
+# TODO
+echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
+echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
+echo -e "\n\n -  Move the /root/secrets directory to a secure, external location." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
