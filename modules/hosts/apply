@@ -8,3 +8,7 @@ fi
 if [ "$serverType" == "Webserver" ]
 	then template $(dirname $0)/webserver.template > /etc/hosts
 fi
+
+if [ "$serverType" == "Records" ]
+        then template $(dirname $0)/records.template > /etc/hosts
+fi
