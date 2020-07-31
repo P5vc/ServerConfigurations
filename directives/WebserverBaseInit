@@ -22,6 +22,7 @@ pip3 install virtualenv
 
 # system
 yes "" | adduser ubuntu
+mkdir -p /home/ubuntu/.ssh
 
 # jail
 mkdir -p $jailDir
