@@ -57,7 +57,7 @@ rm /root/secrets/vpnservers.pub
 echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
 
 # postfix
-debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${internalFQDN}"
+debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${publicFQDN}"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
 apt-get install postfix -y
