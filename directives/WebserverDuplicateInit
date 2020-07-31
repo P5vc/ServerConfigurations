@@ -11,7 +11,7 @@ webserverNum=${webserverNum:9}
 
 # system
 touch /root/TODO
-mkdir /root/secrets
+mkdir -p /root/secrets
 touch /root/secrets/ws${webserverNum}Secrets.txt
 
 # apt
