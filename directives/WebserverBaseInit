@@ -8,7 +8,7 @@ then
 
 # system
 touch /root/TODO
-mkdir /root/secrets
+mkdir -p /root/secrets
 touch /root/secrets/ws0Secrets.txt
 
 # apt
