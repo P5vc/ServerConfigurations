@@ -18,7 +18,7 @@ databaseNum=${databaseNum:8}
 
 # system
 touch /root/TODO
-mkdir /root/secrets
+mkdir -p /root/secrets
 touch /root/secrets/db${databaseNum}Secrets.txt
 
 # apt
@@ -39,6 +39,8 @@ echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql
 echo "wal_level = logical" >> /etc/postgresql/12/main/postgresql.conf
 systemctl restart postgresql
 
+sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
+
 if [ "$serverGeneration" == "Duplicate" ]
 then
   priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
@@ -48,12 +50,10 @@ else
   echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
   echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
   sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
+  sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
+  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
+  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 fi
-
-sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
-sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
 if [ "$serverGeneration" == "Duplicate" ]
 then
