@@ -1,0 +1,47 @@
+source variables
+
+if [ "$serverType" == "Records" ]
+then
+
+
+# system
+touch /root/TODO
+mkdir -p /root/secrets
+touch /root/secrets/recordsSecrets.txt
+
+hostnamectl set-hostname "mail.${publicFQDN}"
+
+echo "127.0.0.1               mail.{{ publicFQDN }} localhost" > /etc/hosts
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install gzip -y
+
+# system
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu
+mkdir -p /home/ubuntu/.ssh
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
+
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl disable systemd-resolved
+
+# iRedMail
+echo -e "\n\nIn order to properly configure this server, the latest version\nof iRedMail must be known (https://github.com/iredmail/iRedMail/releases).\nPlease enter the current version number (i.e. 1.3.1).\n\nVersion Number: "
+read iRedMailVersion
+
+wget https://github.com/iredmail/iRedMail/releases/download/${iRedMailVersion}/iRedMail-${iRedMailVersion}.tar.gz
+tar zxf iRedMail-${iRedMailVersion}.tar.gz
+rm iRedMail-${iRedMailVersion}.tar.gz
+cd iRedMail-${iRedMailVersion}
+bash iRedMail.sh
+
+echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
+
+
+fi
