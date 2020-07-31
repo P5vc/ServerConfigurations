@@ -1,1 +1,1 @@
-{{ serverHostname }}.{{ internalFQDN }}
+{{ serverHostname }}.{{ publicFQDN }}
