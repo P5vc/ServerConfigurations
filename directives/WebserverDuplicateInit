@@ -24,7 +24,7 @@ pip3 install --upgrade pip
 pip3 install virtualenv
 
 # system
-yes "" | adduser ubuntu
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu
 mkdir -p /home/ubuntu/.ssh
 
 # sshd
