@@ -28,7 +28,7 @@ function run() {
   then
     if [ "$serverHostname" == "webserver0" ]
     then
-      if [ ! -f "/root/secrets/dbSecrets.txt" ]
+      if [ ! -f "/root/secrets/db0Secrets.txt" ]
       then
         echo -e "\n\n${RED}The '/root/secrets/dbSecrets.txt' file could not be found.\nPlease set up a database server before this webserver,\nthen copy-over the database server's secrets folder\nto this webserver, before continuing with the install.${NO_COLOR}"
         exit 1
