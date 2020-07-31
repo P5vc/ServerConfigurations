@@ -1,0 +1,4 @@
+source template
+source variables
+
+template $(dirname $0)/cryptpadService.template > /etc/systemd/system/cryptpad.service

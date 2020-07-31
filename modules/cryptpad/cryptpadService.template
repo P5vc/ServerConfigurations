@@ -1,0 +1,10 @@
+[Unit]
+Description=CryptPad service
+
+[Service]
+ExecStart=/usr/bin/node /var/www/cryptpad/server.js
+WorkingDirectory=/var/www/cryptpad
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
