@@ -23,6 +23,9 @@ apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail
 pip3 install --upgrade pip
 pip3 install virtualenv
 
+# system
+yes "" | adduser ubuntu
+
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
 cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys

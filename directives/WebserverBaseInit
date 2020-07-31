@@ -20,6 +20,9 @@ apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail
 pip3 install --upgrade pip
 pip3 install virtualenv
 
+# system
+yes "" | adduser ubuntu
+
 # jail
 mkdir -p $jailDir
 mkdir -p $jailDir/VPN
