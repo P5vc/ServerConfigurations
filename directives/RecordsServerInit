@@ -5,6 +5,7 @@ then
 
 
 # system
+cd /root/
 touch /root/TODO
 mkdir -p /root/secrets
 touch /root/secrets/recordsSecrets.txt
