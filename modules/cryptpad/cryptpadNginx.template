@@ -32,8 +32,8 @@ server {
     server_name docs.{{ publicFQDN }} docs.{{ internalFQDN }};
 
     # You'll need to Set the path to your certificates and keys here
-    ssl_certificate         /etc/ssl/private/tempCert.crt;
-    ssl_certificate_key     /etc/ssl/private/tempKey.key;
+    ssl_certificate         /etc/letsencrypt/live/docs.p5.vc/fullchain.pem;
+    ssl_certificate_key     /etc/letsencrypt/live/docs.p5.vc/privkey.pem;
     #ssl_trusted_certificate /home/cryptpad/.acme.sh/your-main-domain.com/ca.cer;
 
     # diffie-hellman parameters are used to negotiate keys for your session
