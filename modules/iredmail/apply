@@ -1,0 +1,4 @@
+source template
+source variables
+
+template $(dirname $0)/ssl.template > /etc/nginx/templates/ssl.tmpl
