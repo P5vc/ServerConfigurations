@@ -74,10 +74,14 @@ ufw deny 22
 ufw allow 58763
 yes | ufw enable
 
+# amavisd
+amavisd-new genrsa /var/lib/dkim/${internalFQDN}.pem 2048
+
 # TODO
 echo -e "\n\n -  Move the /root/secrets directory to a secure, external location." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts.\nThen run 'sudo certbot certonly --webroot --agree-tos -d mail.${publicFQDN} --cert-name mail.${publicFQDN} --email Admin@${publicFQDN} -w /var/www/html'" >> /root/TODO
+echo -e "\n\n -  Add the following lines to '/etc/amavis/conf.d/50-user' in the appropriate sections:\n\ndkim_key('${internalFQDN}', 'dkim', '/var/lib/dkim/${internalFQDN}.pem');\n\n'${internalFQDN}' => { d => '${internalFQDN}', a => 'rsa-sha256', ttl => 10*24*3600 }," >> /root/TODO
 echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
 
 
