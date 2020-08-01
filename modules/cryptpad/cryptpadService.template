@@ -2,8 +2,8 @@
 Description=CryptPad service
 
 [Service]
-ExecStart=/usr/bin/node /var/www/cryptpad/server.js
-WorkingDirectory=/var/www/cryptpad
+ExecStart=/usr/bin/node /home/ubuntu/cryptpad/server.js
+WorkingDirectory=/home/ubuntu/cryptpad
 Restart=always
 
 [Install]
