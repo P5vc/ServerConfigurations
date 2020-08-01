@@ -77,7 +77,7 @@ yes | ufw enable
 # TODO
 echo -e "\n\n -  Move the /root/secrets directory to a secure, external location." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
-echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
+echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts.\nThen run 'sudo certbot certonly --webroot --agree-tos -d mail.${publicFQDN} --cert-name mail.${publicFQDN} --email Admin@${publicFQDN} -w /var/www/html'" >> /root/TODO
 echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
 
 
