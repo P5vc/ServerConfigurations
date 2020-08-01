@@ -208,6 +208,11 @@ module.exports = {
      */
 
     customLimits: {
+        "[Priveasy Core Team@docs.priveasy.org/VS8vrTFwXjBEG+8A9WYpsx5rEeLaqdo2u9m0Wrdnt8k=]": {
+            limit: 8192 * 1024 * 1024,
+            plan: 'adminTeam',
+            note: 'Thank you for running Priveasy! Enjoy this premium account on us!'
+        },
         "[noah@docs.priveasy.org/R0ahF5ax6cOF36fgF6NVY2XkLjxLdCxi3T8XtjpSuCw=]": {
             limit: 512 * 1024 * 1024,
             plan: 'contributor',
