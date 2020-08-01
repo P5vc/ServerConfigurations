@@ -24,7 +24,7 @@ touch /root/secrets/db${databaseNum}Secrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install postgresql postgresql-contrib fail2ban vnstat -y
+apt-get install postgresql postgresql-contrib fail2ban vnstat libdbix-safe-perl libdbd-pg-perl libboolean-perl make postgresql-plperl -y
 
 # system
 useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu
@@ -53,18 +53,32 @@ else
   priveasyuserPass=${priveasyuserPass:0:64}
   echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
   echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
-  sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
-  sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
-  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
-  sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 fi
 
-if [ "$serverGeneration" == "Duplicate" ]
-then
-  sudo -u postgres psql -c "CREATE SUBSCRIPTION priveasydbPublication CONNECTION 'host=database0.${internalFQDN} port=58762 password=${priveasyuserPass} user=priveasyuser dbname=priveasydb' PUBLICATION priveasydbPublication;"
-else
-  sudo -u postgres psql -c "CREATE PUBLICATION priveasydbPublication FOR ALL TABLES;"
-fi
+sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
+sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
+
+# bucardo
+cd /root
+
+git clone https://github.com/bucardo/bucardo.git
+cd bucardo
+
+perl Makefile.PL
+make
+make install
+
+mkdir -p /tmp/bucardo
+
+rm /etc/postgresql/12/main/pg_hba.conf
+echo "local   all   postgres   peer" > /etc/postgresql/12/main/pg_hba.conf
+echo "local   all   bucardo   trust" >> /etc/postgresql/12/main/pg_hba.conf
+
+systemctl restart postgresql
+
+bucardo install --piddir=/tmp/bucardo
 
 # ufw
 ufw allow 22
