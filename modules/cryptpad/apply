@@ -12,3 +12,4 @@ else
 fi
 
 systemctl enable cryptpad
+systemctl restart cryptpad
