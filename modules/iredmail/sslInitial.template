@@ -1,0 +1,21 @@
+ssl_protocols TLSv1.2;
+
+# Fix 'The Logjam Attack'.
+ssl_ciphers EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH;
+ssl_prefer_server_ciphers on;
+ssl_dhparam /etc/ssl/dh2048_param.pem;
+
+# To use your own ssl cert (e.g. "Let's Encrypt"), please create symbol link to
+# ssl cert/key used below, so that we can manage this config file with Ansible.
+#
+# For example:
+#
+# rm -f /etc/ssl/private/iRedMail.key
+# rm -f /etc/ssl/certs/iRedMail.crt
+# ln -s /etc/letsencrypt/live/<domain>/privkey.pem /etc/ssl/private/iRedMail.key
+# ln -s /etc/letsencrypt/live/<domain>/fullchain.pem /etc/ssl/certs/iRedMail.crt
+#
+# To request free "Let's Encrypt" cert, please check our tutorial:
+# https://docs.iredmail.org/letsencrypt.html
+ssl_certificate /etc/ssl/private/tempCert.crt;
+ssl_certificate_key /etc/ssl/private/tempKey.key;

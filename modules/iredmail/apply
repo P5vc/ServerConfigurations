@@ -2,3 +2,10 @@ source template
 source variables
 
 template $(dirname $0)/ssl.template > /etc/nginx/templates/ssl.tmpl
+
+if [ -d "/etc/letsencrypt/live/mail.${publicFQDN}" ]
+then
+        template $(dirname $0)/ssl.template > /etc/nginx/templates/ssl.tmpl
+else
+        template $(dirname $0)/sslInitial.template > /etc/nginx/templates/ssl.tmpl
+fi
