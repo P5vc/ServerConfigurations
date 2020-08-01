@@ -69,6 +69,11 @@ add-apt-repository universe
 apt-get update
 apt-get install certbot python3-certbot-nginx -y
 
+# ufw
+ufw deny 22
+ufw allow 58763
+yes | ufw enable
+
 # TODO
 echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
 echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
