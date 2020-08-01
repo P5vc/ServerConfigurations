@@ -1,0 +1,4 @@
+source template
+source variables
+
+mkdir -p /tmp/bucardo
