@@ -16,8 +16,8 @@ then
 
 	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
 
-	bucardo add db -p 58762 priveasydbBase dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require"
-	bucardo add db -p 58762 priveasydbDuplicate dbname=priveasydb port=58762 host=$(hostname).${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require"
+	bucardo add db -p 58762 priveasydbBase dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require" >> /dev/null
+	bucardo add db -p 58762 priveasydbDuplicate dbname=priveasydb port=58762 host=$(hostname).${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require" >> /dev/null
 
 	bucardo add all tables db=priveasydbBase relgroup=BaseTables -p 58762 >> /dev/null
 
