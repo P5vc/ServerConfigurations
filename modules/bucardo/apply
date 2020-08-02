@@ -9,6 +9,8 @@ then
 
 if [ -d "/root/secrets" ]
 then
+	systemctl restart postgresql
+
 	mkdir -p /var/log/bucardo
 	touch /var/log/bucardo/log.bucardo
 
