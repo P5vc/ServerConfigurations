@@ -9,6 +9,9 @@ then
 
 if [ -d "/root/secrets" ]
 then
+	mkdir -p /var/log/bucardo
+	touch /var/log/bucardo/log.bucardo
+
 	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
 
 	bucardo add db -p 58762 priveasydbBase dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require"
@@ -17,6 +20,8 @@ then
 	bucardo add all tables db=priveasydbBase relgroup=BaseTables -p 58762
 
 	bucardo add sync fromBase dbs=priveasydbBase,priveasydbDuplicate relgroup=BaseTables conflict_strategy="bucardo_latest" -p 58762
+
+	bucardo start -p 58762
 fi
 
 bucardo add all tables db=priveasydbBase relgroup=BaseTables -p 58762
