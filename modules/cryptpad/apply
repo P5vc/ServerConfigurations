@@ -1,6 +1,8 @@
 source template
 source variables
 
+mkdir -p /home/ubuntu/cryptpad/config
+
 template $(dirname $0)/cryptpadService.template > /etc/systemd/system/cryptpad.service
 template $(dirname $0)/cryptpadConfig.template > /home/ubuntu/cryptpad/config/config.js
 
