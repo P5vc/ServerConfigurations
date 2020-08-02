@@ -3,19 +3,22 @@ source variables
 
 mkdir -p /tmp/bucardo
 
+if [ "$serverGeneration" == "Duplicate" ]
+then
+
+
 if [ -d "/root/secrets" ]
 then
-	databaseNum=$(hostname)
-	databaseNum=${databaseNum:8}
-
 	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
 
-	bucardo add db priveasydb0 dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass}
-	bucardo add db priveasydb1 dbname=priveasydb port=58762 host=database1.${internalFQDN} user=priveasyuser pass=${priveasyuserPass}
+	bucardo add db -p 58762 priveasydbBase dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require"
+	bucardo add db -p 58762 priveasydbDuplicate dbname=priveasydb port=58762 host=$(hostname).${internalFQDN} user=priveasyuser pass=${priveasyuserPass} conn="sslmode=require"
 
-	bucardo add all tables db=priveasydb0 --herd=base
-	bucardo add all tables db=priveasydb1 --herd=duplicate
+	bucardo add all tables db=priveasydbBase relgroup=BaseTables -p 58762
 
-	bucardo add sync fromBase source=base targetdb=priveasydb1 type=fullcopy
-	bucardo add sync fromDuplicate source=duplicate targetdb=priveasydb0 type=fullcopy
+	bucardo add sync fromBase dbs=priveasydbBase,priveasydbDuplicate relgroup=BaseTables conflict_strategy="bucardo_latest" -p 58762
+fi
+
+bucardo add all tables db=priveasydbBase relgroup=BaseTables -p 58762
+
 fi

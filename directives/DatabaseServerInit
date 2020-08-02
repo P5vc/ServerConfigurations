@@ -60,30 +60,33 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveas
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
 # bucardo
-mkdir -p /home/postgres
-cd /home/postgres
+if [ "$serverGeneration" == "Duplicate" ]
+then
+  mkdir -p /home/postgres
+  cd /home/postgres
 
-git clone https://github.com/bucardo/bucardo.git
+  git clone https://github.com/bucardo/bucardo.git
 
-cd /home/postgres/bucardo
+  cd /home/postgres/bucardo
 
-perl Makefile.PL
-make
-make install
+  perl Makefile.PL
+  make
+  make install
 
-chown -R postgres:postgres /home/postgres
+  chown -R postgres:postgres /home/postgres
 
-mkdir -p /tmp/bucardo
+  mkdir -p /tmp/bucardo
 
-rm /etc/postgresql/12/main/pg_hba.conf
-echo "local   all   postgres   peer" > /etc/postgresql/12/main/pg_hba.conf
-echo "local   all   bucardo   trust" >> /etc/postgresql/12/main/pg_hba.conf
+  rm /etc/postgresql/12/main/pg_hba.conf
+  echo "local   all   postgres   peer" > /etc/postgresql/12/main/pg_hba.conf
+  echo "local   all   bucardo   trust" >> /etc/postgresql/12/main/pg_hba.conf
 
-systemctl restart postgresql
+  systemctl restart postgresql
 
-yes 'P' | sudo -u postgres bucardo install --piddir=/tmp/bucardo -U postgres
+  yes 'P' | sudo -u postgres bucardo install --piddir=/tmp/bucardo -U postgres
 
-cd /root
+  cd /root
+fi
 
 # ufw
 ufw allow 22
