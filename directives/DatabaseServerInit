@@ -86,6 +86,8 @@ then
   yes 'P' | sudo -u postgres bucardo install --piddir=/tmp/bucardo -U postgres
 
   cd /root
+
+  echo "@reboot  root  mkdir -p /tmp/bucardo && bucardo start -p 58762" >> /etc/crontab
 fi
 
 # ufw
