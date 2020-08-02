@@ -36,11 +36,10 @@ cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
 rm /root/secrets/${serverHostname}.pub
 
 # TODO
-echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server." >> /root/TODO
+echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\nThe secrets directory MUST be removed from this server after it is copied." >> /root/TODO
 
 # postgres
 echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
-echo "wal_level = logical" >> /etc/postgresql/12/main/postgresql.conf
 systemctl restart postgresql
 
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
@@ -61,14 +60,18 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveas
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
 # bucardo
-cd /root
+mkdir -p /home/postgres
+cd /home/postgres
 
 git clone https://github.com/bucardo/bucardo.git
-cd bucardo
+
+cd /home/postgres/bucardo
 
 perl Makefile.PL
 make
 make install
+
+chown -R postgres:postgres /home/postgres
 
 mkdir -p /tmp/bucardo
 
@@ -78,7 +81,9 @@ echo "local   all   bucardo   trust" >> /etc/postgresql/12/main/pg_hba.conf
 
 systemctl restart postgresql
 
-bucardo install --piddir=/tmp/bucardo
+yes 'P' | sudo -u postgres bucardo install --piddir=/tmp/bucardo -U postgres
+
+cd /root
 
 # ufw
 ufw allow 22

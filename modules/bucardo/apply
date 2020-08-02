@@ -2,3 +2,20 @@ source template
 source variables
 
 mkdir -p /tmp/bucardo
+
+if [ -d "/root/secrets" ]
+then
+	databaseNum=$(hostname)
+	databaseNum=${databaseNum:8}
+
+	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+
+	bucardo add db priveasydb0 dbname=priveasydb port=58762 host=database0.${internalFQDN} user=priveasyuser pass=${priveasyuserPass}
+	bucardo add db priveasydb1 dbname=priveasydb port=58762 host=database1.${internalFQDN} user=priveasyuser pass=${priveasyuserPass}
+
+	bucardo add all tables db=priveasydb0 --herd=base
+	bucardo add all tables db=priveasydb1 --herd=duplicate
+
+	bucardo add sync fromBase source=base targetdb=priveasydb1 type=fullcopy
+	bucardo add sync fromDuplicate source=duplicate targetdb=priveasydb0 type=fullcopy
+fi
