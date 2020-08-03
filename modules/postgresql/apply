@@ -12,7 +12,8 @@ if [ "$serverType" == "Database" ]
 			priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
 
 			rm -rf /var/lib/postgresql/12/main/*
-			yes '${priveasyuserPass}' | pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
+			echo -e "Copy the following password, then paste it at the prompt and press enter:\n\n${priveasyuserPass}\n" 1>&2
+			pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
 			systemctl restart postgresql
 		fi
 	else
