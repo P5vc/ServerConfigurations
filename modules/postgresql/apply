@@ -5,4 +5,14 @@ if [ "$serverType" == "Database" ]
 	then
 	template $(dirname $0)/psqlConf.template > /etc/postgresql/12/main/postgresql.conf
 	template $(dirname $0)/hba.template > /etc/postgresql/12/main/pg_hba.conf
+	if [ "$serverGeneration" == "Duplicate" ]
+	then
+		if [ -d "/root/secrets" ]
+		then
+			priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+
+			rm -rf /var/lib/postgresql/12/main/*
+			yes '${priveasyuserPass}' | pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
+		fi
+	fi
 fi
