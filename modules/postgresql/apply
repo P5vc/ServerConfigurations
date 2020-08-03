@@ -15,5 +15,12 @@ if [ "$serverType" == "Database" ]
 			yes '${priveasyuserPass}' | pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
 			systemctl restart postgresql
 		fi
+	else
+		if [ -d "/root/secrets" ]
+		then
+			systemctl restart postgresql
+			sudo -u postgres psql -d priveasydb -c "select * from pg_create_physical_replication_slot('priveasy_replication_slot')" -p 58762
+			systemctl restart postgresql
+		fi
 	fi
 fi
