@@ -154,11 +154,10 @@ cd /home/ubuntu/Priveasy
 
 yes 'yes' | python manage.py collectstatic
 python manage.py installtasks
-python manage.py makemigrations
-python manage.py migrate
 
 deactivate
 
+echo -e "\n\n -  Run\n'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py makemigrations && python /home/ubuntu/Priveasy/manage.py migrate'\nif this is the very first time you are setting-up the server...\nIf the database is already populated, then run\n'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py makemigrations && python /home/ubuntu/Priveasy/manage.py migrate --fake-initial'" >> /root/TODO
 echo -e "\n\n -  Run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/ws0Secrets.txt file." >> /root/TODO
 echo -e "\n\n -  Add the appropriate Twilio credentials to the /home/ubuntu/Priveasy/mainSite/.env file." >> /root/TODO
 
@@ -221,7 +220,7 @@ echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenServi
 yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt
 
 # TODO
-echo -e "\n\n -  After you save the secrets directory to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  After you save the secrets directory to a separate\ndrive and remove the secrets directory entirely,\n run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
