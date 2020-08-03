@@ -59,37 +59,6 @@ sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
-# bucardo
-if [ "$serverGeneration" == "Duplicate" ]
-then
-  mkdir -p /home/postgres
-  cd /home/postgres
-
-  git clone https://github.com/bucardo/bucardo.git
-
-  cd /home/postgres/bucardo
-
-  perl Makefile.PL
-  make
-  make install
-
-  chown -R postgres:postgres /home/postgres
-
-  mkdir -p /tmp/bucardo
-
-  rm /etc/postgresql/12/main/pg_hba.conf
-  echo "local   all   postgres   peer" > /etc/postgresql/12/main/pg_hba.conf
-  echo "local   all   bucardo   trust" >> /etc/postgresql/12/main/pg_hba.conf
-
-  systemctl restart postgresql
-
-  yes 'P' | sudo -u postgres bucardo install --piddir=/tmp/bucardo -U postgres
-
-  cd /root
-
-  echo "@reboot  root  mkdir -p /tmp/bucardo && bucardo start -p 58762" >> /etc/crontab
-fi
-
 # ufw
 ufw allow 22
 ufw allow 58763
