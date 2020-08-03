@@ -6,4 +6,3 @@ apt
 postgresql
 resolv
 ufw
-bucardo
