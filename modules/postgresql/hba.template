@@ -101,5 +101,5 @@ host    replication     all             ::1/128                 md5
 
 hostssl   priveasydb   priveasyuser   webserver0.{{ internalFQDN }}   scram-sha-256
 hostssl   priveasydb   priveasyuser   webserver1.{{ internalFQDN }}   scram-sha-256
-hostssl   priveasydb   priveasyuser   database0.{{ internalFQDN }}    scram-sha-256
-hostssl   priveasydb   priveasyuser   database1.{{ internalFQDN }}    scram-sha-256
+hostssl   replication   priveasyuser   database0.{{ internalFQDN }}    scram-sha-256
+hostssl   replication   priveasyuser   database1.{{ internalFQDN }}    scram-sha-256
