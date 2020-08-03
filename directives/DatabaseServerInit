@@ -42,6 +42,9 @@ echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${
 echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
 systemctl restart postgresql
 
+mkdir -p /home/postgres/archive
+chown -R postgres:postgres /home/postgres
+
 sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
 
 if [ "$serverGeneration" == "Duplicate" ]
@@ -54,7 +57,7 @@ else
   echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
 fi
 
-sudo -u postgres psql -c "CREATE USER priveasyuser WITH PASSWORD '${priveasyuserPass}';"
+sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
 sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
