@@ -13,6 +13,7 @@ if [ "$serverType" == "Database" ]
 
 			rm -rf /var/lib/postgresql/12/main/*
 			yes '${priveasyuserPass}' | pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
+			systemctl restart postgresql
 		fi
 	fi
 fi
