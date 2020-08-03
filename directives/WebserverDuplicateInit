@@ -105,6 +105,8 @@ echo "STRIPE_API_KEY=" >> ./Priveasy/Priveasy/settings/.env
 
 echo -e "\n\n -  Insert the correct Twilio and Stripe keys in /home/ubuntu/Priveasy/Priveasy/settings/.env" >> /root/TODO
 
+echo "SERVER_GENERATION=${serverGeneration}" >> ./Priveasy/Priveasy/settings/.env
+
 chown -R ubuntu:ubuntu Priveasy
 
 ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
