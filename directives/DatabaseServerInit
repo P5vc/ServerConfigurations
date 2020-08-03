@@ -62,6 +62,11 @@ sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
+if [ "$serverGeneration" == "Base" ]
+then
+  sudo -u postgres psql -d priveasydb -c "select * from pg_create_physical_replication_slot('priveasy_replication_slot')" -p 58762
+fi
+
 # ufw
 ufw allow 22
 ufw allow 58763
