@@ -172,7 +172,7 @@ cd /home/ubuntu/Zcash
 ./zecwallet-cli save
 
 # certbot
-apt-get install software-properties-common
+apt-get install software-properties-common -y
 add-apt-repository universe
 apt-get update
 apt-get install certbot python3-certbot-nginx -y
