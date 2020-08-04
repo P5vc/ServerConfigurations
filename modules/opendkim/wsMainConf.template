@@ -15,9 +15,14 @@ UMask			007
 #Selector		2007
 
 # Commonly-used options; the commented-out versions show the defaults.
-#Canonicalization	simple
-#Mode			sv
-#SubDomains		no
+Canonicalization	relaxed/simple
+Mode			sv
+SubDomains		no
+AutoRestart		yes
+AutoRestartRate		10/1M
+Background		yes
+DNSTimeout		5
+SignatureAlgorithm	rsa-sha256
 
 # Socket smtp://localhost
 #
@@ -31,7 +36,7 @@ UMask			007
 # ##  local:/path/to/socket       to listen on a UNIX domain socket
 #
 #Socket                  inet:8892@localhost
-Socket			local:/run/opendkim/opendkim.sock
+Socket			local:/var/spool/postfix/opendkim/opendkim.sock
 
 ##  PidFile filename
 ###      default (none)
