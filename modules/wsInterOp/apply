@@ -5,13 +5,14 @@ if [ "$serverType" == "Webserver" ]
 then
 if [ "$serverGeneration" == "Duplicate" ]
 then
-
 	scp -P 58763 -i /root/secrets/webserver0 ubuntu@webserver0.p5.vc:/etc/letsencrypt/live/p5.vc/fullchain.pem /etc/ssl/private/tempCert.crt
 	scp -P 58763 -i /root/secrets/webserver0 ubuntu@webserver0.p5.vc:/etc/letsencrypt/live/p5.vc/privkey.pem /etc/ssl/private/tempKey.key
 
 	scp -P 58763 -i /root/secrets/webserver0 -r ubuntu@webserver0.p5.vc:/home/ubuntu/priveasyVPN /home/ubuntu/
 
 	scp -P 58763 -i /root/secrets/webserver0 -r ubuntu@webserver0.p5.vc:/home/ubuntu/Priveasy/mainSite/migrations/* /home/ubuntu/Priveasy/mainSite/migrations/
-
+else
+	chown -R ubuntu:root /etc/letsencrypt/archive
+	chown -R ubuntu:root /etc/letsencrypt/live
 fi
 fi
