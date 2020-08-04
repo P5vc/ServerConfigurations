@@ -11,7 +11,7 @@ then
 
 	scp -P 58763 -i /root/secrets/webserver0 -r ubuntu@webserver0.p5.vc:/home/ubuntu/priveasyVPN /home/ubuntu/
 
-    scp -P 58763 -i /root/secrets/webserver0 ubuntu@webserver0.p5.vc:/home/ubuntu/Priveasy/mainSite/migrations/* /home/ubuntu/mainSite/migrations/
+	scp -P 58763 -i /root/secrets/webserver0 -r ubuntu@webserver0.p5.vc:/home/ubuntu/Priveasy/mainSite/migrations/* /home/ubuntu/Priveasy/mainSite/migrations/
 
 fi
 fi
