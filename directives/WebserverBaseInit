@@ -147,14 +147,10 @@ python -m pip install django[argon2]
 
 cd /home/ubuntu/Priveasy
 
-yes 'yes' | python manage.py collectstatic
-python manage.py installtasks
-
 deactivate
 
-echo -e "\n\n -  Run\n'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py makemigrations && python /home/ubuntu/Priveasy/manage.py migrate'\nif this is the very first time you are setting-up the server...\nIf the database is already populated, then run\n'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py makemigrations && python /home/ubuntu/Priveasy/manage.py migrate --fake-initial'" >> /root/TODO
-echo -e "\n\n -  Run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/ws0Secrets.txt file." >> /root/TODO
-echo -e "\n\n -  Add the appropriate Twilio credentials to the /home/ubuntu/Priveasy/mainSite/.env file." >> /root/TODO
+echo -e "\n\n -  Run\n'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py makemigrations && python /home/ubuntu/Priveasy/manage.py migrate && python /home/ubuntu/Priveasy/manage.py collectstatic && python /home/ubuntu/Priveasy/manage.py installtasks'\nif this is the very first time you are setting-up the server...\nIf the database is already populated, then add the '--fake-initial' argument to the migrate command, as such: 'python /home/ubuntu/Priveasy/manage.py migrate --fake-initial'" >> /root/TODO
+echo -e "\n\n -  If you are using a new database, that doesn't already have\na superuser account on record, run 'source /home/ubuntu/priveasyEnv/bin/activate && python /home/ubuntu/Priveasy/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/ws0Secrets.txt file." >> /root/TODO
 
 # Zcash
 zcashEncKey=$(gpg --armor --gen-random 2 64)
