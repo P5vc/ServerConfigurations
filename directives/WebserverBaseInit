@@ -26,7 +26,13 @@ mkdir -p /home/ubuntu/.ssh
 
 # jail
 mkdir -p $jailDir
-mkdir -p $jailDir/VPN
+mkdir -p ${jailDir}/VPN
+
+mkdir -p ${jailDir}/dev
+mknod -m 666 ${jailDir}/dev/null c 1 3
+mknod -m 666 ${jailDir}/dev/tty c 5 0
+mknod -m 666 ${jailDir}/dev/zero c 1 5
+mknod -m 666 ${jailDir}/dev/random c 1 8
 
 for program in $programsToCopy
 do
