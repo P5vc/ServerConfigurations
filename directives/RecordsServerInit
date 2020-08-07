@@ -1,5 +1,8 @@
 source variables
 
+if [ ! -f "/var/lib/aviary/data/executed_directives/RecordsServerInit" ]
+then
+
 if [ "$serverType" == "Records" ]
 then
 
@@ -85,4 +88,5 @@ echo -e "\n\n -  Add the following lines to '/etc/amavis/conf.d/50-user' in the 
 echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
 
 
+fi
 fi

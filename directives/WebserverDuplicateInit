@@ -1,5 +1,8 @@
 source variables
 
+if [ ! -f "/var/lib/aviary/data/executed_directives/DatabaseServerInit" ]
+then
+
 if [ "$serverType" == "Webserver" ]
 then
 if [ "$serverGeneration" == "Duplicate" ]
@@ -180,4 +183,6 @@ echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
 fi
+fi
+
 fi

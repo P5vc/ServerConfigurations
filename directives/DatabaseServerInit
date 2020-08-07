@@ -1,5 +1,8 @@
 source variables
 
+if [ ! -f "/var/lib/aviary/data/executed_directives/DatabaseServerInit" ]
+then
+
 if [ "$serverType" == "Database" ]
 then
 
@@ -82,4 +85,5 @@ echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo u
 echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
 
 
+fi
 fi
