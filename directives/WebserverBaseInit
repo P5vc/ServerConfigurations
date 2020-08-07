@@ -42,6 +42,8 @@ done
 
 cp --parents /lib64/ld-linux-x86-64.so.2 $jailDir
 
+cp /lib/x86_64-linux-gnu/libnss_files* ${jailDir}/lib/x86_64-linux-gnu/
+
 yes "" | adduser vpnservers --disabled-password
 
 mkdir -p /home/vpnservers/.ssh
@@ -49,6 +51,8 @@ touch /home/vpnservers/.ssh/authorized_keys
 
 groupadd jailed
 adduser vpnservers jailed
+
+echo -e "\n\n -  Find the 'vpnservers' line in '/etc/passwd' and change it to\nthe following: 'vpnservers:x:1001:1001:vpnservers:/home/jail/./home/vpnservers:/bin/bash'.\nNote: Use the same user/group ids that were in the original line.\nIn other words, replace '1001' with the numbers that were\nalready in the file on th vpnservers line." >> /root/TODO
 
 # sshd
 ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
