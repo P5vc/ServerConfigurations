@@ -1,6 +1,6 @@
 source variables
 
-if [ ! -f "/var/lib/aviary/data/executed_directives/DatabaseServerInit" ]
+if [ ! -f "/var/lib/aviary/data/executed_directives/WebserverDuplicateInit" ]
 then
 
 if [ "$serverType" == "Webserver" ]
