@@ -1,6 +1,6 @@
 # Server Configurations
 
-A framework to set up, configure, and maintain all Priveasy servers, for maximum transparency.
+A framework to set up, configure, and maintain all Priveasy servers, for maximum transparency
 
 ------------
 
