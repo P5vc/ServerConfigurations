@@ -1,0 +1,76 @@
+if [ "$serverGeneration" == "Duplicate" ]
+then
+	if [ ! -f "/root/secrets/db0Secrets.txt" ]
+	then
+		echo -e "\n\nThe '/root/secrets/db0Secrets.txt' file could not be found.\nPlease set up a primary database before this database,\nthen copy-over the secrets folder that gets generated."
+		exit 1
+	fi
+fi
+
+databaseNum=$(hostname)
+databaseNum=${databaseNum:8}
+
+# system
+touch /root/TODO
+mkdir -p /root/secrets
+touch /root/secrets/db${databaseNum}Secrets.txt
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install postgresql postgresql-contrib fail2ban vnstat -y
+
+# system
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu
+mkdir -p /home/ubuntu/.ssh
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/$(hostname) -N ""
+cat /root/secrets/$(hostname).pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/$(hostname).pub
+
+# TODO
+echo -e " -  Copy the '/root/secrets' directory to a secured, separate drive.\nThe '$(hostname)' file contains the private key needed to SSH\nback into the server.\nThe secrets directory MUST be removed from this server after it is copied." >> /root/TODO
+
+# postgres
+echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
+systemctl restart postgresql
+
+mkdir -p /home/postgres/archive
+chown -R postgres:postgres /home/postgres
+
+sudo -u postgres psql -c "CREATE DATABASE priveasydb;"
+
+if [ "$serverGeneration" == "Duplicate" ]
+then
+	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+else
+	priveasyuserPass=$(gpg --armor --gen-random 2 64)
+	priveasyuserPass=${priveasyuserPass:0:64}
+	echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
+	echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
+fi
+
+sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
+sudo -u postgres psql -c "ALTER ROLE priveasyuser SET client_encoding TO 'utf8';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveasyuser;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
+
+# ufw
+ufw allow 22
+ufw allow 58763
+
+# Dummy rules that will get replaced:
+ufw insert 1 allow from 127.0.0.1 port 58762
+ufw insert 1 allow from 127.0.0.2 port 58762
+ufw insert 1 allow from 127.0.0.3 port 58762
+
+yes | ufw enable
+
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl disable systemd-resolved
+
+# TODO
+echo -e "\n\n -  After you save the secret key to a separate\ndrive, run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  REBOOT THE SERVER!!" >> /root/TODO
