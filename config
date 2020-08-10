@@ -1,3 +1,0 @@
-inventory_git_url=https://github.com/P5vc/ServerConfigurations.git
-aviary_root=/var/lib/aviary
-inventory_dir=$aviary_root/inventory
