@@ -7,7 +7,7 @@ then
 	fi
 fi
 
-databaseNum=$(hostname)
+databaseNum=${serverHostname}
 databaseNum=${databaseNum:8}
 
 # system
@@ -25,12 +25,12 @@ useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
 mkdir -p /home/ubuntu/.ssh
 
 # sshd
-ssh-keygen -t ed25519 -a 256 -f /root/secrets/$(hostname) -N ""
-cat /root/secrets/$(hostname).pub >> /home/ubuntu/.ssh/authorized_keys
-rm /root/secrets/$(hostname).pub
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
 
 # TODO
-echo -e " -  Copy the '/root/secrets' directory to a secured, separate drive.\nThe '$(hostname)' file contains the private key needed to SSH\nback into the server.\nThe secrets directory MUST be removed from this server after it is copied." >> /root/TODO
+echo -e " -  Copy the '/root/secrets' directory to a secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\nThe secrets directory MUST be removed from this server after it is copied." >> /root/TODO
 
 # postgres
 echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
@@ -48,7 +48,7 @@ else
 	priveasyuserPass=$(gpg --armor --gen-random 2 64)
 	priveasyuserPass=${priveasyuserPass:0:64}
 	echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
-	echo "$(hostname)" >> /root/secrets/db${databaseNum}Secrets.txt
+	echo "${serverHostname}" >> /root/secrets/db${databaseNum}Secrets.txt
 fi
 
 sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
