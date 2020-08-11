@@ -1,1 +1,29 @@
-adminKey="[noah@docs.priveasy.org/gRDkJOjr3-zriBSkNeP2jk243-Mz+5Q4hK8fZvZqejs=]"
+adminKey='[noah@docs.priveasy.org/gRDkJOjr3-zriBSkNeP2jk243-Mz+5Q4hK8fZvZqejs=]'
+
+planOneLimit='512 * 1024 * 1024'
+planOneName='contributor'
+planOneMessage='Thank you for contributing to Priveasy! Enjoy this premium account on us!'
+
+planTwoLimit='8192 * 1024 * 1024'
+planTwoName='adminTeam'
+planTwoMessage='Thank you for running Priveasy! Enjoy this premium account on us!'
+
+customLimits=(
+        '"[Priveasy Core Team@docs.priveasy.org/VS8vrTFwXjBEG+8A9WYpsx5rEeLaqdo2u9m0Wrdnt8k=]": {
+            limit: ${planTwoLimit},
+            plan: "${planTwoName}",
+            note: "${planTwoMessage}
+        },'
+
+        '"[noah@docs.priveasy.org/gRDkJOjr3-zriBSkNeP2jk243-Mz+5Q4hK8fZvZqejs=]": {
+            limit: ${planOneLimit},
+            plan: "${planOneName}",
+            note: "${planOneMessage}"
+        },'
+
+        '"[amugford@docs.priveasy.org/1HfGDH-6lD01xuZVbcUCHpAhaO7QWbYcQ1L7xVEAqgc=]": {
+            limit: ${planOneLimit},
+            plan: "${planOneName}",
+            note: "${planOneMessage}"
+        },'
+)
