@@ -1,8 +1,5 @@
-source template
-source variables
-
 if [ "$serverType" == "Database" ]
-	then
+then
 	webserver0IP=$(host -4 webserver0.${internalFQDN})
 	webserver0IP=${webserver0IP:29}
 	webserver1IP=$(host -4 webserver1.${internalFQDN})
