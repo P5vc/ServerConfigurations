@@ -1,9 +1,6 @@
-source template
-source variables
-
-template $(dirname $0)/sshd_config.template > /etc/ssh/sshd_config
+mo sshd_config > /etc/ssh/sshd_config
 
 if [ "$serverType" == "Webserver" ]
-	then
+then
 	echo -e "Match group jailed\n\tChrootDirectory /home/jail/" >> /etc/ssh/sshd_config
 fi
