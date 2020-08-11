@@ -1,14 +1,10 @@
-source template
-source variables
-
 if [ "$serverType" == "Webserver" ]
-	then template $(dirname $0)/webserver.template > /etc/hosts
-fi
-
-if [ "$serverType" == "Database" ]
-	then template $(dirname $0)/database.template > /etc/hosts
-fi
-
-if [ "$serverType" == "Records" ]
-        then template $(dirname $0)/records.template > /etc/hosts
+then
+	mo webserverHosts > /etc/hosts
+elif [ "$serverType" == "Database" ]
+then
+	mo databaseHosts > /etc/hosts
+elif [ "$serverType" == "Records" ]
+then
+	mo recordsHosts > /etc/hosts
 fi
