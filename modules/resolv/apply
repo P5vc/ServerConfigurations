@@ -1,2 +1,2 @@
 mo resolv.conf > /tmp/resolv.conf
-mv /tmp/resolv.conf > /etc/resolv.conf
+mv /tmp/resolv.conf /etc/resolv.conf
