@@ -42,7 +42,7 @@ openssl dhparam -out /etc/nginx/dhparam.pem 4096
 yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt || true
 
 # iRedMail
-echo -e "\n\nNOTE: USE THE DEFAULT OPTIONS WHEN SETTING UP iRedMail, with these exceptions/notes:\n\n -  Use the provided 'sample' passwords\n -  Use PostgreSQL\n -  Install SOGo\n -  Do NOT install netdata\n -  Use their firewall settings\n\n"
+echo -e "\033[0;33m\n\nNOTE: USE THE DEFAULT OPTIONS WHEN SETTING UP iRedMail, with these exceptions/notes:\n\n -  Use the provided 'sample' passwords\n -  Use PostgreSQL\n -  Install SOGo\n -  Do NOT install netdata\n -  Use their firewall settings\n\n\033[0m"
 
 echo -e "\n\nIn order to properly configure this server, the latest version\nof iRedMail must be known (https://github.com/iredmail/iRedMail/releases).\nPlease enter the current version number (i.e. 1.3.1).\n\nVersion Number: "
 read iRedMailVersion </dev/tty
