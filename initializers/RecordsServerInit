@@ -1,0 +1,77 @@
+# system
+cd /root/
+touch /root/TODO
+mkdir -p /root/secrets
+touch /root/secrets/recordsSecrets.txt
+
+echo "127.0.0.1 mail.${publicFQDN} mail" > /etc/hosts
+echo "${serverPubIPv4} mail.${publicFQDN} mail" >> /etc/hosts
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install gzip nodejs npm nginx -y
+
+# npm
+npm install -g bower
+
+# system
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
+mkdir -p /home/ubuntu/.ssh
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
+
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl disable systemd-resolved
+
+# cryptpad
+cd /home/ubuntu
+sudo -u ubuntu git clone https://github.com/xwiki-labs/cryptpad.git cryptpad
+cd cryptpad
+
+sudo -u ubuntu npm install
+sudo -u ubuntu npm audit fix
+sudo -u ubuntu bower install
+
+# openssl
+openssl dhparam -out /etc/nginx/dhparam.pem 4096
+yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt
+
+# iRedMail
+echo -e "\n\nNOTE: USE THE DEFAULT OPTIONS WHEN SETTING UP iRedMail, with these exceptions/notes:\n\n -  Use the provided 'sample' passwords\n -  Use PostgreSQL\n -  Install SOGo\n -  Do NOT install netdata\n -  Use their firewall settings\n\n"
+
+echo -e "\n\nIn order to properly configure this server, the latest version\nof iRedMail must be known (https://github.com/iredmail/iRedMail/releases).\nPlease enter the current version number (i.e. 1.3.1).\n\nVersion Number: "
+read iRedMailVersion
+
+wget https://github.com/iredmail/iRedMail/releases/download/${iRedMailVersion}/iRedMail-${iRedMailVersion}.tar.gz
+tar zxf iRedMail-${iRedMailVersion}.tar.gz
+rm iRedMail-${iRedMailVersion}.tar.gz
+cd iRedMail-${iRedMailVersion}
+bash iRedMail.sh
+
+mv config /root/secrets/recordsServerConfig
+
+# certbot
+apt-get install software-properties-common
+add-apt-repository universe
+apt-get update
+apt-get install certbot python3-certbot-nginx -y
+
+# ufw
+ufw deny 22
+ufw allow 58763
+yes | ufw enable || true
+
+# amavisd
+amavisd-new genrsa /var/lib/dkim/${internalFQDN}.pem 2048
+
+# TODO
+echo -e "\n\n -  Move the /root/secrets directory to a secure, external location." >> /root/TODO
+echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts.\nThen run 'sudo certbot certonly --webroot --agree-tos -d mail.${publicFQDN} --cert-name mail.${publicFQDN} --email Admin@${publicFQDN} -w /var/www/html'" >> /root/TODO
+echo -e "\n\n -  Add the following lines to '/etc/amavis/conf.d/50-user' in the appropriate sections:\n\ndkim_key('${internalFQDN}', 'dkim', '/var/lib/dkim/${internalFQDN}.pem');\n\n'${internalFQDN}' => { d => '${internalFQDN}', a => 'rsa-sha256', ttl => 10*24*3600 }," >> /root/TODO
+echo -e "\n\n -  REBOOT THE SERVER" >> /root/TODO
+echo -e "\n\n -  Visit mail.${publicFQDN}/iredadmin to finish setting up the mail server." >> /root/TODO
