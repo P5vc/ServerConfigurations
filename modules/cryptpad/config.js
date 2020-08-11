@@ -208,26 +208,9 @@ module.exports = {
      */
 
     customLimits: {
-        "[Priveasy Core Team@docs.priveasy.org/VS8vrTFwXjBEG+8A9WYpsx5rEeLaqdo2u9m0Wrdnt8k=]": {
-            limit: 8192 * 1024 * 1024,
-            plan: 'adminTeam',
-            note: 'Thank you for running Priveasy! Enjoy this premium account on us!'
-        },
-        "[noah@docs.priveasy.org/R0ahF5ax6cOF36fgF6NVY2XkLjxLdCxi3T8XtjpSuCw=]": {
-            limit: 512 * 1024 * 1024,
-            plan: 'contributor',
-            note: 'Thank you for contributing to Priveasy! Enjoy this premium account on us!'
-        },
-        "[amugford@docs.priveasy.org/1HfGDH-6lD01xuZVbcUCHpAhaO7QWbYcQ1L7xVEAqgc=]": {
-            limit: 512 * 1024 * 1024,
-            plan: 'contributor',
-            note: 'Thank you for contributing to Priveasy! Enjoy this premium account on us!'
-        }//,
-        //"[user@docs.priveasy.org/publicSigningKey]": {
-        //    limit: 512 * 1024 * 1024,
-        //    plan: 'contributor',
-        //    note: 'Thank you for contributing to Priveasy! Enjoy this premium account on us!'
-        //}
+    {{ #customLimits }}
+        {{ . }}
+    {{ /customLimits }}
     },
 
 
