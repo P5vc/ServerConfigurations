@@ -65,7 +65,7 @@ ufw insert 1 allow from 127.0.0.1 port 58762
 ufw insert 1 allow from 127.0.0.2 port 58762
 ufw insert 1 allow from 127.0.0.3 port 58762
 
-yes | ufw enable
+yes | ufw enable || true
 
 # dnscrypt
 apt-get install dnscrypt-proxy -y
