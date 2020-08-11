@@ -21,7 +21,7 @@ apt-get upgrade -y
 apt-get install postgresql postgresql-contrib fail2ban vnstat -y
 
 # system
-useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
 mkdir -p /home/ubuntu/.ssh
 
 # sshd
@@ -48,7 +48,7 @@ else
 	priveasyuserPass=$(gpg --armor --gen-random 2 64)
 	priveasyuserPass=${priveasyuserPass:0:64}
 	echo "$priveasyuserPass" >> /root/secrets/db${databaseNum}Secrets.txt
-	echo "$serverHostname" >> /root/secrets/db${databaseNum}Secrets.txt
+	echo "$(hostname)" >> /root/secrets/db${databaseNum}Secrets.txt
 fi
 
 sudo -u postgres psql -c "CREATE USER priveasyuser WITH REPLICATION LOGIN PASSWORD '${priveasyuserPass}';"
