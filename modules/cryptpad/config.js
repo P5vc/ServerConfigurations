@@ -110,7 +110,7 @@ module.exports = {
      */
 
     adminKeys: [
-        "[noah@docs.priveasy.org/R0ahF5ax6cOF36fgF6NVY2XkLjxLdCxi3T8XtjpSuCw=]",
+        "{{ adminKey }}",
     ],
 
     /*  CryptPad's administration panel includes a "support" tab

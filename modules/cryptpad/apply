@@ -1,16 +1,13 @@
-source template
-source variables
-
 mkdir -p /home/ubuntu/cryptpad/config
 
-template $(dirname $0)/cryptpadService.template > /etc/systemd/system/cryptpad.service
-template $(dirname $0)/cryptpadConfig.template > /home/ubuntu/cryptpad/config/config.js
+mo cryptpad.service > /etc/systemd/system/cryptpad.service
+mo config.js > /home/ubuntu/cryptpad/config/config.js
 
 if [ -d "/etc/letsencrypt/live/docs.${internalFQDN}" ]
 then
-	template $(dirname $0)/cryptpadNginx.template > /etc/nginx/sites-enabled/cryptpad.conf
+	mo cryptpadNginx.template > /etc/nginx/sites-enabled/cryptpad.conf
 else
-	template $(dirname $0)/cryptpadNginxInitial.template > /etc/nginx/sites-enabled/cryptpad.conf
+	mo cryptpadNginxInitial.template > /etc/nginx/sites-enabled/cryptpad.conf
 fi
 
 systemctl enable cryptpad
