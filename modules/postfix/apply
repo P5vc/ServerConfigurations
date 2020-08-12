@@ -1,8 +1,2 @@
-source template
-source variables
-
-if [ "$serverType" == "Webserver" ]
-	then
-	template $(dirname $0)/wsMainConf.template > /etc/postfix/main.cf
-	template $(dirname $0)/wsMailname.template > /etc/mailname
-fi
+mo main.cf > /etc/postfix/main.cf
+mo mailname > /etc/mailname
