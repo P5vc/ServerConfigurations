@@ -1,11 +1,5 @@
-source template
-source variables
-
-if [ "$serverType" == "Webserver" ]
-	then
-		template $(dirname $0)/supervisordConf.template > /etc/supervisord.conf
-		template $(dirname $0)/uwsgiSupervisedConf.template > /etc/supervisor/conf.d/uwsgiSupervised.conf
-		template $(dirname $0)/celeryConf.template > /etc/supervisor/conf.d/celery.conf
-		template $(dirname $0)/celeryBeatConf.template > /etc/supervisor/conf.d/celeryBeat.conf
-		template $(dirname $0)/torConf.template > /etc/supervisor/conf.d/tor.conf
-fi
+mo supervisord.conf > /etc/supervisord.conf
+mo uwsgiSupervised.conf > /etc/supervisor/conf.d/uwsgiSupervised.conf
+mo celery.conf > /etc/supervisor/conf.d/celery.conf
+mo celeryBeat.conf > /etc/supervisor/conf.d/celeryBeat.conf
+mo tor.conf > /etc/supervisor/conf.d/tor.conf
