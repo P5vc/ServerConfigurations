@@ -72,7 +72,7 @@ then
 fi
 
 # TODO
-echo -e " -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
+echo -e "\n\n -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
 
 # postfix
 debconf-set-selections <<< "postfix postfix/mailname string ${serverHostname}.${publicFQDN}"
