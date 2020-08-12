@@ -3,7 +3,9 @@ then
 	if [ "$serverGeneration" == "Base" ]
 	then
 		mount --bind /home/ubuntu/priveasyVPN ${jailDir}/VPN
-		chown vpnservers:vpnservers ${jailDir}/VPN
+
+		chmod -R 666 /home/ubuntu/priveasyVPN
+		chown -R ubuntu:ubuntu /home/ubuntu/priveasyVPN
 
 		cat /etc/passwd | grep "vpnservers" > ${jailDir}/etc/passwd
 		cat /etc/group | grep "vpnservers" > ${jailDir}/etc/group
