@@ -34,6 +34,7 @@ then
 	mkdir -p $jailDir
 	mkdir -p ${jailDir}/VPN
 	mkdir -p ${jailDir}/dev
+	mkdir -p ${jailDir}/etc
 
 	mknod -m 666 ${jailDir}/dev/null c 1 3
 	mknod -m 666 ${jailDir}/dev/tty c 5 0
@@ -48,6 +49,8 @@ then
 
 	cp --parents /lib64/ld-linux-x86-64.so.2 $jailDir
 
+	cp /lib/x86_64-linux-gnu/libnss_files.so.2 ${jailDir}/lib/x86_64-linux-gnu
+
 	yes "" | adduser vpnservers --disabled-password || true
 
 	mkdir -p /home/vpnservers/.ssh
@@ -55,6 +58,10 @@ then
 
 	groupadd jailed
 	adduser vpnservers jailed
+
+	cat /etc/passwd | grep "vpnservers" > /home/jail/etc/passwd
+	cat /etc/group | grep "vpnservers" > /home/jail/etc/group
+	cat /etc/group | grep "jailed" >> /home/jail/etc/group
 fi
 
 # sshd
