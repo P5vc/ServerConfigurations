@@ -48,7 +48,7 @@ then
 
 	cp --parents /lib64/ld-linux-x86-64.so.2 $jailDir
 
-	yes "" | adduser vpnservers --disabled-password
+	yes "" | adduser vpnservers --disabled-password || true
 
 	mkdir -p /home/vpnservers/.ssh
 	touch /home/vpnservers/.ssh/authorized_keys
