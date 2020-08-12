@@ -1,11 +1,5 @@
-source template
-source variables
-
-if [ "$serverType" == "Webserver" ]
-	then
-	template $(dirname $0)/wsMainConf.template > /etc/opendkim.conf
-	template $(dirname $0)/wsSigningTable.template > /etc/opendkim/signing.table
-	template $(dirname $0)/wsKeyTable.template > /etc/opendkim/key.table
-	template $(dirname $0)/wsTrustedHosts.template > /etc/opendkim/trusted.hosts
-	template $(dirname $0)/wsDefaultOpendkim.template > /etc/default/opendkim
-fi
+mo opendkim.conf > /etc/opendkim.conf
+mo signing.table > /etc/opendkim/signing.table
+mo key.table > /etc/opendkim/key.table
+mo trusted.hosts > /etc/opendkim/trusted.hosts
+mo opendkim > /etc/default/opendkim
