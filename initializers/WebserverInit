@@ -96,9 +96,9 @@ mkdir /var/spool/postfix/opendkim
 
 if [ "$serverGeneration" == "Base" ]
 then
-	opendkim-genkey -b 4096 -d noreply.${publicFQDN} -D /etc/opendkim/keys/noreply.${publicFQDN} -s noreply -v
-	opendkim-genkey -b 4096 -d fwd.${publicFQDN} -D /etc/opendkim/keys/fwd.${publicFQDN} -s fwd -v
-	opendkim-genkey -b 4096 -d burn.${publicFQDN} -D /etc/opendkim/keys/burn.${publicFQDN} -s burn -v
+	opendkim-genkey -b 2048 -d noreply.${publicFQDN} -D /etc/opendkim/keys/noreply.${publicFQDN} -s noreply -v
+	opendkim-genkey -b 2048 -d fwd.${publicFQDN} -D /etc/opendkim/keys/fwd.${publicFQDN} -s fwd -v
+	opendkim-genkey -b 2048 -d burn.${publicFQDN} -D /etc/opendkim/keys/burn.${publicFQDN} -s burn -v
 
 	chown -R opendkim:opendkim /etc/opendkim
 	chmod go-rw /etc/opendkim/keys
