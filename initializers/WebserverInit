@@ -230,7 +230,7 @@ ufw allow 443
 ufw allow 58763
 ufw allow 25
 ufw allow 587
-yes | ufw enable
+yes | ufw enable || true
 
 # uwsgi
 mkdir -p /var/log/uwsgi/
