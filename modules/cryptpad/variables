@@ -9,7 +9,7 @@ planTwoName='adminTeam'
 planTwoMessage='Thank you for running Priveasy! Enjoy this premium account on us!'
 
 customLimits=(
-        "'[Priveasy Core Team@docs.priveasy.org/VS8vrTFwXjBEG+8A9WYpsx5rEeLaqdo2u9m0Wrdnt8k=]': {
+        "'[Priveasy Core Team@docs.priveasy.org/PnTHBk6y3Fb6W+IuYh55DCJvLuzYI0aYCOQuS1cB3cw=]': {
             limit: ${planTwoLimit},
             plan: '${planTwoName}',
             note: '${planTwoMessage}'
@@ -21,7 +21,7 @@ customLimits=(
             note: '${planOneMessage}'
         },"
 
-        "'[amugford@docs.priveasy.org/1HfGDH-6lD01xuZVbcUCHpAhaO7QWbYcQ1L7xVEAqgc=]': {
+        "'[amugford@docs.priveasy.org/ZlncUhZdwGB4rymxfBuZlgObXxnVQ0u5n7xTOWey1P8=]': {
             limit: ${planOneLimit},
             plan: '${planOneName}',
             note: '${planOneMessage}'
