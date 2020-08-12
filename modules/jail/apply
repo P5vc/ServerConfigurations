@@ -1,8 +1,5 @@
-source template
-source variables
-
 if [ "$serverType" == "Webserver" ]
-	then
+then
 	if [ "$serverGeneration" == "Base" ]
 	then
 		mount --bind /home/ubuntu/priveasyVPN ${jailDir}/VPN
