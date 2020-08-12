@@ -29,7 +29,7 @@ useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
 mkdir -p /home/ubuntu/.ssh
 
 # jail
-if [ "$serverGeneration" == "Duplicate" ]
+if [ "$serverGeneration" == "Base" ]
 then
 	mkdir -p $jailDir
 	mkdir -p ${jailDir}/VPN
@@ -64,7 +64,7 @@ ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
 cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
 rm /root/secrets/${serverHostname}.pub
 
-if [ "$serverGeneration" == "Duplicate" ]
+if [ "$serverGeneration" == "Base" ]
 then
 	ssh-keygen -t ed25519 -a 256 -f /root/secrets/vpnservers -N ""
 	cat /root/secrets/vpnservers.pub >> /home/vpnservers/.ssh/authorized_keys
