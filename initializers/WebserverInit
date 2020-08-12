@@ -258,7 +258,7 @@ curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E8
 echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenService" >> /root/TODO
 
 # openssl
-yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt
+yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt || true
 
 # TODO
 if [ "$serverGeneration" == "Base" ]
