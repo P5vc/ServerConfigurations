@@ -1,14 +1,13 @@
-source template
-source variables
+mo torSource.list > /etc/apt/sources.list.d/torSource.list
 
-if [ "$serverType" == "Webserver" ]
-	then
-		template $(dirname $0)/torSourceList.template > /etc/apt/sources.list.d/torSource.list
-		mkdir -p /etc/tor
-		template $(dirname $0)/torrc.template > /etc/tor/torrc
-		apt-get update
-		yes 'Y' | apt-get install tor deb.torproject.org-keyring -y >> /dev/null
-		mkdir -p /home/ubuntu/hiddenService/authorized_clients
-		chmod -R 700 /home/ubuntu/hiddenService
-		chown -R ubuntu:ubuntu /home/ubuntu/hiddenService
-fi
+mkdir -p /etc/tor
+
+mo torrc > /etc/tor/torrc
+
+apt-get update
+yes 'Y' | apt-get install tor deb.torproject.org-keyring -y >> /dev/null
+
+mkdir -p /home/ubuntu/hiddenService/authorized_clients
+
+chmod -R 700 /home/ubuntu/hiddenService
+chown -R ubuntu:ubuntu /home/ubuntu/hiddenService
