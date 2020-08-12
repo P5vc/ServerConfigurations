@@ -196,6 +196,10 @@ echo "$zcashEncKey" >> /root/secrets/ws${webserverNum}Secrets.txt
 echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/Priveasy/Priveasy/settings/.env
 
 cd /home/ubuntu
+
+echo -e "\n\nIn order to properly configure this server, the latest version\nof zecwallet-light-cli must be known (https://github.com/adityapk00/zecwallet-light-cli/releases).\nPlease enter the current version number (i.e. 1.4.1).\n\nVersion Number: "
+read zcashCliVersion </dev/tty
+
 wget https://github.com/adityapk00/zecwallet-light-cli/releases/download/v${zcashCliVersion}/linux-zecwallet-cli-v${zcashCliVersion}.zip
 unzip linux-zecwallet-cli-v${zcashCliVersion}.zip
 rm linux-zecwallet-cli-v${zcashCliVersion}.zip
