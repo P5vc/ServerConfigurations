@@ -4,7 +4,7 @@ then
 	then
 		mount --bind /home/ubuntu/priveasyVPN ${jailDir}/VPN
 
-		chmod -R 666 /home/ubuntu/priveasyVPN
+		chmod -R 766 /home/ubuntu/priveasyVPN
 		chown -R ubuntu:ubuntu /home/ubuntu/priveasyVPN
 
 		cat /etc/passwd | grep "vpnservers" > ${jailDir}/etc/passwd
