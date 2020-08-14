@@ -1,0 +1,9 @@
+mo dnscrypt-proxy.toml > /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+mo blocked-ips.txt > /etc/dnscrypt-proxy/blocked-ips.txt
+
+if [ -e "/root/TODO" ]
+then
+	dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml -service install && dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml -service start
+fi
+
+mo dnscrypt-proxy.service > /etc/systemd/system/dnscrypt-proxy.service
