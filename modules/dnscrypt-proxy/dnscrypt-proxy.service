@@ -1,0 +1,17 @@
+[Unit]
+Description=Encrypted/authenticated DNS proxy
+ConditionFileIsExecutable=/usr/sbin/dnscrypt-proxy
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/sbin/dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+
+WorkingDirectory=/root
+
+Restart=always
+RestartSec=120
+EnvironmentFile=-/etc/sysconfig/dnscrypt-proxy
+
+[Install]
+WantedBy=multi-user.target
