@@ -1,0 +1,26 @@
+# scp
+if [ -e "/root/vpnservers" ]
+then
+	chmod 600 /root/vpnservers
+else
+	echo -e "Error: the '/root/vpnservers' private key was not found.\nPlease copy-over this key from the main webserver's secrets\ndirectory before continuing."
+	exit 1
+fi
+
+# system
+cd /root
+
+mkdir -p /root/configs/WireGuard
+mkdir -p /root/configs/Shadowsocks
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install python-is-python3 golang-go unattended-upgrades ufw dnscrypt-proxy wireguard wireguard-tools shadowsocks-libev git -y
+
+# go
+go get "github.com/shadowsocks/v2ray-plugin"
+cd /root/go/src/github.com/shadowsocks/v2ray-plugin
+go install /root/go/src/github.com/shadowsocks/v2ray-plugin
+
+cd /root
