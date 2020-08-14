@@ -1,0 +1,1 @@
+mo sysctl.conf > /etc/sysctl.conf
