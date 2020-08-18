@@ -1,3 +1,7 @@
+motd
+sshd
+apt
 unattendedUpgrades
 sysctl
 dnscrypt-proxy
+shadowsocks
