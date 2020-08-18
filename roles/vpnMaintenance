@@ -1,7 +1,10 @@
+hosts
 motd
 sshd
+cron
 apt
 unattendedUpgrades
 sysctl
 dnscrypt-proxy
 shadowsocks
+vpnManagement
