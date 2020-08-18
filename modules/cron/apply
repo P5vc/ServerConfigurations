@@ -1,0 +1,4 @@
+if [ ! -e "/etc/cron.d/priveasy" ]
+then
+	mo priveasy > /etc/cron.d/priveasy
+fi
