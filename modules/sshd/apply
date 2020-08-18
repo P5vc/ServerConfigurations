@@ -3,4 +3,8 @@ mo sshd_config > /etc/ssh/sshd_config
 if [ "$serverType" == "Webserver" ]
 then
 	echo -e "Match group jailed\n\tChrootDirectory /home/jail/" >> /etc/ssh/sshd_config
+elif [ "$serverType" == "VPN" ]
+then
+	systemctl stop sshd
+	systemctl disable sshd
 fi
