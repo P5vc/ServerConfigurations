@@ -7,4 +7,7 @@ then
 elif [ "$serverType" == "Records" ]
 then
 	mo recordsHosts > /etc/hosts
+elif [ "$serverType" == "VPN" ]
+then
+	mo vpnHosts > /etc/hosts
 fi
