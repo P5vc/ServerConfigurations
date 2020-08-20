@@ -10,6 +10,8 @@ fi
 # system
 cd /root
 
+touch /root/TODO
+
 mkdir -p /etc/wireguard
 mkdir -p /root/configs/WireGuard
 mkdir -p /root/configs/Shadowsocks
@@ -35,3 +37,7 @@ systemctl disable dnscrypt-proxy
 # git
 git clone https://github.com/P5vc/VPNServerBackend.git
 cp -R VPNServerBackend/* /root/
+rm -rf /root/VPNServerBackend
+
+# TODO
+echo -e " -  Reboot the server" >> /etc/TODO
