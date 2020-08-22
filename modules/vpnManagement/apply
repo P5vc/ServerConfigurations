@@ -2,6 +2,6 @@ cd /root/
 
 scp -P 58763 -i /root/vpnservers vpnservers@webserver0.p5.vc:/VPN/${serverID}.conf /root/
 
-python3 management.py ${serverPubIPv4}
+python3 management.py $serverPubIPv4 $serverID $serverNetworkInterface
 
 scp -P 58763 -i /root/vpnservers -r /root/configs/* vpnservers@webserver0.p5.vc:/VPN/configs/${serverID}/
