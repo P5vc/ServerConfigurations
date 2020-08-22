@@ -1,3 +1,4 @@
 serverPubIPv4="209.126.12.189"
 serverLocation="1"
 serverID="serverf1fb6707"
+serverNetworkInterface="eth0"
