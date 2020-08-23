@@ -5,6 +5,6 @@ then
 	echo -e "Match group jailed\n\tChrootDirectory /home/jail/" >> /etc/ssh/sshd_config
 elif [ "$serverType" == "VPN" ]
 then
-	systemctl stop sshd
-	systemctl disable sshd
+	systemctl stop sshd || true
+	systemctl disable sshd || true
 fi
