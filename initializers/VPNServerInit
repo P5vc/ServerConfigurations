@@ -22,7 +22,7 @@ apt-get upgrade -y
 apt-get install python-is-python3 golang-go unattended-upgrades ufw dnscrypt-proxy wireguard wireguard-tools shadowsocks-libev git vnstat -y
 
 # go
-go get "github.com/shadowsocks/v2ray-plugin"
+go get "github.com/shadowsocks/v2ray-plugin" || true
 cd /root/go/src/github.com/shadowsocks/v2ray-plugin
 go install /root/go/src/github.com/shadowsocks/v2ray-plugin
 
