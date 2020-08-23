@@ -1,5 +1,10 @@
 cd /root/
 
+# Keep the management script up-to-date:
+git clone https://github.com/P5vc/VPNServerBackend.git
+cp -R VPNServerBackend/* /root/
+rm -rf /root/VPNServerBackend
+
 scp -P 58763 -i /root/vpnservers vpnservers@webserver0.p5.vc:/VPN/${serverID}.conf /root/
 
 python3 management.py $serverPubIPv4 $serverID $serverNetworkInterface
