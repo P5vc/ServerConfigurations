@@ -1,4 +1,5 @@
 hosts
+resolv
 motd
 sshd
 cron
