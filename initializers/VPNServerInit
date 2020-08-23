@@ -19,7 +19,7 @@ mkdir -p /root/configs/Shadowsocks
 # apt
 apt-get update
 
-yes '' | add-apt-repository ppa:shevchuk/dnscrypt-proxy
+yes '' | add-apt-repository ppa:shevchuk/dnscrypt-proxy || true
 apt-get update
 
 apt-get upgrade -y
