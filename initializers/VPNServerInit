@@ -18,6 +18,10 @@ mkdir -p /root/configs/Shadowsocks
 
 # apt
 apt-get update
+
+yes '' | add-apt-repository ppa:shevchuk/dnscrypt-proxy
+apt-get update
+
 apt-get upgrade -y
 apt-get install python-is-python3 golang-go unattended-upgrades ufw dnscrypt-proxy wireguard wireguard-tools shadowsocks-libev git vnstat -y
 
