@@ -1,4 +1,4 @@
-mo dnscrypt-proxy.toml > /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+mo dnscrypt-proxy-legacy.toml > /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 mo blocked-ips.txt > /etc/dnscrypt-proxy/blocked-ips.txt
 
 if [ -e "/root/TODO" ]
