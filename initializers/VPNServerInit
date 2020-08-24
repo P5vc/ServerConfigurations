@@ -33,10 +33,14 @@ go install /root/go/src/github.com/shadowsocks/v2ray-plugin
 cd /root
 
 # systemctl
-systemctl stop systemd-resolved
 systemctl disable systemd-resolved
 systemctl stop dnscrypt-proxy
 systemctl disable dnscrypt-proxy
+
+# ip
+ip link add dev dns0 type dummy
+ip address add dev dns0 172.31.253.253/32
+ip link set up dev dns0
 
 # git
 git clone https://github.com/P5vc/VPNServerBackend.git
