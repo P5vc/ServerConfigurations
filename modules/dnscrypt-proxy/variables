@@ -1,0 +1,2 @@
+dnscryptproxyInstallLocation="$(which dnscrypt-proxy)"
+dnscryptproxyInstallLocation="${dnscryptproxyInstallLocation:5:-15}"
