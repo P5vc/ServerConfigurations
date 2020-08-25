@@ -1,11 +1,11 @@
 [Unit]
 Description=Encrypted/authenticated DNS proxy
-ConditionFileIsExecutable=/usr/bin/dnscrypt-proxy
+ConditionFileIsExecutable=/usr/{{ dnscryptproxyInstallLocation }}/dnscrypt-proxy
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/usr/bin/dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+ExecStart=/usr/{{ dnscryptproxyInstallLocation }}/dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 
 WorkingDirectory=/root
 
