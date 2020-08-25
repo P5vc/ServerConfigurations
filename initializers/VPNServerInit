@@ -48,4 +48,4 @@ cp -R VPNServerBackend/* /root/
 rm -rf /root/VPNServerBackend
 
 # TODO
-echo -e " -  Reboot the server" >> /etc/TODO
+echo -e " -  Reboot the server" >> /root/TODO
