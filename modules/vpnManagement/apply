@@ -7,6 +7,10 @@ rm -rf /root/VPNServerBackend
 
 scp -P 58763 -i /root/vpnservers vpnservers@webserver0.p5.vc:/VPN/${serverID}.conf /root/
 
+scp -P 58763 -i /root/vpnservers vpnservers@webserver0.p5.vc:/VPN/configs/${serverID}/pUsers.dat /root/
+
 python3 management.py $serverPubIPv4 $serverID $serverNetworkInterface
 
 scp -P 58763 -i /root/vpnservers -r /root/configs/* vpnservers@webserver0.p5.vc:/VPN/configs/${serverID}/
+
+scp -P 58763 -i /root/vpnservers /root/pUsers.dat vpnservers@webserver0.p5.vc:/VPN/configs/${serverID}/
