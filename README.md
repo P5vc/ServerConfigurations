@@ -8,7 +8,7 @@ Priveasy uses [Fetch Apply](https://github.com/P5vc/FetchApply "Fetch Apply") to
 
 When we set up a new Priveasy server, we do a fresh install of Ubuntu Server 20.04 LTS, then run the following command:
 
-`curl https://raw.githubusercontent.com/P5vc/FetchApply/master/install -o /tmp/install && sudo bash /tmp/install && echo -e "$(cat /etc/fetchapply | grep -v 'fa_var_IGNORE_RUN_LOCKS')" > /etc/fetchapply && echo "fa_var_IGNORE_RUN_LOCKS=true" >> /etc/fetchapply && sudo fa`
+`curl https://raw.githubusercontent.com/P5vc/FetchApply/master/install -o /tmp/install && sudo bash /tmp/install && echo -e "$(cat /etc/fetchapply | grep -v 'fa_var_IGNORE_ERRORS')" > /etc/fetchapply && echo "fa_var_IGNORE_ERRORS=true" >> /etc/fetchapply && sudo fa`
 
 After running the command, we answer any prompts that may appear, and then follow any final instructions (that cannot be automated) as left in the `/root/TODO` file.
 
