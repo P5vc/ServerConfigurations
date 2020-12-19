@@ -23,7 +23,7 @@ echo -e "\n\n -  Copy '/root/secrets' directory to secured, separate drive.\nThe
 ufw allow 22
 ufw allow 58763
 ufw allow Bind9
-yes | ufw enable
+yes | ufw enable || true
 
 # TODO
 echo -e "\n\n -  After you save the secrets directory to a separate\ndrive and remove the secrets directory entirely,\n run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
