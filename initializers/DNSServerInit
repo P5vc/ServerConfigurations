@@ -1,7 +1,6 @@
 # system
 touch /root/TODO
 mkdir -p /root/secrets
-touch /root/secrets/DNSSecrets.txt
 
 # apt
 apt-get update
