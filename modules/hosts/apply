@@ -10,4 +10,7 @@ then
 elif [ "$serverType" == "VPN" ]
 then
 	mo vpnHosts > /etc/hosts
+elif [ "$serverType" == "DNS" ]
+then
+	mo dnsHosts > /etc/hosts
 fi
