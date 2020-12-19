@@ -1,0 +1,13 @@
+;
+; BIND data file for p5.vc
+;
+$TTL	604800
+@	IN	SOA	p5.vc. admin.priveasy.org. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	{{ serverHostname }}.p5.vc.
+dns0	IN	A	37.218.246.180

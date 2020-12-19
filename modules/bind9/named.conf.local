@@ -1,0 +1,21 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "priveasy.org" {
+	type master;
+	file "/etc/bind/db.priveasy.org";
+	allow-update { none; };
+	allow-transfer { none; };
+};
+
+zone "p5.vc" {
+	type master;
+	file "/etc/bind/db.p5.vc";
+	allow-update { none; };
+	allow-transfer { none; };
+};
