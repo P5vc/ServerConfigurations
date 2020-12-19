@@ -1,7 +1,10 @@
 mo named.conf > /etc/bind/named.conf
 mo named.conf.options > /etc/bind/named.conf.options
 mo named.conf.local > /etc/bind/named.conf.local
+mo db.priveasy.org > /etc/bind/db.priveasy.org
 mo db.p5.vc > /etc/bind/db.p5.vc
+
+sudo chown bind:bind /etc/bind/*
 
 systemctl reload bind9
 rndc reload
