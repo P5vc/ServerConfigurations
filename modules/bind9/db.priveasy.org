@@ -20,9 +20,9 @@ docs	IN	A	95.111.228.106
 mail	IN	A	95.111.228.106
 webserver0	IN	A	144.91.77.173
 webserver1	IN	A	51.79.87.85
-www	IN	CNAME	@
 autoconfig	IN	CNAME	mail
 autodiscover	IN	CNAME	mail
+www	IN	CNAME	@
 @	IN	MX	10	mail
 burn	IN	MX	10	webserver0
 fwd	IN	MX	10 webserver0
