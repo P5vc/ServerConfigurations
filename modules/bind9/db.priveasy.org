@@ -15,6 +15,7 @@ $TTL	86400
 
 $TTL	10800
 @	IN	A	144.91.77.173
+;badapple	IN	A	10.0.0.1
 docs	IN	A	95.111.228.106
 mail	IN	A	95.111.228.106
 webserver0	IN	A	144.91.77.173
