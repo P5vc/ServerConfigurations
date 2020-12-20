@@ -1,7 +1,8 @@
 ;
 ; BIND data file for priveasy.org
 ;
-$TTL	604800
+
+$TTL	86400
 @	IN	SOA	priveasy.org. admin.priveasy.org. (
 			      2		; Serial
 			 604800		; Refresh
@@ -10,4 +11,30 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 @	IN	NS	{{ serverHostname }}.priveasy.org.
-dns0	IN	A	37.218.246.180
+{{ serverHostname }}	IN	A	37.218.246.180
+
+$TTL	10800
+@	IN	A	144.91.77.173
+docs	IN	A	95.111.228.106
+mail	IN	A	95.111.228.106
+webserver0	IN	A	144.91.77.173
+webserver1	IN	A	51.79.87.85
+www	IN	CNAME	@
+autoconfig	IN	CNAME	mail
+autodiscover	IN	CNAME	mail
+@	IN	MX	10	mail
+burn	IN	MX	10	webserver0
+fwd	IN	MX	10 webserver0
+noreply	IN	MX	10	webserver0
+@	IN	TXT	"v=spf1 mx ip4:95.111.228.106/32 a:mail.priveasy.org -all" "keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
+_dmarc	IN	TXT	"v=DMARC1; p=reject; pct=100"
+dkim._domainkey	IN	TXT	"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwigNdV1j" "CPvZ5UraLd1Fj/WZn1378Yk2lriJivVqNTYlKoBesk3Quoqw3r72CGlHXxT188A" "HrLGgoFaqaFw3NB5r5acOGE7RgeNE5Hm+pQZEwbDME0cx242RA8P1yrQrMNGf/l" "Z4Xa44MTjeKAWtyyUUQEpIUjtllCdWeTqrwtz8qHR8jQivJWzqWExIQQ+VwzVQK" "piYcOwaRtEP5SeHw0VUG1gQKWw5eZ2k4YkHrn3gNXVG3+YyvGGCYJU1rWQQ1uqh" "hWDWy5TPtfKY9AogXNoir+1i8V3uq6HnHu6PiM8CB6NCDIkUVeqQax3DbEirUku" "V5IO8zWYis9vwIDAQAB"
+burn	IN	TXT	"v=spf1 mx ip4:144.91.77.173/32 ip4:51.79.87.85/32 a:webserver0.priveasy.org a:webserver1.priveasy.org -all"
+_dmarc.burn	IN	TXT	"v=DMARC1; p=reject; pct=100"
+burn._domainkey.burn	IN	TXT	"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMII" "CgKCAQEA2EwRx5xTfkQO0igRVVSjh7/pdFJDQ7IdXIcX3pfkjmIW2q78VQwf/Fz" "xGeJ4TkZs3TBRaHOrldt5hgUtbUhurSowXfU4c3Yr5E2TlnB5SLaYN2NxOlqR2L" "XpHkE9TIEa3zpwk/QeGbDOTQubq2tj08LzJNid9+1K2PVLGGD564dFVbegb3K0I" "gXTANlJD9WyI+pBWqNvMtHT7eyxAv375knu0pV2Qyv8n50DrAKvqLtpPQ8j8Y7J" "UUanxxwpceyT68RugJ2lJs6Fh1/AedqgGRldXF4yOxY3Ne5oBDVL4RjBDKcce9q" "gUTmeDZvq/qJPVfdlJOXckmbGG7tPwIDAQAB"
+fwd	IN	TXT	"v=spf1 mx ip4:144.91.77.173/32 ip4:51.79.87.85/32 a:webserver0.priveasy.org a:webserver1.priveasy.org -all"
+_dmarc.fwd	IN	TXT	"v=DMARC1; p=reject; pct=100"
+fwd._domainkey.fwd	IN	TXT	"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMII" "CgKCAQEAugLdZu/F+bqsGpnHyM+CLrvrcljRpJ4CdU+9s/XTGH5PoBrA5WUbs5F" "1e20D5zHJcSrvxXAu0iE9GC9HwNCy94TTY4qnszbdXamqCeUokQioNGIWEGvU5F" "/q/gZ0RjFBFBAdFunpujExdVDAouW8o9ELqQ86EmCR/9Aiwm6ikAOWTANT/wbKj" "4bhaa+g5HNEomHFJdst+4FoEDBg4odE1rd5QBCyoC6P8vsMF67nu7SkUs6CtjtV" "iNGhrjaqbU2o21sKlVlAdKMkr0t4vvaoAdXW1x1hsvZanZ5Gv0reJk7Ugi0B3Af" "itIpdeUDpPECG6mZJyReBepGoO0EBwIDAQAB"
+noreply	IN	TXT	"v=spf1 mx ip4:144.91.77.173/32 ip4:51.79.87.85/32 a:webserver0.priveasy.org a:webserver1.priveasy.org -all"
+_dmarc.noreply	IN	TXT	"v=DMARC1; p=reject; pct=100"
+noreply._domainkey.noreply	IN	TXT	"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMII" "CgKCAQEAs95tfINY8HwGjcoX+VBlmQHroL+mn5mtDvtd9z18ipRDlW4ElsIhJQx" "muJI37sWmiASzZh2oYEwE5nQoj0mCxxXUxhotF5UMUINF/rwD/O1c5u/2JvP38A" "6uxj6XV4Mp+DE5iFA/VOVeuJ0jcpAsA09QshqDf3JYo4IzG76bFSxPAI2CDnBXF" "yLuVVO2nmvtjtcm3iOYEIhjJGia1mv2hkHOp6h3trkLkzkfrGNybzSIlE8Zqrix" "OloxDu/XywihoP4N0NEj9u6cfTsSi9fFTTtnF1UZ/gPTnI02v6o0vswL9c5Cp/J" "5OXwA2AEavnyJut1NJ0D59gVeeCb8QIDAQAB"
