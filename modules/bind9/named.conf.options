@@ -24,7 +24,7 @@ options {
 
 	allow-query { any; };
 
-	recursion yes;
+	recursion no;
 
 	auth-nxdomain no; # Conform to RFC1035
 };
