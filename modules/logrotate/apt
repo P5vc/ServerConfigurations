@@ -1,0 +1,17 @@
+/var/log/apt/term.log {
+	rotate 13
+	daily
+	compress
+	missingok
+	shred
+	shredcycles 7
+}
+
+/var/log/apt/history.log {
+	rotate 13
+	daily
+	compress
+	missingok
+	shred
+	shredcycles 7
+}

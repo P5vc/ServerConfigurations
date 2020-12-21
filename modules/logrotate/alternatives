@@ -1,0 +1,10 @@
+/var/log/alternatives.log {
+	daily
+	rotate 13
+	compress
+	delaycompress
+	missingok
+	create 644 root root
+	shred
+	shredcycles 7
+}

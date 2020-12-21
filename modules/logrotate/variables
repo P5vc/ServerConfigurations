@@ -1,0 +1,44 @@
+logList=()
+
+potentialLogList=("$(ls -d /var/log/*)")
+presetRules=("$(ls /etc/logrotate.d)")
+
+# Exceptions (individual entries provided):
+exceptions=("alternatives.log" "apt/term.log" "apt/history.log" "btmp" "ufw.log" "wtmp" "syslog" "mail.info" "mail.warn" "mail.err" "mail.log" "daemon.log" "kern.log" "auth.log" "user.log" "lpr.log" "cron.log" "debug" "messages")
+
+logListCounter=0
+for logFile in ${potentialLogList[@]}
+do
+	matchFound="No"
+	for rule in ${presetRules[@]}
+	do
+		if [ -n "$(echo $logFile | grep $rule)" ]
+		then
+			matchFound="Yes"
+			break
+		fi
+	done
+
+	if [ $matchFound == "No" ]
+	then
+		for rule in ${exceptions[@]}
+		do
+			if [ -n "$(echo $logFile | grep $rule)" ]
+			then
+				matchFound="Yes"
+				break
+			fi
+		done
+	fi
+
+	if [ $matchFound == "No" ]
+	then
+		logList[$logListCounter]="$logFile"
+		logListCounter=$((logListCounter+=1))
+	fi
+done
+
+for item in ${logList[@]}
+do
+	echo "Here: ${item}!"
+done
