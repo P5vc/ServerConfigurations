@@ -37,8 +37,3 @@ do
 		logListCounter=$((logListCounter+=1))
 	fi
 done
-
-for item in ${logList[@]}
-do
-	echo "Here: ${item}!"
-done
