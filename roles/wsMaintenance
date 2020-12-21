@@ -11,3 +11,4 @@ tor
 resolv
 jail
 wsInterOp
+logrotate
