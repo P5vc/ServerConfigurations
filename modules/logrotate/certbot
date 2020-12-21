@@ -1,0 +1,8 @@
+/var/log/letsencrypt/*.log {
+	rotate 13
+	daily
+	compress
+	missingok
+	shred
+	shredcycles 7
+}
