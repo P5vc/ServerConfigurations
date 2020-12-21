@@ -1,0 +1,9 @@
+/var/log/ubuntu-advantage.log {
+	rotate 13
+	daily
+	shred
+	shredcycles 7
+	compress
+	delaycompress
+	missingok
+}

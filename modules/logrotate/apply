@@ -10,6 +10,7 @@ mo logrotate.service > /lib/systemd/system/logrotate.service
 mo alternatives > /etc/logrotate.d/alternatives
 mo btmp > /etc/logrotate.d/btmp
 mo rsyslog > /etc/logrotate.d/rsyslog
+mo ubuntu-advantage-tools > /etc/logrotate.d/ubuntu-advantage-tools
 mo wtmp > /etc/logrotate.d/wtmp
 
 if [ -n "$(which ufw)" ]
@@ -21,3 +22,6 @@ if [ -n "$(which apt)" ]
 then
 	mo apt > /etc/logrotate.d/apt
 fi
+
+
+systemctl daemon-reload
