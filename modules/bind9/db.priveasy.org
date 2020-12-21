@@ -27,7 +27,8 @@ www	IN	CNAME	@
 burn	IN	MX	10	webserver0
 fwd	IN	MX	10 webserver0
 noreply	IN	MX	10	webserver0
-@	IN	TXT	"v=spf1 mx ip4:95.111.228.106/32 a:mail.priveasy.org -all" "keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
+@	IN	TXT	"v=spf1 mx ip4:95.111.228.106/32 a:mail.priveasy.org -all"
+_keybase	IN	TXT	"keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
 _dmarc	IN	TXT	"v=DMARC1; p=reject; pct=100"
 dkim._domainkey	IN	TXT	"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwigNdV1j" "CPvZ5UraLd1Fj/WZn1378Yk2lriJivVqNTYlKoBesk3Quoqw3r72CGlHXxT188A" "HrLGgoFaqaFw3NB5r5acOGE7RgeNE5Hm+pQZEwbDME0cx242RA8P1yrQrMNGf/l" "Z4Xa44MTjeKAWtyyUUQEpIUjtllCdWeTqrwtz8qHR8jQivJWzqWExIQQ+VwzVQK" "piYcOwaRtEP5SeHw0VUG1gQKWw5eZ2k4YkHrn3gNXVG3+YyvGGCYJU1rWQQ1uqh" "hWDWy5TPtfKY9AogXNoir+1i8V3uq6HnHu6PiM8CB6NCDIkUVeqQax3DbEirUku" "V5IO8zWYis9vwIDAQAB"
 burn	IN	TXT	"v=spf1 mx ip4:144.91.77.173/32 ip4:51.79.87.85/32 a:webserver0.priveasy.org a:webserver1.priveasy.org -all"

@@ -26,6 +26,7 @@ relay2-1	IN	A	185.145.129.25
 webserver0	IN	A	144.91.77.173
 webserver1	IN	A	51.79.87.85
 @	IN	MX	10	@
-@	IN	TXT	"v=spf1 mx a ip4:95.111.228.106/32 include:mail.priveasy.org -all" "keybase-site-verification=DHramCRdMolyxSdp0eFGBrcEHqTWhi4QPKDlV5vH85U"
+@	IN	TXT	"v=spf1 mx a ip4:95.111.228.106/32 include:mail.priveasy.org -all"
+_keybase	IN	TXT	"keybase-site-verification=DHramCRdMolyxSdp0eFGBrcEHqTWhi4QPKDlV5vH85U"
 _dmarc	IN	TXT	"v=DMARC1; p=reject; pct=100"
 dkim._domainkey	IN	TXT	"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoLgiU64/" "JQcKeUgaJMT07RQuA3zC4ZDDU26hVQHGVwHI4AbuTkZUEe3DOWoP52iw5lCK+sB" "h6tjqx7JtLjsXWJjwQ2VMLC23llG9+AAdLGlsi9vYPfvwWkW/zkndnD2FynD/R8" "j0rh0c37EFOIvQ39dNJVj0AcjkQMcKZPBj0a5Sl1NHpZHKgVK+0z+ucR7fJRPwi" "Gj9Mvk1qTwUhbOSXeoz5ak4BMTgM4vZC0/seE0LvAGF46yZyny+rrc6rGXhyeUf" "91K+CXfF1CT0eeNq3XuEM6Fse9p8b0OQquetO8RITaO6kGFr3iradNgpJkpr79f" "h4XreNoznvD0QIDAQAB"
