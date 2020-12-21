@@ -1,0 +1,14 @@
+/var/log/tor/*log {
+	daily
+	rotate 0
+	missingok
+	shred
+	shredcycles 7
+	create 0640 debian-tor adm
+	sharedscripts
+	postrotate
+		if invoke-rc.d tor status > /dev/null; then
+			invoke-rc.d tor reload > /dev/null
+		fi
+	endscript
+}

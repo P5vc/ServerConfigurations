@@ -1,0 +1,10 @@
+/var/log/dpkg.log {
+	daily
+	rotate 13
+	compress
+	delaycompress
+	missingok
+	shred
+	shredcycles 7
+	create 644 root root
+}

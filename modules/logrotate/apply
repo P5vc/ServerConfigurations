@@ -23,5 +23,40 @@ then
 	mo apt > /etc/logrotate.d/apt
 fi
 
+if [ -n "$(which certbot)" ]
+then
+	mo certbot > /etc/logrotate.d/certbot
+fi
+
+if [ -n "$(which dpkg)" ]
+then
+	mo dpkg > /etc/logrotate.d/dpkg
+fi
+
+if [ -n "$(which fail2ban-server)" ]
+then
+	mo fail2ban > /etc/logrotate.d/fail2ban
+fi
+
+if [ -n "$(which nginx)" ]
+then
+	mo nginx > /etc/logrotate.d/nginx
+fi
+
+if [ -n "$(which rabbitmq-server)" ]
+then
+	mo rabbitmq-server > /etc/logrotate.d/rabbitmq-server
+fi
+
+if [ -n "$(which tor)" ]
+then
+	mo tor > /etc/logrotate.d/tor
+fi
+
+if [ -n "$(which unattended-upgrades)" ]
+then
+	mo unattended-upgrades > /etc/logrotate.d/unattended-upgrades
+fi
+
 
 systemctl daemon-reload
