@@ -1,0 +1,9 @@
+# no packages own wtmp -- we'll rotate it here
+/var/log/wtmp {
+	rotate 13
+	missingok
+	daily
+	create 0664 root utmp
+	shred
+	shredcycles 7
+}

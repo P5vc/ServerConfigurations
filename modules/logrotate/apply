@@ -1,0 +1,23 @@
+mkdir -p /etc/systemd/system/timers.target.wants
+
+# Base configurations:
+mo logrotate.conf > /etc/logrotate.conf
+mo logrotate.timer > /etc/systemd/system/timers.target.wants/logrotate.timer
+mo logrotate.timer > /lib/systemd/system/logrotate.timer
+mo logrotate.service > /lib/systemd/system/logrotate.service
+
+# Specialized configurations:
+mo alternatives > /etc/logrotate.d/alternatives
+mo btmp > /etc/logrotate.d/btmp
+mo rsyslog > /etc/logrotate.d/rsyslog
+mo wtmp > /etc/logrotate.d/wtmp
+
+if [ -n "$(which ufw)" ]
+then
+	mo ufw > /etc/logrotate.d/ufw
+fi
+
+if [ -n "$(which apt)" ]
+then
+	mo apt > /etc/logrotate.d/apt
+fi

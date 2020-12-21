@@ -1,0 +1,14 @@
+/var/log/ufw.log
+{
+	rotate 13
+	daily
+	missingok
+	shred
+	shredcycles 7
+	compress
+	delaycompress
+	sharedscripts
+	postrotate
+		invoke-rc.d rsyslog rotate >/dev/null 2>&1 || true
+	endscript
+}
