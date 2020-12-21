@@ -15,8 +15,7 @@ $TTL	86400
 
 $TTL	10800
 @	IN	A	144.91.77.173
-;ba	IN	A	10.0.0.1
-;badapple	IN	A	10.0.0.1
+badapplews0	IN	A	213.108.105.170
 database0	IN	A	161.97.95.155
 database1	IN	A	51.79.86.89
 docs	IN	A	95.111.228.106
@@ -25,6 +24,8 @@ relay1-1	IN	A	209.126.12.189
 relay2-1	IN	A	185.145.129.25
 webserver0	IN	A	144.91.77.173
 webserver1	IN	A	51.79.87.85
+ba	IN	CNAME	badapplews0
+badapple	IN	CNAME	badapplews0
 @	IN	MX	10	@
 @	IN	TXT	"v=spf1 mx a ip4:95.111.228.106/32 include:mail.priveasy.org -all"
 _keybase	IN	TXT	"keybase-site-verification=DHramCRdMolyxSdp0eFGBrcEHqTWhi4QPKDlV5vH85U"
