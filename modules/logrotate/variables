@@ -3,8 +3,8 @@ logList=()
 potentialLogList=("$(ls -d /var/log/*)")
 presetRules=("$(ls /etc/logrotate.d)")
 
-# Exceptions (individual entries provided):
-exceptions=("alternatives.log" "apt/term.log" "apt/history.log" "btmp" "ufw.log" "wtmp" "syslog" "mail.info" "mail.warn" "mail.err" "mail.log" "daemon.log" "kern.log" "auth.log" "user.log" "lpr.log" "cron.log" "debug" "messages")
+# Exceptions (most likely individual entries are provided):
+exceptions=("alternatives.log" "apt/term.log" "apt/history.log" "btmp" "ufw.log" "wtmp" "syslog" "mail.info" "mail.warn" "mail.err" "mail.log" "daemon.log" "kern.log" "auth.log" "user.log" "lpr.log" "cron.log" "debug" "messages" "ubuntu-advantage.log")
 
 logListCounter=0
 for logFile in ${potentialLogList[@]}
