@@ -1,6 +1,6 @@
 logList=()
 
-potentialLogList=("$(ls -d /var/log/*)")
+potentialLogList=("$(find /var/log -type f)")
 presetRules=("$(ls /etc/logrotate.d)")
 
 # Exceptions (most likely individual entries are provided):
