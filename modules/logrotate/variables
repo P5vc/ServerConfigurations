@@ -4,7 +4,7 @@ potentialLogList=("$(find /var/log -type f)")
 presetRules=("$(ls /etc/logrotate.d)")
 
 # Exceptions (most likely individual entries are provided):
-exceptions=("fetchapply.log" "alternatives.log" "apt/term.log" "apt/history.log" "btmp" "ufw.log" "wtmp" "syslog" "mail.info" "mail.warn" "mail.err" "mail.log" "daemon.log" "kern.log" "auth.log" "user.log" "lpr.log" "cron.log" "debug" "messages" "ubuntu-advantage.log" "certbot" "dpkg" "fail2ban" "nginx" "rabbitmq-server" "tor" "unattended-upgrades")
+exceptions=("fetchapply.log" "alternatives.log" "apt/term.log" "apt/history.log" "btmp" "ufw.log" "wtmp" "syslog" "mail.info" "mail.warn" "mail.err" "mail.log" "daemon.log" "kern.log" "auth.log" "user.log" "lpr.log" "cron.log" "debug" "messages" "ubuntu-advantage.log" "certbot" "letsencrypt" "dpkg" "fail2ban" "nginx" "rabbitmq" "tor" "unattended-upgrades")
 
 logListCounter=0
 for logFile in ${potentialLogList[@]}
