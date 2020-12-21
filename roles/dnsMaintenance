@@ -1,4 +1,5 @@
 hosts
+logrotate
 motd
 sshd
 apt
