@@ -1,6 +1,6 @@
 hosts
-logrotate
 motd
 sshd
 apt
 bind9
+logrotate
