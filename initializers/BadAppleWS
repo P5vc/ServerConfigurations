@@ -1,0 +1,138 @@
+# system
+touch /root/TODO
+mkdir -p /root/secrets
+touch /root/secrets/secrets.txt
+
+# apt
+apt-get update
+apt-get upgrade -y
+apt-get install python3-pip supervisor nginx vnstat fail2ban rabbitmq-server apt-transport-https ufw nano postgresql postgresql-contrib -y
+
+# pip3
+pip3 install --upgrade pip
+pip3 install virtualenv
+
+# system
+useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
+mkdir -p /home/ubuntu/.ssh
+
+# sshd
+ssh-keygen -t ed25519 -a 256 -f /root/secrets/${serverHostname} -N ""
+cat /root/secrets/${serverHostname}.pub >> /home/ubuntu/.ssh/authorized_keys
+rm /root/secrets/${serverHostname}.pub
+
+# TODO
+echo -e "\n\n -  Copy '/root/secrets' directory to secured, separate drive.\nThe '${serverHostname}' file contains the private key needed to SSH\nback into the server.\n\n" >> /root/TODO
+echo -e "\n\n -  Make sure to clear the '/root/.ssh/authorized_keys' file of any entries.\n\n" >> /root/TODO
+
+# dnscrypt
+apt-get install dnscrypt-proxy -y
+systemctl disable systemd-resolved
+
+# system
+cd /home/ubuntu
+
+# virtualenv
+virtualenv badAppleEnv
+chown -R ubuntu:ubuntu badAppleEnv
+source badAppleEnv/bin/activate
+
+pip install django uwsgi psycopg2-binary celery django-environ
+
+deactivate
+
+# django
+git clone https://github.com/P5vc/BadAppleBackend.git
+cp -R BadAppleBackend/* ./
+rm -rf BadAppleBackend
+
+djangoSecretKey=$(gpg --armor --gen-random 2 64)
+djangoSecretKey=${djangoSecretKey:0:64}
+echo "$djangoSecretKey" >> /root/secrets/secrets.txt
+echo "SECRET_KEY=${djangoSecretKey}" >> ./BadApple/BadApple/settings/.env
+
+echo "DJANGO_SETTINGS_MODULE=BadApple.settings.pro" >> /etc/environment
+export DJANGO_SETTINGS_MODULE=BadApple.settings.pro
+
+chown -R ubuntu:ubuntu BadApple
+
+ln -s /home/ubuntu/BadApple/config/nginx.conf /etc/nginx/sites-enabled/BadApple.conf
+
+# May be needed later, to server Tor traffic:
+#pythonVersion=$(ls /home/ubuntu/badAppleEnv/lib/)
+#sed "s/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return 'https'\n        ### END OF MODIFIED LINES ###/1" /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py > /tmp/request.py
+#mv /tmp/request.py /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py
+
+source badAppleEnv/bin/activate
+
+python -m pip install django[argon2]
+
+deactivate
+
+echo -e "\n\n -  Run\n'su - ubuntu' and then the following commands as the 'ubuntu' user:\n'source /home/ubuntu/badAppleEnv/bin/activate && python /home/ubuntu/BadApple/manage.py makemigrations && python /home/ubuntu/BadApple/manage.py migrate && python /home/ubuntu/BadApple/manage.py collectstatic && python /home/ubuntu/BadApple/manage.py installtasks'" >> /root/TODO
+echo -e "\n\n -  If you are using a new database, that doesn't already have\na superuser account on record, run 'source /home/ubuntu/badAppleEnv/bin/activate && python /home/ubuntu/BadApple/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/secrets/secrets.txt file." >> /root/TODO
+
+# postgres
+echo "password_encryption = scram-sha-256" >> /etc/postgresql/12/main/postgresql.conf
+systemctl restart postgresql
+
+badappleuserPass=$(gpg --armor --gen-random 2 64)
+badappleuserPass=${badappleuserPass:0:64}
+echo "$badappleuserPass" >> /root/secrets/secrets.txt
+echo "DATABASE_PASSWORD=${badappleuserPass}" >> ./BadApple/BadApple/settings/.env
+
+sudo -u postgres psql -c "CREATE DATABASE badappledb;"
+sudo -u postgres psql -c "CREATE USER badappleuser WITH LOGIN PASSWORD '${badapplePass}';"
+sudo -u postgres psql -c "ALTER ROLE badappleuser SET client_encoding TO 'utf8';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE badappledb TO badappleuser;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO badappleuser;"
+
+# TODO
+echo -e "\n\n -  If database already populated, copy the data over to the newly-initialized one" >> /root/TODO
+
+# certbot
+apt-get install software-properties-common -y
+add-apt-repository universe
+apt-get update
+apt-get install certbot python3-certbot-nginx -y
+
+echo -e "\n\n -  Run 'sudo certbot --nginx' and follow the prompts." >> /root/TODO
+
+# ufw
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw allow 58763
+yes | ufw enable || true
+
+# uwsgi
+mkdir -p /var/log/uwsgi/
+touch /var/log/uwsgi/uwsgi.log
+
+# supervisor
+mkdir -p /var/log/celery/
+touch /var/log/celery/worker.log
+
+# rabbitmq
+systemctl enable rabbitmq-server
+
+# tor
+cd /var
+mkdir tor
+chown ubuntu:ubuntu tor
+chmod 660 tor
+cd /home/ubuntu
+mkdir hiddenService
+chmod 700 hiddenService
+
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+
+# TODO
+echo -e "\n\n -  Copy-over the appropriate key files to /home/ubuntu/hiddenService" >> /root/TODO
+
+# openssl
+yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt || true
+
+# TODO
+echo -e "\n\n -  After you save the secrets directory to a separate\ndrive and remove the secrets directory entirely,\n run 'sudo ufw delete allow 22'.\nThis will now block the standard SSH port (as a\nnon-standard port will now be used by default)." >> /root/TODO
+echo -e "\n\n -  REBOOT THE SERVER" >> /root/TODO
