@@ -82,7 +82,7 @@ echo "$badappleuserPass" >> /root/secrets/secrets.txt
 echo "DATABASE_PASSWORD=${badappleuserPass}" >> ./BadApple/BadApple/settings/.env
 
 sudo -u postgres psql -c "CREATE DATABASE badappledb;"
-sudo -u postgres psql -c "CREATE USER badappleuser WITH LOGIN PASSWORD '${badapplePass}';"
+sudo -u postgres psql -c "CREATE USER badappleuser WITH LOGIN PASSWORD '${badappleuserPass}';"
 sudo -u postgres psql -c "ALTER ROLE badappleuser SET client_encoding TO 'utf8';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE badappledb TO badappleuser;"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO badappleuser;"
