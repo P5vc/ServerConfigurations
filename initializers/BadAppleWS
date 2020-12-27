@@ -69,7 +69,7 @@ python -m pip install django[argon2]
 
 deactivate
 
-echo -e "\n\n -  Run\n'su - ubuntu' and then the following commands as the 'ubuntu' user:\n'source /home/ubuntu/badAppleEnv/bin/activate && python /home/ubuntu/BadApple/manage.py makemigrations && python /home/ubuntu/BadApple/manage.py migrate && python /home/ubuntu/BadApple/manage.py collectstatic && python /home/ubuntu/BadApple/manage.py installtasks'" >> /root/TODO
+echo -e "\n\n -  Run\n'su - ubuntu' and then the following commands as the 'ubuntu' user:\n'source /home/ubuntu/badAppleEnv/bin/activate && python /home/ubuntu/BadApple/manage.py makemigrations && python /home/ubuntu/BadApple/manage.py migrate && python /home/ubuntu/BadApple/manage.py collectstatic'" >> /root/TODO
 echo -e "\n\n -  If you are using a new database, that doesn't already have\na superuser account on record, run 'source /home/ubuntu/badAppleEnv/bin/activate && python /home/ubuntu/BadApple/manage.py createsuperuser',\nthen follow the steps to create a superuser account, and save the\ncredentials to the /root/secrets/secrets.txt file." >> /root/TODO
 
 # postgres
