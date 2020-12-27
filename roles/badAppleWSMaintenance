@@ -1,0 +1,10 @@
+hosts
+sshd
+motd
+fail2ban
+apt
+nginx
+supervisor
+tor
+resolv
+logrotate

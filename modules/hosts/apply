@@ -13,4 +13,7 @@ then
 elif [ "$serverType" == "DNS" ]
 then
 	mo dnsHosts > /etc/hosts
+elif [ "$serverType" == "BadAppleWebserver" ]
+then
+	mo badAppleWebserverHosts > /etc/hosts
 fi

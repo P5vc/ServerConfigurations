@@ -1,0 +1,8 @@
+whichWebserverProject=Priveasy
+whichWebserverEnvironment=priveasyEnv
+
+if [ "$serverType" == "BadAppleWebserver" ]
+then
+	whichWebserverProject=BadApple
+	whichWebserverEnv=badAppleEnv
+fi
