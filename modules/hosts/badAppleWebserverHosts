@@ -1,4 +1,5 @@
 127.0.0.1		{{ serverHostname }}.{{ publicFQDN }}		{{ serverHostname }}
+localhost		{{ serverHostname }}.{{ publicFQDN }}		{{ serverHostname }}
 {{ serverPubIPv4 }}		badapple.{{ publicFQDN }}		{{ serverHostname }}
 {{ serverPubIPv4 }}		badapple.{{ internalFQDN }}		{{ serverHostname }}
 {{ serverPubIPv4 }}		{{ serverHostname }}.{{ publicFQDN }}		{{ serverHostname }}
