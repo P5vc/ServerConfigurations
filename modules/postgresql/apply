@@ -1,17 +1,26 @@
-mo postgresql.conf > /etc/postgresql/12/main/postgresql.conf
-mo pg_hba.conf > /etc/postgresql/12/main/pg_hba.conf
-
-if [ -d "/root/secrets" ]
+if [ "$serverType" == "Database" ]
 then
-	if [ "$serverGeneration" == "Duplicate" ]
+	mo postgresql.conf > /etc/postgresql/12/main/postgresql.conf
+	mo pg_hba.conf > /etc/postgresql/12/main/pg_hba.conf
+
+	if [ -d "/root/secrets" ]
 	then
-		rm -rf /var/lib/postgresql/12/main/*
-		echo -e "Copy the following password, then paste it at the prompt and press enter:\n\n${priveasyuserPass}\n" 1>&2
-		sudo -u postgres pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
-		systemctl restart postgresql
-	else
-		systemctl restart postgresql
-		sudo -u postgres psql -d priveasydb -c "select * from pg_create_physical_replication_slot('priveasy_replication_slot')" -p 58762
-		systemctl restart postgresql
+		if [ "$serverGeneration" == "Duplicate" ]
+		then
+			rm -rf /var/lib/postgresql/12/main/*
+			echo -e "Copy the following password, then paste it at the prompt and press enter:\n\n${priveasyuserPass}\n" 1>&2
+			sudo -u postgres pg_basebackup -h database0.${internalFQDN} -U priveasyuser -p 58762 -D /var/lib/postgresql/12/main -P -Xs -R
+			systemctl restart postgresql
+		else
+			systemctl restart postgresql
+			sudo -u postgres psql -d priveasydb -c "select * from pg_create_physical_replication_slot('priveasy_replication_slot')" -p 58762
+			systemctl restart postgresql
+		fi
 	fi
+elif [ "$serverType" == "BadAppleWebserver" ]
+then
+	mo ba_postgresql.conf > /etc/postgresql/12/main/postgresql.conf
+	mo ba_pg_hba.conf > /etc/postgresql/12/main/pg_hba.conf
 fi
+
+chown -R postgres:postgres /etc/postgresql/12/main
