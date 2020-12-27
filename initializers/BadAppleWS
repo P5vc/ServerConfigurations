@@ -58,9 +58,16 @@ chown -R ubuntu:ubuntu BadApple
 
 ln -s /home/ubuntu/BadApple/config/nginx.conf /etc/nginx/sites-enabled/BadApple.conf
 
+
+# Modify Django Library Files To Support Tor:
 pythonVersion=$(ls /home/ubuntu/badAppleEnv/lib/)
+
 sed "s/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return 'https'\n        ### END OF MODIFIED LINES ###/1" /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py > /tmp/request.py
 mv /tmp/request.py /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py
+
+sed "s/return self._reject(request, REASON_INSECURE_REFERER)/### START OF MODIFIED LINES ###\n                    if (not(referer.netloc in settings.HOST_SCHEME_ALWAYS_HTTPS)):\n                        return self._reject(request, REASON_INSECURE_REFERER)\n                    ### END OF MODIFIED LINES###/1" /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/middleware/csrf.py > /tmp/csrf.py
+mv /tmp/csrf.py /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/middleware/csrf.py
+
 
 source badAppleEnv/bin/activate
 
