@@ -58,10 +58,9 @@ chown -R ubuntu:ubuntu BadApple
 
 ln -s /home/ubuntu/BadApple/config/nginx.conf /etc/nginx/sites-enabled/BadApple.conf
 
-# May be needed later, to server Tor traffic:
-#pythonVersion=$(ls /home/ubuntu/badAppleEnv/lib/)
-#sed "s/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return 'https'\n        ### END OF MODIFIED LINES ###/1" /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py > /tmp/request.py
-#mv /tmp/request.py /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py
+pythonVersion=$(ls /home/ubuntu/badAppleEnv/lib/)
+sed "s/    def scheme(self):/    def scheme(self):\n        ### START OF MODIFIED LINES ###\n        if (self.get_host() in settings.HOST_SCHEME_ALWAYS_HTTPS):\n            return 'https'\n        ### END OF MODIFIED LINES ###/1" /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py > /tmp/request.py
+mv /tmp/request.py /home/ubuntu/badAppleEnv/lib/${pythonVersion}/site-packages/django/http/request.py
 
 source badAppleEnv/bin/activate
 
