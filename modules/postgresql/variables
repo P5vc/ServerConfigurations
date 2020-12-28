@@ -1,4 +1,7 @@
-if [ -d "/root/secrets" ]
+if [ "$serverType" == "Database" ]
 then
-	priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+	if [ -d "/root/secrets" ]
+	then
+		priveasyuserPass=$(sed -n "1p" "/root/secrets/db0Secrets.txt")
+	fi
 fi
