@@ -1,5 +1,5 @@
 whichWebserverProject=Priveasy
-whichWebserverEnvironment=priveasyEnv
+whichWebserverEnv=priveasyEnv
 
 if [ "$serverType" == "BadAppleWebserver" ]
 then
