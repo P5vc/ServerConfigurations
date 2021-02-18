@@ -14,15 +14,14 @@ $TTL	86400
 {{ serverHostname }}	IN	A	37.218.246.180
 
 $TTL	10800
-@	IN	A	144.91.77.173
+@	IN	A	213.108.110.213
 badapplews0	IN	A	213.108.105.170
 database0	IN	A	161.97.95.155
 docs	IN	A	95.111.228.106
 records0	IN	A 95.111.228.106
 relay1-1	IN	A	209.126.12.189
 relay2-1	IN	A	213.108.110.193
-webserver0	IN	A	144.91.77.173
-webserver1	IN	A	51.79.87.85
+webserver0	IN	A	213.108.110.213
 ba	IN	CNAME	badapplews0
 badapple	IN	CNAME	badapplews0
 @	IN	MX	10	@
