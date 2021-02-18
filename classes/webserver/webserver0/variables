@@ -1,6 +1,4 @@
-serverPubIPv4="144.91.77.173"
-
-serverGeneration="Base"
+serverPubIPv4="213.108.110.213"
 
 # Jailed directory variables:
 jailDir="/home/jail"
