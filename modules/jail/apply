@@ -1,14 +1,11 @@
 if [ "$serverType" == "Webserver" ]
 then
-	if [ "$serverGeneration" == "Base" ]
-	then
-		mount --bind /home/ubuntu/priveasyVPN ${jailDir}/VPN
+	mount --bind /home/ubuntu/priveasyVPN ${jailDir}/VPN
 
-		chmod -R 775 /home/ubuntu/priveasyVPN
-		chown -R ubuntu:vpnservers /home/ubuntu/priveasyVPN
+	chmod -R 775 /home/ubuntu/priveasyVPN
+	chown -R ubuntu:vpnservers /home/ubuntu/priveasyVPN
 
-		cat /etc/passwd | grep "vpnservers" > ${jailDir}/etc/passwd
-		cat /etc/group | grep "vpnservers" > ${jailDir}/etc/group
-		cat /etc/group | grep "jailed" >> ${jailDir}/etc/group
-	fi
+	cat /etc/passwd | grep "vpnservers" > ${jailDir}/etc/passwd
+	cat /etc/group | grep "vpnservers" > ${jailDir}/etc/group
+	cat /etc/group | grep "jailed" >> ${jailDir}/etc/group
 fi
