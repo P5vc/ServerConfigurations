@@ -9,6 +9,6 @@ nginx
 supervisor
 tor
 resolv
+resolved
 jail
-wsInterOp
 logrotate
