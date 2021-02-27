@@ -6,5 +6,8 @@ mo db.p5.vc > /etc/bind/db.p5.vc
 
 sudo chown -R bind:bind /etc/bind
 
+rm /etc/bind/db.priveasy.org.*
+rm /etc/bind/db.p5.vc.*
+
 systemctl reload bind9
 rndc reload
