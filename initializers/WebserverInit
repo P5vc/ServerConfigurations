@@ -201,6 +201,10 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE priveasydb TO priveas
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO priveasyuser;"
 
 
+# openssl
+yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt || true
+
+
 # certbot
 apt-get install software-properties-common -y
 add-apt-repository universe
@@ -244,7 +248,3 @@ mkdir hiddenService
 chmod 700 hiddenService
 
 curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import && gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
-
-
-# openssl
-yes "" | openssl req -x509 -nodes -days 1 -newkey rsa:2048 -keyout /etc/ssl/private/tempKey.key -out /etc/ssl/private/tempCert.crt || true
