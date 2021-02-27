@@ -2,6 +2,10 @@ if [ "$serverType" == "VPN" ]
 then
 	mo vpnServerResolv.conf > /tmp/resolv.conf
 	mv /tmp/resolv.conf /etc/resolv.conf
+elif [ "$serverType" == "Webserver" ]
+then
+	mo defaultResolv.conf > /tmp/resolv.conf
+	mv /tmp/resolv.conf /etc/resolv.conf
 else
 	mo genericResolv.conf > /tmp/resolv.conf
 	mv /tmp/resolv.conf /etc/resolv.conf
