@@ -13,7 +13,7 @@ fi
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban rabbitmq-server apt-transport-https unzip jailkit wget curl nano -y
+apt-get install python3-pip supervisor nginx opendkim opendkim-tools vnstat fail2ban rabbitmq-server apt-transport-https unzip jailkit wget curl nano ufw -y
 
 
 # pip3
@@ -183,8 +183,8 @@ cd /home/ubuntu/Zcash
 sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-apt update
-apt install postgresql
+apt-get update
+apt-get install postgresql -y
 
 echo "password_encryption = scram-sha-256" >> /etc/postgresql/13/main/postgresql.conf
 systemctl restart postgresql
