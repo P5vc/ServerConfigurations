@@ -27,6 +27,8 @@ mkdir -p /home/ubuntu/.ssh
 
 
 # jail
+mkdir -p /home/ubuntu/priveasyVPN
+
 mkdir -p $jailDir
 mkdir -p ${jailDir}/VPN
 mkdir -p ${jailDir}/dev
