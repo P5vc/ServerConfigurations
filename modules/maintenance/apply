@@ -1,0 +1,10 @@
+if [ -e /etc/nginx/sites-enabled/maintenance.conf ]
+then
+	rm /etc/nginx/sites-enabled/maintenance.conf
+	ln -s /home/ubuntu/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
+else
+	rm /etc/nginx/sites-enabled/*
+	mo maintenance.conf > /etc/nginx/sites-enabled/maintenance.conf
+fi
+
+systemctl restart nginx
