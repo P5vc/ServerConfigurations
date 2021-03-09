@@ -3,11 +3,13 @@ mo named.conf.options > /etc/bind/named.conf.options
 mo named.conf.local > /etc/bind/named.conf.local
 mo db.priveasy.org > /etc/bind/db.priveasy.org
 mo db.p5.vc > /etc/bind/db.p5.vc
+mo db.badapple.tools > /etc/bind/db.badapple.tools
 
 sudo chown -R bind:bind /etc/bind
 
 rm /etc/bind/db.priveasy.org.*
 rm /etc/bind/db.p5.vc.*
+rm /etc/bind/db.badapple.tools.*
 
 systemctl reload bind9
 rndc reload
