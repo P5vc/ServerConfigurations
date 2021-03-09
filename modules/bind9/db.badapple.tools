@@ -1,0 +1,17 @@
+;
+; BIND data file for badapple.tools
+;
+
+$TTL	86400
+@	IN	SOA	p5.vc. admin.priveasy.org. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	{{ serverHostname }}.p5.vc.
+{{ serverHostname }}	IN	A	37.218.246.180
+
+$TTL	10800
+@	IN	A	213.108.105.170

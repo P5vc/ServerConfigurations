@@ -21,3 +21,11 @@ zone "p5.vc" {
 	allow-transfer { none; };
 	dnssec-policy default;
 };
+
+zone "badapple.tools" {
+	type master;
+	file "/etc/bind/db.badapple.tools";
+	allow-update { none; };
+	allow-transfer { none; };
+	dnssec-policy default;
+};
