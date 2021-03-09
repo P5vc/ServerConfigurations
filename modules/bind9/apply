@@ -7,6 +7,11 @@ mo db.badapple.tools > /etc/bind/db.badapple.tools
 
 sudo chown -R bind:bind /etc/bind
 
+
+rndc stats
+mv /home/ubuntu/stats/dns.stats /home/ubuntu/stats/$(date +'%B_%d_%Y-%H_%M_%S.stats')
+
+
 rm /etc/bind/db.priveasy.org.*
 rm /etc/bind/db.p5.vc.*
 rm /etc/bind/db.badapple.tools.*

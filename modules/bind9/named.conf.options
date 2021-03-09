@@ -27,4 +27,7 @@ options {
 	recursion no;
 
 	auth-nxdomain no; # Conform to RFC1035
+
+	statistics-file "/home/ubuntu/stats/dns.stats";
+	zone-statistics yes;
 };
