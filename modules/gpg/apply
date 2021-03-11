@@ -21,7 +21,7 @@ currentKeys="$(su - ubuntu -c 'gpg --list-keys' | grep -v 'pub' | grep -v '\-\-\
 
 for fingerprint in ${fingerprints[*]}
 do
-	currentKeys="$(echo $currentKeys | grep -v $fingerprint)" || true
+	currentKeys="$(echo "$currentKeys" | grep -v $fingerprint)" || true
 done
 
 # Remove keyring if any unexpected keys found:
