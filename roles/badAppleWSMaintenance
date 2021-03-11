@@ -9,3 +9,4 @@ supervisor
 tor
 resolv
 logrotate
+gpg
