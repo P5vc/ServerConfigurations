@@ -37,7 +37,7 @@ virtualenv badAppleEnv
 chown -R ubuntu:ubuntu badAppleEnv
 source badAppleEnv/bin/activate
 
-pip install django uwsgi psycopg2-binary celery django-environ
+pip install django uwsgi psycopg2-binary celery django-environ python-gnupg
 
 deactivate
 
