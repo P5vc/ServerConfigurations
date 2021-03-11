@@ -1,0 +1,38 @@
+source variables
+
+
+# Clear then rewrite the correct, public keys:
+if [ -e '/home/ubuntu/.pubKeys' ]
+then
+	rm -rf /home/ubuntu/.pubKeys
+fi
+
+mkdir -p /home/ubuntu/.pubKeys
+
+for key in ${keys[*]}
+do
+	mo $key > /home/ubuntu/.pubKeys/${key}
+	chown ubuntu:ubuntu /home/ubuntu/.pubKeys/${key}
+done
+
+
+# Look for any unexpected keys:
+currentKeys="$(su - ubuntu -c 'gpg --list-keys' | grep -v 'pub' | grep -v '\-\-\-' | grep -v 'uid' | grep -v 'sub' | grep -v '^$')"
+
+for fingerprint in ${fingerprints[*]}
+do
+	currentKeys="$(echo $currentKeys | grep -v $fingerprint)"
+done
+
+# Remove keyring if any unexpected keys found:
+if [ -n "$currentKeys" ]
+then
+	rm -rf /home/ubuntu/.gnupg
+	su - ubuntu -c 'gpg --list-keys'
+fi
+
+# Import the correct keys:
+for key in ${keys[*]}
+do
+	su - ubuntu -c "gpg --import /home/ubuntu/.pubKeys/${key}"
+done
