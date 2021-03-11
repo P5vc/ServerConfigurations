@@ -17,11 +17,11 @@ done
 
 
 # Look for any unexpected keys:
-currentKeys="$(su - ubuntu -c 'gpg --list-keys' | grep -v 'pub' | grep -v '\-\-\-' | grep -v 'uid' | grep -v 'sub' | grep -v '^$')"
+currentKeys="$(su - ubuntu -c 'gpg --list-keys' | grep -v 'pub' | grep -v '\-\-\-' | grep -v 'uid' | grep -v 'sub' | grep -v '^$')" || true
 
 for fingerprint in ${fingerprints[*]}
 do
-	currentKeys="$(echo $currentKeys | grep -v $fingerprint)"
+	currentKeys="$(echo $currentKeys | grep -v $fingerprint)" || true
 done
 
 # Remove keyring if any unexpected keys found:
