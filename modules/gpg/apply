@@ -36,3 +36,6 @@ for key in ${keys[*]}
 do
 	su - ubuntu -c "gpg --import /home/ubuntu/.pubKeys/${key}"
 done
+
+# Correct permissions:
+chmod -R 755 /home/ubuntu/.gnupg
