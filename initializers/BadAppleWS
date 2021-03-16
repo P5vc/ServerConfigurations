@@ -6,7 +6,7 @@ touch /root/secrets/secrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install python3-pip supervisor nginx vnstat fail2ban rabbitmq-server apt-transport-https ufw nano postgresql postgresql-contrib -y
+apt-get install python3-pip supervisor nginx vnstat fail2ban rabbitmq-server apt-transport-https ufw nano postgresql postgresql-contrib gettext -y
 
 # pip3
 pip3 install --upgrade pip
