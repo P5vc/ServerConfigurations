@@ -17,20 +17,21 @@ $TTL	10800
 @	IN	A	213.108.110.213
 badapplews0	IN	A	213.108.105.170
 docs	IN	A	95.111.228.106
-mail	IN	A	95.111.228.106
 webserver0	IN	A	213.108.110.213
-autoconfig	IN	CNAME	mail
-autodiscover	IN	CNAME	mail
 badapple	IN	CNAME	badapplews0
+_mta-sts	IN	CNAME	mta-sts.tutanota.de.
+mta-sts	IN	CNAME	mta-sts.tutanota.de.
+s1._domainkey	IN	CNAME	s1.domainkey.tutanota.de.
+s2._domainkey	IN	CNAME	s2.domainkey.tutanota.de.
 www	IN	CNAME	@
-@	IN	MX	10	mail
+@	IN	MX	10	mail.tutanota.de.
 burn	IN	MX	10	webserver0
 fwd	IN	MX	10 webserver0
 noreply	IN	MX	10	webserver0
-@	IN	TXT	"v=spf1 mx ip4:95.111.228.106/32 a:mail.priveasy.org -all"
+@	IN	TXT	"t-verify=e3816b75a3b866ee14d523f1fe32de6f"
+@	IN	TXT	"v=spf1 include:spf.tutanota.de -all"
 _keybase	IN	TXT	"keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
-_dmarc	IN	TXT	"v=DMARC1; p=reject; pct=100"
-dkim._domainkey	IN	TXT	"v=DKIM1; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwigNdV1j" "CPvZ5UraLd1Fj/WZn1378Yk2lriJivVqNTYlKoBesk3Quoqw3r72CGlHXxT188A" "HrLGgoFaqaFw3NB5r5acOGE7RgeNE5Hm+pQZEwbDME0cx242RA8P1yrQrMNGf/l" "Z4Xa44MTjeKAWtyyUUQEpIUjtllCdWeTqrwtz8qHR8jQivJWzqWExIQQ+VwzVQK" "piYcOwaRtEP5SeHw0VUG1gQKWw5eZ2k4YkHrn3gNXVG3+YyvGGCYJU1rWQQ1uqh" "hWDWy5TPtfKY9AogXNoir+1i8V3uq6HnHu6PiM8CB6NCDIkUVeqQax3DbEirUku" "V5IO8zWYis9vwIDAQAB"
+_dmarc	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
 burn	IN	TXT	"v=spf1 mx ip4:144.91.77.173/32 ip4:51.79.87.85/32 a:webserver0.priveasy.org a:webserver1.priveasy.org -all"
 _dmarc.burn	IN	TXT	"v=DMARC1; p=reject; pct=100"
 burn._domainkey.burn	IN	TXT	"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMII" "CgKCAQEA2EwRx5xTfkQO0igRVVSjh7/pdFJDQ7IdXIcX3pfkjmIW2q78VQwf/Fz" "xGeJ4TkZs3TBRaHOrldt5hgUtbUhurSowXfU4c3Yr5E2TlnB5SLaYN2NxOlqR2L" "XpHkE9TIEa3zpwk/QeGbDOTQubq2tj08LzJNid9+1K2PVLGGD564dFVbegb3K0I" "gXTANlJD9WyI+pBWqNvMtHT7eyxAv375knu0pV2Qyv8n50DrAKvqLtpPQ8j8Y7J" "UUanxxwpceyT68RugJ2lJs6Fh1/AedqgGRldXF4yOxY3Ne5oBDVL4RjBDKcce9q" "gUTmeDZvq/qJPVfdlJOXckmbGG7tPwIDAQAB"
