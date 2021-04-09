@@ -28,7 +28,6 @@ www	IN	CNAME	@
 burn	IN	MX	10	webserver0
 fwd	IN	MX	10 webserver0
 noreply	IN	MX	10	webserver0
-@	IN	TXT	"t-verify=e3816b75a3b866ee14d523f1fe32de6f"
 @	IN	TXT	"v=spf1 include:spf.tutanota.de -all"
 _keybase	IN	TXT	"keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
 _dmarc	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
