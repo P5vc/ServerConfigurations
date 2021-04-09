@@ -15,3 +15,10 @@ $TTL	86400
 
 $TTL	10800
 @	IN	A	213.108.105.170
+_mta-sts	IN	CNAME	mta-sts.tutanota.de.
+mta-sts	IN	CNAME	mta-sts.tutanota.de.
+s1._domainkey	IN	CNAME	s1.domainkey.tutanota.de.
+s2._domainkey	IN	CNAME	s2.domainkey.tutanota.de.
+@	IN	MX	10	mail.tutanota.de.
+@	IN	TXT	"v=spf1 include:spf.tutanota.de -all"
+_dmarc	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
