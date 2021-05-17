@@ -1,6 +1,6 @@
 /var/log/syslog
 {
-	rotate 13
+	rotate 6
 	daily
 	shred
 	shredcycles 7
