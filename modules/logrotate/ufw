@@ -1,6 +1,6 @@
 /var/log/ufw.log
 {
-	rotate 13
+	rotate 6
 	daily
 	missingok
 	shred
