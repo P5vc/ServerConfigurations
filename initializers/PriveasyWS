@@ -13,7 +13,7 @@ virtualenv /home/ubuntu/priveasyEnv
 chown -R ubuntu:ubuntu /home/ubuntu/priveasyEnv
 source /home/ubuntu/priveasyEnv/bin/activate
 
-pip install celery django django-environ django[argon2] psycopg2-binary uwsgi
+pip install celery django django-environ django[argon2] psycopg2-binary supervisor uwsgi
 
 deactivate
 
@@ -36,7 +36,7 @@ export DJANGO_SETTINGS_MODULE=Priveasy.settings
 
 chown -R ubuntu:ubuntu /home/ubuntu/priveasyBackend
 
-ln -s /home/ubuntu/priveasyBackend/Priveasy/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
+ln -s /home/ubuntu/priveasyBackend/config/nginx.conf /etc/nginx/sites-enabled/Priveasy.conf
 
 
 # postgres
