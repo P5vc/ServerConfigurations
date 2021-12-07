@@ -1,5 +1,0 @@
-serverPubIPv4="213.108.110.213"
-
-# Jailed directory variables:
-jailDir="/home/jail"
-programsToCopy="/bin/bash /bin/ls /bin/cat /bin/echo /bin/rm /usr/bin/pwd /usr/bin/chmod /usr/bin/touch /usr/bin/ssh /usr/bin/scp"
