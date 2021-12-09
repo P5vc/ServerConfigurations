@@ -1,6 +1,4 @@
 hosts
-sshd
-motd
 fail2ban
 apt
 opendkim
@@ -11,4 +9,3 @@ tor
 resolv
 resolved
 jail
-logrotate
