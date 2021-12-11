@@ -10,7 +10,7 @@ cd /home/ubuntu
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install curl nano secure-delete vnstat wget -y
+apt-get install curl apt-config-auto-update nano secure-delete unattended-upgrades vnstat wget -y
 
 
 # sshd

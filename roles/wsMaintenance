@@ -1,3 +1,5 @@
-sshd
 motd
+sshd
+unattendedUpgrades
+
 logrotate
