@@ -1,19 +1,6 @@
-if [ "$serverType" == "Webserver" ]
+mo defaultHosts > /etc/hosts
+
+if [ -e "${serverHostname}.hosts" ]
 then
-	mo webserverHosts > /etc/hosts
-elif [ "$serverType" == "Database" ]
-then
-	mo databaseHosts > /etc/hosts
-elif [ "$serverType" == "Records" ]
-then
-	mo recordsHosts > /etc/hosts
-elif [ "$serverType" == "VPN" ]
-then
-	mo vpnHosts > /etc/hosts
-elif [ "$serverType" == "DNS" ]
-then
-	mo dnsHosts > /etc/hosts
-elif [ "$serverType" == "BadAppleWebserver" ]
-then
-	mo badAppleWebserverHosts > /etc/hosts
+	mo ${serverHostname}.hosts >> /etc/hosts
 fi

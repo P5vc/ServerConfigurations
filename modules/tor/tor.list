@@ -1,0 +1,2 @@
+deb	[arch={{ architecture }} signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org {{ distribution }} main
+deb-src	[arch={{ architecture }} signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org {{ distribution }} main

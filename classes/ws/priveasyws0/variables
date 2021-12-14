@@ -1,0 +1,2 @@
+serverIPv4Address="$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1)"
+serverIPv6Address="$(ip addr show eth0 | grep 'inet6' | awk '{print $2}' | cut -d'/' -f1)"

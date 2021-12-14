@@ -3,6 +3,10 @@ apt-get update
 apt-get install nftables nginx python3-pip snapd -y
 
 
+# tor
+wget -O- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+
+
 # pip3
 pip3 install --upgrade pip
 pip3 install virtualenv

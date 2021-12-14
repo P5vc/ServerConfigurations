@@ -1,4 +1,4 @@
 serverHostname="$(hostname)"
 
-publicFQDN="priveasy.org"
-internalFQDN="p5.vc"
+primaryFQDN="priveasy.org"
+secondaryFQDN="p5.vc"

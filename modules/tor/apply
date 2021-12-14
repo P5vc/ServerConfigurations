@@ -1,11 +1,10 @@
-mo torSource.list > /etc/apt/sources.list.d/torSource.list
-
 mkdir -p /etc/tor
 
+mo tor.list > /etc/apt/sources.list.d/tor.list
 mo torrc > /etc/tor/torrc
 
 apt-get update
-yes 'Y' | apt-get install tor deb.torproject.org-keyring -y >> /dev/null || true
+apt-get install tor deb.torproject.org-keyring -y
 
 mkdir -p /home/ubuntu/hiddenService/authorized_clients
 

@@ -1,8 +1,0 @@
-whichWebserverProject=Priveasy
-whichWebserverEnv=priveasyEnv
-
-if [ "$serverType" == "BadAppleWebserver" ]
-then
-	whichWebserverProject=BadApple
-	whichWebserverEnv=badAppleEnv
-fi

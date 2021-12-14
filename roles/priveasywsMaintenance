@@ -1,10 +1,5 @@
 hosts
-fail2ban
-opendkim
-postfix
 nginx
+resolved
 supervisor
 tor
-resolv
-resolved
-jail

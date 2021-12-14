@@ -1,1 +1,8 @@
-mo jail.conf > /etc/fail2ban/jail.conf
+rm -rf /etc/fail2ban/jail.d/*
+
+mo default.conf > /etc/fail2ban/jail.d/default.conf
+
+if [ -e "${serverHostname}.conf" ]
+then
+	mo ${serverHostname}.conf > /etc/fail2ban/jail.d/${serverHostname}.conf
+fi

@@ -1,5 +1,19 @@
-mo supervisord.conf > /etc/supervisord.conf
-mo uwsgiSupervised.conf > /etc/supervisor/conf.d/uwsgiSupervised.conf
-mo celery.conf > /etc/supervisor/conf.d/celery.conf
-mo celeryBeat.conf > /etc/supervisor/conf.d/celeryBeat.conf
-mo tor.conf > /etc/supervisor/conf.d/tor.conf
+if [ -e "${serverHostname}-uwsgi.conf" ]
+then
+	mo ${serverHostname}-uwsgi.conf > /etc/supervisor/conf.d/uwsgiSupervised.conf
+fi
+
+if [ -e "${serverHostname}-celery.conf" ]
+then
+	mo ${serverHostname}-celery.conf > /etc/supervisor/conf.d/celery.conf
+fi
+
+if [ -e "${serverHostname}-celeryBeat.conf" ]
+then
+	mo ${serverHostname}-celeryBeat.conf > /etc/supervisor/conf.d/celeryBeat.conf
+fi
+
+if [ -e "${serverHostname}-tor.conf" ]
+then
+	mo ${serverHostname}-tor.conf > /etc/supervisor/conf.d/tor.conf
+fi
