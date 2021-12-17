@@ -1,0 +1,39 @@
+table inet Firewall {
+	set rateLimitedIPv4 {
+		type ipv4_addr
+		size 65535
+		flags dynamic,timeout
+		timeout 3h
+	}
+
+	set rateLimitedIPv6 {
+		type ipv6_addr
+		size 65535
+		flags dynamic,timeout
+		timeout 3h
+	}
+
+	chain inbound {
+		type filter hook input priority filter; policy drop;
+
+		# Rate Limiting:
+		tcp dport 80 add @rateLimitedIPv4 { ip saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 80 add @rateLimitedIPv6 { ip6 saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 443 add @rateLimitedIPv4 { ip saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 443 add @rateLimitedIPv6 { ip6 saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
+
+		# Web Traffic:
+		tcp dport 80 counter packets 0 bytes 0 accept
+		tcp dport 443 counter packets 0 bytes 0 accept
+
+		# Tor Traffic:
+		tcp dport 3269 counter packets 0 bytes 0 accept
+
+		# SSH Traffic:
+		tcp dport 58763 counter packets 0 bytes 0 accept
+
+		# Connection-Based:
+		ct state established,related accept
+		ct state invalid drop
+	}
+}

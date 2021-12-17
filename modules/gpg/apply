@@ -1,6 +1,3 @@
-source variables
-
-
 # Clear then rewrite the correct, public keys:
 if [ -e '/home/ubuntu/.pubKeys' ]
 then

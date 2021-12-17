@@ -1,2 +1,7 @@
-serverPubIPv4="213.108.105.170"
-serverType="BadAppleWebserver"
+serverIPv4Address="213.108.105.170"
+gatewayIPv4Address="213.108.105.254"
+serverIPv4AddressNetmask="25"
+
+serverIPv6Address="2a00:c6c0:0:109:2:4241:5753:2d30"
+gatewayIPv6Address="2a00:c6c0:0:109:2::1"
+serverIPv6AddressNetmask="64"

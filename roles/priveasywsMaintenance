@@ -1,7 +1,2 @@
-hosts
-networkInterfaces
-nftables
-nginx
-resolved
 supervisor
 tor

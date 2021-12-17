@@ -1,12 +1,3 @@
-hosts
-sshd
-motd
-fail2ban
-apt
-nginx
-postgresql
 supervisor
 tor
-resolv
-logrotate
 gpg

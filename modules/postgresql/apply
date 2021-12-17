@@ -17,10 +17,6 @@ then
 			systemctl restart postgresql
 		fi
 	fi
-elif [ "$serverType" == "BadAppleWebserver" ]
-then
-	mo ba_postgresql.conf > /etc/postgresql/12/main/postgresql.conf
-	mo ba_pg_hba.conf > /etc/postgresql/12/main/pg_hba.conf
 fi
 
 chown -R postgres:postgres /etc/postgresql/12/main
