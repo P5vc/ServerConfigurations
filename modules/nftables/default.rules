@@ -1,0 +1,8 @@
+table inet firewall {
+	chain inbound {
+		type filter hook input priority filter; policy drop;
+
+		# SSH Traffic:
+		tcp dport 58763 accept
+	}
+}

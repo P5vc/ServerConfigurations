@@ -1,0 +1,12 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+	address {{ serverIPv4Address }}
+	netmask {{ serverIPv4AddressNetmask }}
+	gateway {{ gatewayIPv4Address }}
+iface eth0 inet6 static
+	address {{ serverIPv6Address }}
+	netmask {{ serverIPv6AddressNetmask }}
+	gateway {{ gatewayIPv6Address }}
