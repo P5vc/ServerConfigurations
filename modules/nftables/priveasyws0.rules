@@ -30,6 +30,10 @@ table inet Firewall {
 		tcp dport 3269 counter packets 0 bytes 0 accept
 
 		# SSH Traffic:
-		tcp dport 22 counter packets 0 bytes 0 accept
+		tcp dport 58763 counter packets 0 bytes 0 accept
+
+		# Connection-Based:
+		ct state established,related accept
+		ct state invalid drop
 	}
 }

@@ -10,7 +10,7 @@ cd /home/ubuntu
 # apt
 apt-get update
 apt-get upgrade -y
-apt-get install apt-config-auto-update apt-transport-https curl fail2ban nano nftables secure-delete unattended-upgrades vnstat wget -y
+apt-get install apt-config-auto-update apt-transport-https curl fail2ban nano nftables nginx python3-pip secure-delete snapd unattended-upgrades vnstat wget -y
 
 
 # sshd
