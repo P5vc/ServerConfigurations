@@ -1,3 +1,5 @@
+mo default > /etc/network/interfaces
+
 if [ -e "${serverHostname} ]
 then
 	mo ${serverHostname} > /etc/network/interfaces

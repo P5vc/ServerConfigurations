@@ -1,6 +1,10 @@
+bind9
+fail2ban
 hosts
 motd
+networkInterfaces
+nftables
+resolved
 sshd
-apt
-bind9
+unattendedUpgrades
 logrotate

@@ -1,1 +1,7 @@
-serverPubIPv4="37.218.246.180"
+serverIPv4Address="37.218.246.180"
+gatewayIPv4Address="37.218.246.254"
+serverIPv4AddressNetmask="25"
+
+serverIPv6Address="2a00:c6c0:0:117:3:444e:5353:2d30"
+gatewayIPv6Address="2a00:c6c0:0:117::1"
+serverIPv6AddressNetmask="64"

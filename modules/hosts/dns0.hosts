@@ -1,0 +1,3 @@
+{{ serverIPv4Address }}	{{ serverHostname }}.{{ secondaryFQDN }}	{{ serverHostname }}.{{ primaryFQDN }}	{{ serverHostname }}
+
+{{ serverIPv6Address }}	{{ serverHostname }}.{{ secondaryFQDN }}	{{ serverHostname }}.{{ primaryFQDN }}	{{ serverHostname }}

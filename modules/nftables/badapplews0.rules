@@ -17,10 +17,10 @@ table inet Firewall {
 		type filter hook input priority filter; policy drop;
 
 		# Rate Limiting:
-		tcp dport 80 add @rateLimitedIPv4 { ip saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
-		tcp dport 80 add @rateLimitedIPv6 { ip6 saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
-		tcp dport 443 add @rateLimitedIPv4 { ip saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
-		tcp dport 443 add @rateLimitedIPv6 { ip6 saddr limit rate over 128 kbytes/minute burst 64 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 80 add @rateLimitedIPv4 { ip saddr limit rate over 256 kbytes/minute burst 128 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 80 add @rateLimitedIPv6 { ip6 saddr limit rate over 256 kbytes/minute burst 128 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 443 add @rateLimitedIPv4 { ip saddr limit rate over 256 kbytes/minute burst 128 kbytes } counter packets 0 bytes 0 drop
+		tcp dport 443 add @rateLimitedIPv6 { ip6 saddr limit rate over 256 kbytes/minute burst 128 kbytes } counter packets 0 bytes 0 drop
 
 		# Web Traffic:
 		tcp dport 80 counter packets 0 bytes 0 accept

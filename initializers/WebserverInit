@@ -4,7 +4,6 @@ touch /root/${serverHostname}/secrets.txt
 
 useradd -s /bin/bash -d /home/ubuntu -m -G sudo -p "" ubuntu || true
 mkdir -p /home/ubuntu/.ssh
-cd /home/ubuntu
 
 
 # apt
