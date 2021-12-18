@@ -1,6 +1,6 @@
 mo default > /etc/network/interfaces
 
-if [ -e "${serverHostname} ]
+if [ -e "${serverHostname}" ]
 then
 	mo ${serverHostname} > /etc/network/interfaces
 fi

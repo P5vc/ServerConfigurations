@@ -4,5 +4,8 @@ table inet firewall {
 
 		# SSH Traffic:
 		tcp dport 58763 accept
+
+		# Loopback Interface:
+		iif "lo" accept
 	}
 }

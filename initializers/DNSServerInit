@@ -6,7 +6,15 @@ touch /root/${serverHostname}/secrets.txt
 # apt
 apt-get update
 apt-get upgrade -y
+apt-get purge iptables* -y
+apt-get autoclean -y
+apt-get autoremove -y
 apt-get install apt-config-auto-update apt-transport-https bind9 curl fail2ban nano nftables python3-pip secure-delete snapd unattended-upgrades vnstat wget -y
+
+
+# nftables
+systemctl enable nftables
+systemctl start nftables
 
 
 # system

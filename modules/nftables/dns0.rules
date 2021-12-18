@@ -27,6 +27,9 @@ table inet Firewall {
 		# SSH Traffic:
 		tcp dport 58763 counter packets 0 bytes 0 accept
 
+		# Loopback Interface:
+		iif "lo" accept
+
 		# Connection-Based:
 		ct state established,related accept
 		ct state invalid drop

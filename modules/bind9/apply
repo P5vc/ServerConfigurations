@@ -20,3 +20,6 @@ rm /etc/bind/db.privacy.ms.*
 
 systemctl reload bind9
 rndc reload
+
+# To get the DNSKEYs to upload to the registrar:
+# dnssec-dsfromkey /var/cache/bind/Kpriveasy.org.+013+16988.key
