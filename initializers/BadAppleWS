@@ -39,7 +39,7 @@ export DJANGO_SETTINGS_MODULE=BadApple.settings.pro
 
 chown -R ubuntu:ubuntu /home/ubuntu/badAppleBackend
 
-ln -s /home/ubuntu/badAppleBackend/BadApple/config/nginx.conf /etc/nginx/sites-enabled/BadApple.conf
+ln -s /home/ubuntu/badAppleBackend/config/nginx.conf /etc/nginx/sites-enabled/BadApple.conf
 
 
 # Modify Django Library Files To Support Tor:
