@@ -12,7 +12,8 @@ $TTL	86400
 ;
 @	IN	NS	{{ serverHostname }}.p5.vc.
 @	IN	NS	{{ serverHostname }}.priveasy.org.
-{{ serverHostname }}	IN	A	37.218.246.180
+{{ serverHostname }}	IN	A	{{ serverIPv4Address }}
+{{ serverHostname }}	IN	AAAA	{{ serverIPv6Address }}
 
 
 $TTL	10800
