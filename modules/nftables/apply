@@ -1,8 +1,10 @@
-nft flush ruleset
-nft -f default.rules
-
 if [ -e "${serverHostname}.rules" ]
 then
 	nft flush ruleset
 	nft -f ${serverHostname}.rules
+	mo ${serverHostname}.rules > /etc/nftables.conf
+else
+	nft flush ruleset
+	nft -f default.rules
+	mo default.rules > /etc/nftables.conf
 fi
