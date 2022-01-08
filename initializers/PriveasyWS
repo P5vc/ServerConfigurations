@@ -1,6 +1,39 @@
 # apt
 apt-get update
-apt-get install rabbitmq-server supervisor -y
+apt-get install opendkim opendkim-tools rabbitmq-server supervisor -y
+
+
+# postfix
+debconf-set-selections <<< "postfix postfix/mailname string ${primaryFQDN}"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+
+apt-get install postfix -y
+
+touch /etc/postfix/virtual
+postmap /etc/postfix/virtual
+
+
+# opendkim
+adduser postfix opendkim
+
+mkdir -p /etc/opendkim/keys
+mkdir /etc/opendkim/keys/burn.${primaryFQDN}
+mkdir /etc/opendkim/keys/fwd.${primaryFQDN}
+mkdir /etc/opendkim/keys/noreply.${primaryFQDN}
+mkdir /var/spool/postfix/opendkim
+
+opendkim-genkey -b 2048 -d burn.${primaryFQDN} -D /etc/opendkim/keys/burn.${primaryFQDN} -s burn -v
+opendkim-genkey -b 2048 -d fwd.${primaryFQDN} -D /etc/opendkim/keys/fwd.${primaryFQDN} -s fwd -v
+opendkim-genkey -b 2048 -d noreply.${primaryFQDN} -D /etc/opendkim/keys/noreply.${primaryFQDN} -s noreply -v
+
+chown -R opendkim:opendkim /etc/opendkim
+chmod go-rw /etc/opendkim/keys
+
+chown opendkim:postfix /var/spool/postfix/opendkim
+
+cp -R /etc/opendkim/keys /root/${serverHostname}/
+
+systemctl restart opendkim postfix
 
 
 # tor

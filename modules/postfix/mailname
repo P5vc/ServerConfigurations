@@ -1,1 +1,1 @@
-{{ serverHostname }}.{{ publicFQDN }}
+{{ primaryFQDN }}

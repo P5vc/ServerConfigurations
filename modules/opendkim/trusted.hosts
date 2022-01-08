@@ -1,6 +1,7 @@
 127.0.0.1
+::1
 localhost
 
-*.noreply.{{ publicFQDN }}
-*.fwd.{{ publicFQDN }}
-*.burn.{{ publicFQDN }}
+*.burn.{{ primaryFQDN }}
+*.fwd.{{ primaryFQDN }}
+*.noreply.{{ primaryFQDN }}
