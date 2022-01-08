@@ -23,7 +23,7 @@ table inet Firewall {
 
 		# Connection-Based:
 		ct state { invalid } counter packets 0 bytes 0 drop
-		ct state { established, related } accept
+		ct state { established, related } counter packets 0 bytes 0 accept
 
 		# ICMP Traffic (Based On: https://datatracker.ietf.org/doc/html/rfc4890#section-4):
 		ip protocol icmp icmp type { echo-reply, destination-unreachable, echo-request } counter packets 0 bytes 0 accept

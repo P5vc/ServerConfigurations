@@ -54,5 +54,5 @@ milter_protocol = 6
 smtpd_milters = local:/opendkim/opendkim.sock
 non_smtpd_milters = $smtpd_milters
 
-virtual_alias_domains = fwd.{{ publicFQDN }}
+virtual_alias_domains = fwd.{{ primaryFQDN }}
 virtual_alias_maps = hash:/etc/postfix/virtual

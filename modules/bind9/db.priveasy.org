@@ -27,6 +27,7 @@ $TTL	10800
 www	IN	CNAME	@
 
 badapple	IN	CNAME	badapple.tools.
+priveasyws0	IN	CNAME	priveasyws0.p5.vc.
 
 _mta-sts	IN	CNAME	mta-sts.tutanota.de.
 mta-sts	IN	CNAME	mta-sts.tutanota.de.
@@ -36,10 +37,25 @@ s2._domainkey	IN	CNAME	s2.domainkey.tutanota.de.
 
 ; MX Records
 @	IN	MX	10	mail.tutanota.de.
+burn	IN	MX	10	@
+fwd	IN	MX	10	@
+noreply	IN	MX	10	@
 
 
 ; TXT Records
 @	IN	TXT	"v=spf1 include:spf.tutanota.de -all"
 _dmarc	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
+_dmarc.burn	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
+_dmarc.fwd	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
+_dmarc.noreply	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
 
 _keybase	IN	TXT	"keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
+
+burn	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+burn._domainkey.burn	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEA5kkXnBVgaA+6slYiirWh0lH0Zjzy5VuLGtYODX+zJoTpFnXoSx6+ZsnAt" "Q9xqzKkb9B+xrLaUZcV2FbZdymOqqdGlwPx5UV9wO/qshtIX8CixlkgVrxxyB9f" "8MP7679y8RWicG69/xiGGhq7kI5gUfE9kbOuqcZCRTeQonTJb0irjQK3KWv80US" "GCLmf81XZ6+8fTkmy42YVo/IKtp3mDbF4JdWWMChZGJQC39E7XtiWO+YIAFMQyT" "o4XtjJY8j0AtE0/+rRGWC6PfFsBh6s8A2i0TpKXNKbWH7yPbtjNS5PaPBmu2YXZ" "irh8iVgsnS0kX9z/0R76B7Sa3I4IWNDtwIDAQAB"
+
+fwd	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+fwd._domainkey.fwd	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEAp3U7+H8+CGmfBy3Zw0Ol5zJWUunpHNnLDW5hQvZMzfEPYIW29zRZmkdwR" "OKpnnoTUcBLLziXQA0n5o8dWg14jbKBonsWh51soI2SxEOWyRDPr/QtMNvU7Tby" "tw+3rMv4IMbMrYPK6UHBbcntzPsd5MO6cLh2whm8SLOX+gIqq3uKd3AkLL4Z97L" "O6fEG/3y+bmSceAbcrv0R0GDdV8tlE0NS2s/EeukENE17tJvdkGwVVtRjTHl4us" "vF4i9PETOc6qHtZgkyhXwmBK+6oUSvlNHjpKfZuApjjub6YINh0ZkS/n3/HdIRW" "SYwZFMwsa53WY9NTSUuRkihG6n63ZpqWwIDAQAB"
+
+noreply	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+noreply._domainkey.noreply	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEAx67LPoD9kZu4sBVTKnqzpTuKfHDtMiGrdbDaMuM+PjAi85OQhyMr3daaU" "NBh1Utq+JKCfSljBq5STGR8PO1vlRPfB7TfbW4/8olSnM5J9haKWU2+c8Zw/xbm" "TdVNZVjN4wIZjNnIfgHHOFRJN/qA7Dz0OKLTY9WZFSmLnHb3Mu4UBWzl8PEntvF" "b+eS3qG8L8FWd1XJ9AojycuppqKGx1huZD9Gu8M8AWxA1CXJecPyHnN6R40CbsM" "hUUTICFh7NJzwdX5eZqoHO6cV6Dd9TzyNT5QcwiihLve9QLPd7icGVTg9iXW7PX" "IQ/9fsjomAqZH0WaVcLHVzZy5Onv0UEjwIDAQAB"

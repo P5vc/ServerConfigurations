@@ -1,2 +1,10 @@
 mo main.cf > /etc/postfix/main.cf
 mo mailname > /etc/mailname
+
+if [ ! -e "/etc/postfix/virtual" ]
+then
+	touch /etc/postfix/virtual
+	chown postfix:postfix /etc/postfix/virtual
+fi
+
+postmap /etc/postfix/virtual
