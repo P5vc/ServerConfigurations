@@ -1,6 +1,6 @@
 # apt
 apt-get update
-apt-get install opendkim opendkim-tools rabbitmq-server supervisor -y
+apt-get install opendkim opendkim-tools rabbitmq-server supervisor unzip -y
 
 
 # postfix
@@ -136,3 +136,21 @@ chown ubuntu:ubuntu /var/tor
 chmod 660 /var/tor
 mkdir /home/ubuntu/hiddenService
 chmod 700 /home/ubuntu/hiddenService
+
+
+# Zcash
+zcashEncKey=$(gpg --armor --gen-random 2 64)
+zcashEncKey=${zcashEncKey:0:64}
+echo "zcashWalletEncryptionKey=${zcashEncKey}" >> /root/${serverHostname}/secrets.txt
+echo "ZCASH_WALLET_ENCRYPTION_KEY=${zcashEncKey}" >> /home/ubuntu/priveasyBackend/Priveasy/Priveasy/.env
+
+echo -e "\n\nIn order to properly configure this server, the latest version\nof zecwallet-light-cli must be known (https://github.com/adityapk00/zecwallet-light-cli/releases).\nPlease enter the current version number (i.e. 1.7.7).\n\nVersion Number: "
+read zcashCliVersion </dev/tty
+
+wget https://github.com/adityapk00/zecwallet-light-cli/releases/download/v${zcashCliVersion}/linux-zecwallet-cli-v${zcashCliVersion}.zip -O /tmp/zecwallet.zip
+unzip /tmp/zecwallet.zip -d /home/ubuntu/ZcashWallet
+srm -r /tmp/zecwallet.zip
+mv /home/ubuntu/ZcashWallet/linux-zecwallet-cli-v${zcashCliVersion}/zecwallet-cli /home/ubuntu/ZcashWallet/
+srm -r /home/ubuntu/ZcashWallet/linux-zecwallet-cli-v${zcashCliVersion}
+su - ubuntu -c "/home/ubuntu/ZcashWallet/zecwallet-cli encrypt ${zcashEncKey}"
+su - ubuntu -c "/home/ubuntu/ZcashWallet/zecwallet-cli save"
