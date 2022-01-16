@@ -4,8 +4,6 @@ motd
 networkInterfaces
 nftables
 nginx
-opendkim
-postfix
 resolved
 sshd
 unattendedUpgrades

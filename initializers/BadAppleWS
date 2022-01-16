@@ -18,24 +18,22 @@ virtualenv /home/ubuntu/badAppleEnv
 chown -R ubuntu:ubuntu /home/ubuntu/badAppleEnv
 source /home/ubuntu/badAppleEnv/bin/activate
 
-pip install celery django django-environ django[argon2] psycopg2-binary python-gnupg uwsgi
+pip install celery cryptography django django-environ django[argon2] Pillow psycopg2-binary python-gnupg uwsgi
 
 deactivate
 
 
 # django
 git clone https://github.com/P5vc/BadAppleBackend.git /home/ubuntu/badAppleBackend
-srm -r /home/ubuntu/priveasyBackend/.git
-
+srm -r /home/ubuntu/badAppleBackend/.git
 
 djangoSecretKey=$(gpg --armor --gen-random 2 64)
 djangoSecretKey=${djangoSecretKey:0:64}
 echo "djangoSecretKey=${djangoSecretKey}" >> /root/${serverHostname}/secrets.txt
-echo "SECRET_KEY=${djangoSecretKey}" >> /home/ubuntu/priveasyBackend/Priveasy/Priveasy/.env
-echo "SECRET_KEY=${djangoSecretKey}" >> /home/ubuntu/badAppleBackend/BadApple/BadApple/settings/.env
+echo "SECRET_KEY=${djangoSecretKey}" >> /home/ubuntu/badAppleBackend/BadApple/BadApple/.env
 
-echo "DJANGO_SETTINGS_MODULE=BadApple.settings.pro" >> /etc/environment
-export DJANGO_SETTINGS_MODULE=BadApple.settings.pro
+echo "DJANGO_SETTINGS_MODULE=BadApple.settings" >> /etc/environment
+export DJANGO_SETTINGS_MODULE=BadApple.settings
 
 chown -R ubuntu:ubuntu /home/ubuntu/badAppleBackend
 
@@ -62,7 +60,7 @@ apt-get install postgresql -y
 badappleuserPass=$(gpg --armor --gen-random 2 64)
 badappleuserPass=${badappleuserPass:0:64}
 echo "badappleuserPostgresPassword=${badappleuserPass}" >> /root/${serverHostname}/secrets.txt
-echo "DATABASE_PASSWORD=${badappleuserPass}" >> /home/ubuntu/badAppleBackend/BadApple/BadApple/settings/.env
+echo "DATABASE_PASSWORD=${badappleuserPass}" >> /home/ubuntu/badAppleBackend/BadApple/BadApple/.env
 
 sudo -u postgres psql -c "CREATE DATABASE badappledb;"
 sudo -u postgres psql -c "CREATE USER badappleuser WITH LOGIN PASSWORD '${badappleuserPass}';"
