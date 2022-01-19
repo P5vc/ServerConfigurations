@@ -149,8 +149,9 @@ read zcashCliVersion </dev/tty
 
 wget https://github.com/adityapk00/zecwallet-light-cli/releases/download/v${zcashCliVersion}/linux-zecwallet-cli-v${zcashCliVersion}.zip -O /tmp/zecwallet.zip
 unzip /tmp/zecwallet.zip -d /home/ubuntu/ZcashWallet
-srm -r /tmp/zecwallet.zip
+srm -r -l /tmp/zecwallet.zip
 mv /home/ubuntu/ZcashWallet/linux-zecwallet-cli-v${zcashCliVersion}/zecwallet-cli /home/ubuntu/ZcashWallet/
-srm -r /home/ubuntu/ZcashWallet/linux-zecwallet-cli-v${zcashCliVersion}
+srm -r -l /home/ubuntu/ZcashWallet/linux-zecwallet-cli-v${zcashCliVersion}
 su - ubuntu -c "/home/ubuntu/ZcashWallet/zecwallet-cli encrypt ${zcashEncKey}"
 su - ubuntu -c "/home/ubuntu/ZcashWallet/zecwallet-cli save"
+su - ubuntu -c "/home/ubuntu/ZcashWallet/zecwallet-cli seed" >> /root/${serverHostname}/secrets.txt

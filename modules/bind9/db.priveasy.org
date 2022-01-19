@@ -19,8 +19,8 @@ $TTL	86400
 $TTL	10800
 
 ; A/AAA Records
-@	IN	A	213.108.110.213
-@	IN	AAAA	2a00:c6c0:0:133:6:5035:7663:2d30
+@	IN	A	37.218.246.183
+@	IN	AAAA	2a00:c6c0:0:117:4:5035:7663:2d30
 
 
 ; CNAME Records
@@ -51,11 +51,11 @@ _dmarc.noreply	IN	TXT	"v=DMARC1; p=reject; adkim=s; aspf=s"
 
 _keybase	IN	TXT	"keybase-site-verification=7vntSggoXZyNZ19HY6KmnpbjsxcyrYmo2zD7nyqFoBI"
 
-burn	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
-burn._domainkey.burn	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEA5kkXnBVgaA+6slYiirWh0lH0Zjzy5VuLGtYODX+zJoTpFnXoSx6+ZsnAt" "Q9xqzKkb9B+xrLaUZcV2FbZdymOqqdGlwPx5UV9wO/qshtIX8CixlkgVrxxyB9f" "8MP7679y8RWicG69/xiGGhq7kI5gUfE9kbOuqcZCRTeQonTJb0irjQK3KWv80US" "GCLmf81XZ6+8fTkmy42YVo/IKtp3mDbF4JdWWMChZGJQC39E7XtiWO+YIAFMQyT" "o4XtjJY8j0AtE0/+rRGWC6PfFsBh6s8A2i0TpKXNKbWH7yPbtjNS5PaPBmu2YXZ" "irh8iVgsnS0kX9z/0R76B7Sa3I4IWNDtwIDAQAB"
+burn	IN	TXT	"v=spf1 mx ip4:37.218.246.183 ip6:2a00:c6c0:0:117:4:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+burn._domainkey.burn	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEApAq2Bh5kz9weXyDHuvlX9J/C+uOgdcnwQ2iGdWqDxJ9HzghLw8qYeIbEM" "kWIqBhzNBc664BUrY6/GdLYIiZ1dc3zywH/0O6/wzAkVRUIJxiI+UfR9gz3u9vr" "C4Fi9rcPwj4On4eEfJmchCmZ9qsGNolvWIt/0/Ziajk04K6+fJIcqK1IrRuD03b" "r2jrnFtg2ywyMPqugMbfkOn0OhKWPiTogSypPdGs05f5fr62QnADBgEQTdATz1Z" "yejoQ4ePLYqP1/T4YbFn8ZxnnW3bEwI1PUPUre+l4E1WQIThb8VkKdl+0KnlNpj" "2hVDJ/p/B1+u4VADDfdpeplhhk24Rwz4wIDAQAB"
 
-fwd	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
-fwd._domainkey.fwd	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEAp3U7+H8+CGmfBy3Zw0Ol5zJWUunpHNnLDW5hQvZMzfEPYIW29zRZmkdwR" "OKpnnoTUcBLLziXQA0n5o8dWg14jbKBonsWh51soI2SxEOWyRDPr/QtMNvU7Tby" "tw+3rMv4IMbMrYPK6UHBbcntzPsd5MO6cLh2whm8SLOX+gIqq3uKd3AkLL4Z97L" "O6fEG/3y+bmSceAbcrv0R0GDdV8tlE0NS2s/EeukENE17tJvdkGwVVtRjTHl4us" "vF4i9PETOc6qHtZgkyhXwmBK+6oUSvlNHjpKfZuApjjub6YINh0ZkS/n3/HdIRW" "SYwZFMwsa53WY9NTSUuRkihG6n63ZpqWwIDAQAB"
+fwd	IN	TXT	"v=spf1 mx ip4:37.218.246.183 ip6:2a00:c6c0:0:117:4:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+fwd._domainkey.fwd	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEA0/TxJXoLvxuaRNTbobGievWKcn70MubxF0vtXtByGeq8IGKWgrtqmV5jm" "j9n/oVvBZmKzIggHx6NMLrn/QkX4TUI+f2/bYDCwgQPKcAyIaN+NKoE/R3jKulS" "7CRYxp8eAHGMteldeEOA9gAC1MXRnU8dp7lkD7IqjtM6F68XxAcU3ORsVxX4WYA" "iXMB+M3g42OR5a8j7tvQQuD6nGTdImHZrjq/ejWhZQi6aD92TXWV8re3S2XzjwS" "6YKe9qMbprUwXnVBKjmpYLw/urCXcU+2LJpdvaj0S4iSVSwRPMwTZxUDwfTqmem" "LM2pSqDEcYuRbwZjLCDIpUpmZ0eR3ROwwIDAQAB"
 
-noreply	IN	TXT	"v=spf1 mx ip4:213.108.110.213 ip6:2a00:c6c0:0:133:6:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
-noreply._domainkey.noreply	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEAx67LPoD9kZu4sBVTKnqzpTuKfHDtMiGrdbDaMuM+PjAi85OQhyMr3daaU" "NBh1Utq+JKCfSljBq5STGR8PO1vlRPfB7TfbW4/8olSnM5J9haKWU2+c8Zw/xbm" "TdVNZVjN4wIZjNnIfgHHOFRJN/qA7Dz0OKLTY9WZFSmLnHb3Mu4UBWzl8PEntvF" "b+eS3qG8L8FWd1XJ9AojycuppqKGx1huZD9Gu8M8AWxA1CXJecPyHnN6R40CbsM" "hUUTICFh7NJzwdX5eZqoHO6cV6Dd9TzyNT5QcwiihLve9QLPd7icGVTg9iXW7PX" "IQ/9fsjomAqZH0WaVcLHVzZy5Onv0UEjwIDAQAB"
+noreply	IN	TXT	"v=spf1 mx ip4:37.218.246.183 ip6:2a00:c6c0:0:117:4:5035:7663:2d30 a:priveasyws0.priveasy.org -all"
+noreply._domainkey.noreply	IN	TXT	"v=DKIM1;h=sha256;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" "KCAQEA37gz1opCCRIs+sJb5qhR5fiP8cXstu8cOtKvWCkPd65kP5UIuN8ogUhgc" "+Tj3MP/2w+DswHclRmHti/I/18dKLOxQEwhzkzmojCZcwr2iDkRQhn0nbxzbnjU" "SUGj3d9IPzBqIWwH0o6Wp0DlyRM4SPi5+BP4BkPpkW+gMj8BqgLLYx95eqCKakN" "6IDeek9WGvzESc6/jd/WuVzBwfOw0nDQ4+V6CoTjGdgTdMCVC0LvgDFHmXO24FL" "lwzrRKK9KY6U1EKXvrCRWaQcS0ddUhegVPAh0zfFloKhLY78Y65InlMUFU3+5DL" "xR1gbhTqQXa3xB8RfIZ14K4ENA7LsE3uQIDAQAB"
