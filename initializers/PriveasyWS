@@ -50,7 +50,7 @@ virtualenv /home/ubuntu/priveasyEnv
 chown -R ubuntu:ubuntu /home/ubuntu/priveasyEnv
 source /home/ubuntu/priveasyEnv/bin/activate
 
-pip install celery cryptography django django-environ django[argon2] Pillow psycopg2-binary uwsgi
+pip install celery cryptography django django-environ django[argon2] Pillow psycopg2-binary uwsgi zecwallet
 
 deactivate
 
