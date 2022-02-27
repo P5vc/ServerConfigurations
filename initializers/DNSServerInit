@@ -25,6 +25,6 @@ chown bind:bind /home/ubuntu/stats
 
 
 # sshd
-ssh-keygen -t ed25519 -a 256 -f /root/${serverHostname}/sshKey -N ""
-cat /root/${serverHostname}/sshKey.pub >> /home/ubuntu/.ssh/authorized_keys
-srm /root/${serverHostname}/sshKey.pub
+echo "Copy a unique SSH public key to the /home/ubuntu/.ssh/authorized_keys file on this server."
+echo "Press enter when done."
+read completed
