@@ -28,6 +28,11 @@ then
 	mo certbot > /etc/logrotate.d/certbot
 fi
 
+if [ -e "/var/log/celery" ]
+then
+	mo celery > /etc/logrotate.d/celery
+fi
+
 if [ -n "$(which dpkg)" ]
 then
 	mo dpkg > /etc/logrotate.d/dpkg

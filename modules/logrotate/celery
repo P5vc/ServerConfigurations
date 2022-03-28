@@ -1,0 +1,9 @@
+/var/log/celery/* {
+	daily
+	rotate 13
+	compress
+	missingok
+	shred
+	shredcycles 7
+	create 0664 beat.err beat.log worker.err worker.log
+}
